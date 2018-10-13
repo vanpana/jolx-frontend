@@ -1,0 +1,8 @@
+<h1>{{ title }}</h1>
+<h2>{{ subtitle }}</h2>
+
+<hr *ngIf="title || subtitle">
+
+<p>{{ content }}</p>
+
+<button (click)="handleBtnClick()">Click me!</button>

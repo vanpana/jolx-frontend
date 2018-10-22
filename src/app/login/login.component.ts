@@ -1,8 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {
-  AuthService,
-  FacebookLoginProvider,
-} from 'angular5-social-login';
+import { FormsModule } from '@angular/forms';
 
 declare var window: any;
 declare var FB: any;
@@ -13,6 +10,9 @@ declare var FB: any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  public email: string;
+  public password: string;
+
   constructor() {
     (function (d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -51,6 +51,10 @@ export class LoginComponent implements OnInit {
     if (window.FB) {
       window.FB.XFBML.parse();
     }
+  }
+
+  loginWithCredentials() {
+    console.log(this.email);
   }
 
 // public socialSignIn(socialPlatform: string) {

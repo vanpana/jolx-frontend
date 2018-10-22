@@ -5,18 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CompsComponent } from './comps/comps.component';
 import { CardComponent } from './card/card.component';
+import {SkillService} from './services/skill.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompsComponent,
-    CardComponent
+    CardComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [SkillService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

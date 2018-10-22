@@ -1,7 +1,8 @@
 import {Skill} from './skill';
 import {Review} from './review';
+import {Resource} from './resource';
 
-export class User {
+export class User extends Resource {
   firstname: string;
   lastname: string;
   username: string;

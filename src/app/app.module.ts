@@ -7,6 +7,9 @@ import {CompsComponent} from './comps/comps.component';
 import {CardComponent} from './card/card.component';
 import {LoginComponent} from './login/login.component';
 import {FormsModule} from '@angular/forms';
+import {SkillService} from './services/skill.service';
+import {HttpClientModule} from '@angular/common/http';
+import {ReviewService} from './services/review.service';
 
 @NgModule({
   declarations: [
@@ -19,8 +22,9 @@ import {FormsModule} from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule
+    HttpClientModule
   ],
-  providers: [],
+  providers: [SkillService, ReviewService],
   bootstrap: [AppComponent]
 })
 

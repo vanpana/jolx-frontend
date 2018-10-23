@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ReviewService} from './services/review.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  constructor(private reviewService: ReviewService) {}
+
+  getReviews() {
+    this.reviewService.list().subscribe(reviews => console.log(reviews));
+  }
 }

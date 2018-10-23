@@ -1,23 +1,25 @@
 import {Serializer} from './serializer';
 import {Skill} from '../models/skill';
-
+import {TagSerializer} from './tag-serializer';
 
 export class SkillSerializer implements Serializer {
+
+  private tagSerializer: TagSerializer = new TagSerializer();
+
   fromJson(json: any): Skill {
-    const skill = new Skill();
-    skill.id = json.id;
-    skill.name = json.name;
-    skill.description = json.description;
-    skill.tags = json.tags;
-    return skill;
+    return {
+      id: json.id,
+      name: json.Name,
+      description: json.Description,
+      tags: json.tags.map(tag => this.tagSerializer.fromJson(tag))
+    };
   }
 
   toJson(skill: Skill): any {
     return {
-      id: skill.id,
       name: skill.name,
-      desciption: skill.description,
-      tags: skill.tags
+      description: skill.description,
+      tags: skill.tags.map(tag => this.tagSerializer.toJson(tag))
     };
   }
 }

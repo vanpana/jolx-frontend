@@ -3,6 +3,7 @@ import {Resource} from '../models/resource';
 import {HttpClient} from '@angular/common/http';
 import {Serializer} from '../serializers/serializer';
 import {Observable} from 'rxjs/Observable';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class ResourceService<T extends Resource> {
@@ -22,17 +23,25 @@ export class ResourceService<T extends Resource> {
       .put<T>(`${this.url}/${this.endpoint}/${item.id}`,
         this.serializer.toJson(item));
   }
+
   read(id: string): Observable<T> {
     return this.httpClient
-      .get<T>(`${this.url}/${this.endpoint}/${id}`);
+     .get(`${this.url}/${this.endpoint}/${id}`)
+      .pipe(map(json => this.serializer.fromJson(json) as T));
   }
-  list(): Observable<Array<T>> {
+
+  list(): Observable<T[]> {
     return this.httpClient
-      .get<Array<T>>(`${this.url}/${this.endpoint}`);
+      .get(`${this.url}/${this.endpoint}`)
+      .pipe(map((data => this.convertData(data))));
   }
 
   delete(id: number) {
     return this.httpClient
       .delete(`${this.url}/${this.endpoint}/${id}`);
+  }
+
+  protected convertData(data: any): T[] {
+    return data.map(item => this.serializer.fromJson(item));
   }
 }

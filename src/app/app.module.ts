@@ -7,6 +7,7 @@ import { CompsComponent } from './comps/comps.component';
 import { CardComponent } from './card/card.component';
 import {SkillService} from './services/skill.service';
 import {HttpClientModule} from '@angular/common/http';
+import {ReviewService} from './services/review.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [SkillService],
+  providers: [SkillService, ReviewService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

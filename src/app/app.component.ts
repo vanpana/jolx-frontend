@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import {SkillService} from './services/skill.service';
-import {Skill} from './models/skill';
+import {ReviewService} from './services/review.service';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +9,9 @@ import {Skill} from './models/skill';
 export class AppComponent {
   title = 'app';
 
-  constructor(private skillService: SkillService) {}
-   getSkills() {
-    this.skillService.read('5bcd81ddf0131f258cccfb5b').subscribe( e => {});
+  constructor(private reviewService: ReviewService) {}
+
+  getReviews() {
+    this.reviewService.list().subscribe(reviews => console.log(reviews));
   }
 }

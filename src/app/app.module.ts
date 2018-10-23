@@ -21,7 +21,7 @@ import {ReviewService} from './services/review.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
     HttpClientModule
   ],
   providers: [SkillService, ReviewService],

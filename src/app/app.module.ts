@@ -8,18 +8,20 @@ import {CardComponent} from './card/card.component';
 import {LoginComponent} from './login/login.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {UserService} from './services/login.service';
+import {UserService} from './services/user.service';
 import {HttpService} from './services/http.service';
 import {ReviewService} from './services/review.service';
 import {SkillService} from './services/skill.service';
 import {CookiesService} from './services/cookies.service';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompsComponent,
     CardComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

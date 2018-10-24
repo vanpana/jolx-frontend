@@ -1,0 +1,32 @@
+<p>
+  Signup for Jolx
+</p>
+
+<div>
+  <label>
+    First name
+    <input type="text" [(ngModel)]="firstName">
+  </label>
+
+  <label>
+    Last name
+    <input type="text" [(ngModel)]="lastName">
+  </label>
+
+  <label>
+    Username
+    <input type="text" [(ngModel)]="username">
+  </label>
+
+  <label>
+    Email
+    <input type="email" [(ngModel)]="email">
+  </label>
+
+  <label>
+    Password
+    <input type="password" [(ngModel)]="password">
+  </label>
+
+  <button (click)="signUp()">Signup</button>
+</div>

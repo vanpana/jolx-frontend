@@ -15,7 +15,10 @@ export class UserService {
     return this.httpService.post(this.loginUrl, {identifier: identifier, password: password});
   }
 
-  doSignup(email: string, username: string, password: string) {
-    return this.httpService.post(this.signupUrl, {email: email, username: username, password: password});
+  doSignup(firstName: string, lastName: string, email: string, username: string, password: string) {
+    return this.httpService.post(this.signupUrl, {
+      firstName: firstName, lastName: lastName, email: email, username: username,
+      password: password
+    });
   }
 }

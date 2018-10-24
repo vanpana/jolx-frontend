@@ -12,6 +12,7 @@ import {LoginService} from './services/login.service';
 import {HttpService} from './services/http.service';
 import {ReviewService} from './services/review.service';
 import {SkillService} from './services/skill.service';
+import {CookiesService} from './services/cookies.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import {SkillService} from './services/skill.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [HttpService, LoginService, ReviewService, SkillService],
+  providers: [CookiesService, HttpService, LoginService, ReviewService, SkillService],
   bootstrap: [AppComponent]
 })
 

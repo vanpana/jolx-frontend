@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ReviewService} from './services/review.service';
 
 @Component({
@@ -15,6 +15,6 @@ export class AppComponent {
   }
 
   getReviews() {
-    this.reviewService.getAll().subscribe(reviews => console.log(reviews));
+    this.reviewService.getAll().subscribe(success_data => console.log(success_data), err_data => console.log(err_data));
   }
 }

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {LoginService} from '../services/login.service';
+import {User} from '../models/user';
+import {CookiesService} from '../services/cookies.service';
 
 declare var window: any;
 declare var FB: any;
@@ -12,12 +14,11 @@ declare var FB: any;
   providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
-  private loginService: LoginService;
   public email: string;
   public password: string;
 
-  constructor(loginService: LoginService) {
-    this.loginService = loginService;
+  constructor(private loginService: LoginService,
+              private cookieService: CookiesService) {
 
     this.initFb();
   }
@@ -63,13 +64,21 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithCredentials() {
-    console.log(this.email);
     this.loginService.doLogin(this.email, this.password).subscribe(
-      success => {
-        console.log('SUC', success);
+      success_data => {
+        // Deserialize user and jwt
+        const user: User = success_data['user'];
+        const jwt: string = success_data['jwt'];
+
+        // Persist user and jwt
+        this.cookieService.saveUser(user);
+        this.cookieService.setCookie(this.cookieService.jwtKey, jwt);
+
+        console.log('===');
+        console.log('JWT', this.cookieService.getCookie(this.cookieService.jwtKey));
       },
-      err => {
-        console.log('ERR', err);
+      err_data => {
+        console.log('ERR', err_data);
       }
     );
   }

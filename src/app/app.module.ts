@@ -8,12 +8,14 @@ import { CardComponent } from './card/card.component';
 import {SkillService} from './services/skill.service';
 import {HttpClientModule} from '@angular/common/http';
 import {ReviewService} from './services/review.service';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompsComponent,
     CardComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

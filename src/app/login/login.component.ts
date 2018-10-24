@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {LoginService} from '../services/login.service';
+import {UserService} from '../services/login.service';
 import {User} from '../models/user';
 import {CookiesService} from '../services/cookies.service';
 
@@ -11,13 +11,13 @@ declare var FB: any;
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [LoginService]
+  providers: [UserService]
 })
 export class LoginComponent implements OnInit {
   public email: string;
   public password: string;
 
-  constructor(private loginService: LoginService,
+  constructor(private loginService: UserService,
               private cookieService: CookiesService) {
 
     this.initFb();

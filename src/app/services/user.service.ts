@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpService} from './http.service';
 
 @Injectable()
-export class LoginService {
+export class UserService {
   httpService: HttpService;
   private loginUrl = 'login';
   private signupUrl = 'signup';

@@ -8,7 +8,7 @@ import {CardComponent} from './card/card.component';
 import {LoginComponent} from './login/login.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {LoginService} from './services/login.service';
+import {UserService} from './services/login.service';
 import {HttpService} from './services/http.service';
 import {ReviewService} from './services/review.service';
 import {SkillService} from './services/skill.service';
@@ -27,7 +27,7 @@ import {CookiesService} from './services/cookies.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [CookiesService, HttpService, LoginService, ReviewService, SkillService],
+  providers: [CookiesService, HttpService, UserService, ReviewService, SkillService],
   bootstrap: [AppComponent]
 })
 

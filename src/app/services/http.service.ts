@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {CookiesService} from './cookies.service';
@@ -8,37 +8,35 @@ import {RequestOptions} from '@angular/http';
 export class HttpService {
   private baseUrl = 'http://localhost:1337';
 
-  httpOptions = {
-    headers: this.headers()
-  };
-
   constructor(
     private httpClient: HttpClient,
-    private cookieService: CookiesService) {}
+    private cookieService: CookiesService) {
+  }
 
   public post(url: string, item: any): Observable<any> {
+    console.log();
     return this.httpClient
-      .post(`${this.baseUrl}/${url}`, item, this.httpOptions);
+      .post(`${this.baseUrl}/${url}`, item, this.options());
   }
 
   public update(url: string, id: string, item: any): Observable<any> {
     return this.httpClient
-      .put(`${this.baseUrl}/${url}/${id}`, item, this.httpOptions);
+      .put(`${this.baseUrl}/${url}/${id}`, item, this.options());
   }
 
   read(url: string, id: string): Observable<any> {
     return this.httpClient
-     .get(`${this.baseUrl}/${url}/${id}`, this.httpOptions);
+      .get(`${this.baseUrl}/${url}/${id}`, this.options());
   }
 
   list(url: string): Observable<any> {
     return this.httpClient
-      .get(`${this.baseUrl}/${url}`, this.httpOptions);
+      .get(`${this.baseUrl}/${url}`, this.options());
   }
 
   delete(url: string, id: number) {
     return this.httpClient
-      .delete(`${this.baseUrl}/${url}/${id}`, this.httpOptions);
+      .delete(`${this.baseUrl}/${url}/${id}`, this.options());
   }
 
   private headers(): HttpHeaders {
@@ -51,5 +49,9 @@ export class HttpService {
     }
     console.log(headers);
     return headers;
+  }
+
+  options() {
+    return {headers: this.headers()};
   }
 }

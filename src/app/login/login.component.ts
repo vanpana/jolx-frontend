@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../services/user.service';
 import {User} from '../models/user';
 import {CookiesService} from '../services/cookies.service';
+import {Error} from '../models/error';
 
 declare var window: any;
 declare var FB: any;
@@ -65,21 +66,27 @@ export class LoginComponent implements OnInit {
   loginWithCredentials() {
     this.loginService.doLogin(this.email, this.password).subscribe(
       success_data => {
-        // Deserialize user and jwt
-        const user: User = success_data['user'];
-        const jwt: string = success_data['jwt'];
-
-        // Persist user and jwt
-        this.cookieService.saveUser(user);
-        this.cookieService.setCookie(this.cookieService.jwtKey, jwt);
+        LoginComponent.constructAndPersistUser(success_data, this.cookieService);
 
         console.log('===');
         console.log('JWT', this.cookieService.getCookie(this.cookieService.jwtKey));
       },
-      err_data => {
-        console.log('ERR', err_data);
+      error_data => {
+        const error: Error = error_data['error'];
+
+        // TODO Do whatever with the error
       }
     );
+  }
+
+  public static constructAndPersistUser(data, cookieService) {
+    // Deserialize user and jwt
+    const user: User = data['user'];
+    const jwt: string = data['jwt'];
+
+    // Persist user and jwt
+    cookieService.saveUser(user);
+    cookieService.setCookie(cookieService.jwtKey, jwt);
   }
 
 // public socialSignIn(socialPlatform: string) {

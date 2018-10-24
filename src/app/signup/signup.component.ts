@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../services/user.service';
+import {Error} from '../models/error';
+import {LoginComponent} from '../login/login.component';
+import {CookiesService} from '../services/cookies.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +16,8 @@ export class SignupComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private cookieService: CookiesService) {
   }
 
   ngOnInit() {
@@ -22,10 +26,12 @@ export class SignupComponent implements OnInit {
   signUp() {
     this.userService.doSignup(this.firstName, this.lastName, this.email, this.username, this.password).subscribe(
       success_data => {
-        console.log('Succ', success_data);
+        LoginComponent.constructAndPersistUser(success_data, this.cookieService);
       },
       error_data => {
-        console.log('Err', error_data);
+        const error: Error = error_data['error'];
+
+        // TODO Do whatever with the error
       }
     );
   }

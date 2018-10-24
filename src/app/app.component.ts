@@ -7,11 +7,14 @@ import {ReviewService} from './services/review.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  private reviewService: ReviewService;
   title = 'app';
 
-  constructor(private reviewService: ReviewService) {}
+  constructor(reviewService: ReviewService) {
+    this.reviewService = reviewService;
+  }
 
   getReviews() {
-    this.reviewService.list().subscribe(reviews => console.log(reviews));
+    this.reviewService.getAll().subscribe(reviews => console.log(reviews));
   }
 }

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {LoginService} from '../services/login.service';
 
 declare var window: any;
 declare var FB: any;
@@ -7,13 +8,28 @@ declare var FB: any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
+  private loginService: LoginService;
   public email: string;
   public password: string;
 
-  constructor() {
+  constructor(loginService: LoginService) {
+    this.loginService = loginService;
+
+    this.initFb();
+  }
+
+
+  ngOnInit() {
+    if (window.FB) {
+      window.FB.XFBML.parse();
+    }
+  }
+
+  initFb() {
     (function (d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {
@@ -46,15 +62,16 @@ export class LoginComponent implements OnInit {
     };
   }
 
-
-  ngOnInit() {
-    if (window.FB) {
-      window.FB.XFBML.parse();
-    }
-  }
-
   loginWithCredentials() {
     console.log(this.email);
+    this.loginService.doLogin(this.email, this.password).subscribe(
+      success => {
+        console.log('SUC', success);
+      },
+      err => {
+        console.log('ERR', err);
+      }
+    );
   }
 
 // public socialSignIn(socialPlatform: string) {

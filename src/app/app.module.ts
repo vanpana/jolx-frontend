@@ -7,9 +7,11 @@ import {CompsComponent} from './comps/comps.component';
 import {CardComponent} from './card/card.component';
 import {LoginComponent} from './login/login.component';
 import {FormsModule} from '@angular/forms';
-import {SkillService} from './services/skill.service';
 import {HttpClientModule} from '@angular/common/http';
+import {LoginService} from './services/login.service';
+import {HttpService} from './services/http.service';
 import {ReviewService} from './services/review.service';
+import {SkillService} from './services/skill.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,7 @@ import {ReviewService} from './services/review.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [SkillService, ReviewService],
+  providers: [HttpService, LoginService, ReviewService, SkillService],
   bootstrap: [AppComponent]
 })
 

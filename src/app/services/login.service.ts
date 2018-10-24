@@ -1,22 +1,21 @@
 import {Injectable} from '@angular/core';
-import {ResourceService} from './resource.service';
-import {HttpClient} from '@angular/common/http';
-import {UserLogin} from '../models/user-login';
-import {UserLoginSerializer} from '../serializers/user-login-serializer';
+import {HttpService} from './http.service';
 
 @Injectable()
-export class LoginService extends ResourceService<UserLogin> {
+export class LoginService {
+  httpService: HttpService;
+  private loginUrl = 'login';
+  private signupUrl = 'signup';
 
-  constructor(httpClient: HttpClient) {
-    super(
-      httpClient,
-      'http://localhost:1337',
-      'login',
-      new UserLoginSerializer()
-    );
+  constructor(httpService: HttpService) {
+    this.httpService = httpService;
   }
 
   doLogin(identifier: string, password: string) {
-      return this.create({identifier: identifier, password: password});
+    return this.httpService.post(this.loginUrl, {identifier: identifier, password: password});
+  }
+
+  doSignup(email: string, username: string, password: string) {
+    return this.httpService.post(this.signupUrl, {email: email, username: username, password: password});
   }
 }

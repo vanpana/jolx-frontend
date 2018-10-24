@@ -19,7 +19,7 @@ describe('CompsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should post', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../services/user.service';
-import {Error} from '../models/error';
+import {UserService} from '../../services/user.service';
+import {Error} from '../../models/error';
 import {LoginComponent} from '../login/login.component';
-import {CookiesService} from '../services/cookies.service';
+import {CookiesService} from '../../services/cookies.service';
 
 @Component({
   selector: 'app-signup',

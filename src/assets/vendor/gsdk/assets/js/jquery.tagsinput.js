@@ -275,7 +275,7 @@
 
 
 				} else {
-						// if a user tabs out of the field, create a new tag
+						// if a user tabs out of the field, post a new tag
 						// this is only available if autocomplete is not used.
 						$(data.fake_input).bind('blur',data,function(event) {
 							var d = $(this).attr('data-default');
@@ -290,7 +290,7 @@
 						});
 
 				}
-				// if user types a comma, create a new tag
+				// if user types a comma, post a new tag
 				$(data.fake_input).bind('keypress',data,function(event) {
 					if (event.which==event.data.delimiter.charCodeAt(0) || event.which==13 ) {
 					    event.preventDefault();

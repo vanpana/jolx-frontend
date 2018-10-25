@@ -15,6 +15,7 @@ import {SkillService} from './services/skill.service';
 import {CookiesService} from './services/cookies.service';
 import { SignupComponent } from './signup/signup.component';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +23,9 @@ import { HeaderComponent } from './header/header.component';
     CompsComponent,
     CardComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
     HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

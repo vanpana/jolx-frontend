@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from './http.service';
+import {ResourceService} from './resource.service';
+import {Review} from '../models/review';
+import {ReviewSerializer} from '../serializers/review-serializer';
 
 @Injectable()
-export class ReviewService {
-  private httpService: HttpService;
-  private reviewsUrl = 'reviews';
-
+export class ReviewService extends ResourceService< Review> {
   constructor(httpService: HttpService) {
-    this.httpService = httpService;
-  }
-
-  getAll() {
-    return this.httpService.list(this.reviewsUrl);
+    super(
+      httpService,
+      'reviews',
+      new ReviewSerializer()
+    );
   }
 }

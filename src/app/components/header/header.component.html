@@ -8,7 +8,7 @@
         <span class="icon-bar bar2"></span>
         <span class="icon-bar bar3"></span>
       </button>
-      <a class="navbar-brand">
+      <a routerLink="home" class="navbar-brand">
         <img src="../../../assets/images/jolx_white.png">
       </a>
     </div>
@@ -70,8 +70,10 @@
             </li>
           </ul>
         </li>
-        <li><a href="/register" class="btn btn-round btn-default">Register</a></li>
-        <li><a href="/login" class="btn btn-round btn-default">Login</a></li>
+        <li *ngIf="!authService.isAuthenticated"><a routerLink="register" class="btn btn-round btn-default">Register</a></li>
+        <li *ngIf="!authService.isAuthenticated"><a routerLink="login" class="btn btn-round btn-default">Login</a></li>
+        <li *ngIf="authService.isAuthenticated"><a>{{authService.user.username}}</a></li>
+        <li *ngIf="authService.isAuthenticated"><button (click)="authService.logout()" class="btn btn-round btn-default">Logout</button></li>
       </ul>
 
     </div><!-- /.navbar-collapse -->

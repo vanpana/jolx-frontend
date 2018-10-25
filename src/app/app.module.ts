@@ -16,6 +16,9 @@ import {CookiesService} from './services/cookies.service';
 import { SignupComponent } from './components/signup/signup.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import {ConfigService} from './services/config.service';
+import {AuthService} from './services/auth.service';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import { FooterComponent } from './components/footer/footer.component';
     SignupComponent,
     HeaderComponent,
     FooterComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,15 @@ import { FooterComponent } from './components/footer/footer.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [CookiesService, HttpService, UserService, ReviewService, SkillService],
+  providers: [
+    CookiesService,
+    HttpService,
+    UserService,
+    ReviewService,
+    SkillService,
+    ConfigService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 

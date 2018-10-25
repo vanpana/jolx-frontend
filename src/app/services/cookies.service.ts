@@ -3,25 +3,15 @@ import {User} from '../models/user';
 
 @Injectable()
 export class CookiesService {
-  isConsented = false;
-  jwtKey = 'JWT';
-  userKey = 'USER';
+  public isConsented = false;
+  private jwtKey = 'JWT';
+  private userKey = 'USER';
 
   constructor() {}
 
-  /**
-   * delete cookie
-   * @param name
-   */
   public deleteCookie(name) {
     this.setCookie(name, '', -1);
   }
-
-  /**
-   * get cookie
-   * @param {string} name
-   * @returns {string}
-   */
   public getCookie(name: string) {
     const ca: Array<string> = document.cookie.split(';');
     const caLen: number = ca.length;
@@ -37,13 +27,6 @@ export class CookiesService {
     return '';
   }
 
-  /**
-   * set cookie
-   * @param {string} name
-   * @param {string} value
-   * @param {number} expireDays
-   * @param {string} path
-   */
   public setCookie(name: string, value: string, expireDays: number = 10, path: string = '') {
     const d: Date = new Date();
     d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
@@ -52,14 +35,6 @@ export class CookiesService {
     document.cookie = `${name}=${value}; ${expires}${cpath}`;
   }
 
-  /**
-   * consent
-   * @param {boolean} isConsent
-   * @param e
-   * @param {string} COOKIE
-   * @param {string} EXPIRE_DAYS
-   * @returns {boolean}
-   */
   public consent(isConsent: boolean, e: any, COOKIE: string, EXPIRE_DAYS: number) {
     if (!isConsent) {
       return this.isConsented;
@@ -70,9 +45,28 @@ export class CookiesService {
     }
   }
 
-  // Entity specific methods
-  public saveUser(user: User) {
+  public saveUserCookie(user: User) {
     this.setCookie(this.userKey, JSON.stringify(user));
   }
 
+  public saveJWTCookie(jwt: string) {
+    this.setCookie(this.jwtKey, jwt);
+  }
+
+  public getUserCookie(): any {
+    return JSON.parse(this.getCookie(this.userKey));
+  }
+
+  public getJWTCookie(): string {
+    return this.getCookie(this.jwtKey);
+  }
+
+  public hasJWTCookie() {
+    return this.getCookie(this.jwtKey) !== '';
+  }
+
+  clearCookies() {
+    this.deleteCookie(this.jwtKey);
+    this.deleteCookie(this.userKey);
+  }
 }

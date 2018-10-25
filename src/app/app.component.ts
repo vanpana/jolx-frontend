@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {ReviewService} from './services/review.service';
+import {AuthService} from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +8,14 @@ import {ReviewService} from './services/review.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private reviewService: ReviewService;
   title = 'app';
 
-  constructor(reviewService: ReviewService) {
-    this.reviewService = reviewService;
+  constructor(private authService: AuthService,
+              private reviewService: ReviewService) {
+    this.authService.broadcastIfAuthenicated();
   }
 
   getReviews() {
-    this.reviewService.getAll().subscribe(success_data => console.log(success_data), err_data => console.log(err_data));
+    this.reviewService.list().subscribe(success_data => console.log(success_data));
   }
 }

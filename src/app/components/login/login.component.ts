@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
-import {User} from '../../models/user';
-import {CookiesService} from '../../services/cookies.service';
 import {Error} from '../../models/error';
+import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
 
 declare var window: any;
 declare var FB: any;
@@ -17,22 +17,27 @@ export class LoginComponent implements OnInit {
   public email: string;
   public password: string;
 
-  constructor(private loginService: UserService,
-              private cookieService: CookiesService) {
+  constructor(private authService: AuthService,
+              private router: Router) {
 
     this.initFb();
   }
-
 
   ngOnInit() {
     if (window.FB) {
       window.FB.XFBML.parse();
     }
+
+    this.authService.userAuthenticated.subscribe(() => {
+        this.router.navigateByUrl('/home');
+      }
+    );
   }
 
-  initFb() {
+  public initFb() {
     (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
+      let js;
+      const fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {
         return;
       }
@@ -63,31 +68,20 @@ export class LoginComponent implements OnInit {
     };
   }
 
-  loginWithCredentials() {
-    this.loginService.doLogin(this.email, this.password).subscribe(
-      success_data => {
-        LoginComponent.constructAndPersistUser(success_data, this.cookieService);
-
-        console.log('===');
-        console.log('JWT', this.cookieService.getCookie(this.cookieService.jwtKey));
+  public loginWithCredentials() {
+    this.authService.login(this.email, this.password).subscribe(
+      successData => {
+        console.log(successData);
+        this.authService.authenticate(successData);
       },
-      error_data => {
-        const error: Error = error_data['error'];
-
-        // TODO Do whatever with the error
+      errorData => {
+        const error: Error = errorData['error'];
+        alert(error.message);
       }
     );
   }
 
-  public static constructAndPersistUser(data, cookieService) {
-    // Deserialize user and jwt
-    const user: User = data['user'];
-    const jwt: string = data['jwt'];
 
-    // Persist user and jwt
-    cookieService.saveUser(user);
-    cookieService.setCookie(cookieService.jwtKey, jwt);
-  }
 
 // public socialSignIn(socialPlatform: string) {
 //   let socialPlatformProvider;

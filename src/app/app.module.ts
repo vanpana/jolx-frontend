@@ -19,6 +19,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import {ConfigService} from './services/config.service';
 import {AuthService} from './services/auth.service';
 import { HomeComponent } from './components/home/home.component';
+import {UploaderService} from './services/uploader.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { HomeComponent } from './components/home/home.component';
     ReviewService,
     SkillService,
     ConfigService,
-    AuthService
+    AuthService,
+    UploaderService
   ],
   bootstrap: [AppComponent]
 })

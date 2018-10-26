@@ -12,12 +12,12 @@ export class HttpService {
     private configService: ConfigService,
     private httpClient: HttpClient,
     private cookieService: CookiesService) {
-      this.baseUrl = this.configService.devApiURL;
+    this.baseUrl = this.configService.devApiURL;
   }
 
-  public post(endpoint: string, item: any): Observable<any> {
+  public post(endpoint: string, item: any, isMultipart: boolean = false): Observable<any> {
     return this.httpClient
-      .post(`${this.baseUrl}/${endpoint}`, item, this.options());
+      .post(`${this.baseUrl}/${endpoint}`, item, this.options(isMultipart));
   }
 
   public update(endpoint: string, id: string, item: any): Observable<any> {
@@ -40,14 +40,16 @@ export class HttpService {
       .delete(`${this.baseUrl}/${endpoint}/${id}`, this.options());
   }
 
-  private options() {
-    return {headers: this.headers()};
+  private options(isMultipart: boolean = false) {
+    return {headers: this.headers(isMultipart)};
   }
 
-  private headers(): HttpHeaders {
+  private headers(isMultipart: boolean = false): HttpHeaders {
     let headers = new HttpHeaders();
 
-    headers = headers.append('Content-Type', 'application/json');
+    if (!isMultipart) {
+      headers = headers.append('Content-Type', 'application/json');
+    }
     const bearer = this.cookieService.getJWTCookie();
     if (bearer !== '') {
       headers = headers.append('Authorization', `Bearer ${bearer}`);

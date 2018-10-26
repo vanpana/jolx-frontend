@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../services/user.service';
 import {Error} from '../../models/error';
-import {LoginComponent} from '../login/login.component';
-import {CookiesService} from '../../services/cookies.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import {UploaderService} from '../../services/uploader.service';
 
 @Component({
   selector: 'app-signup',
@@ -19,6 +17,7 @@ export class SignupComponent implements OnInit {
   public password: string;
 
   constructor(private authService: AuthService,
+              private uploaderService: UploaderService,
               private router: Router) {
   }
 
@@ -39,5 +38,22 @@ export class SignupComponent implements OnInit {
         alert(error.message);
       }
     );
+  }
+
+  fileChange(event) {
+    const fileList: FileList = event.target.files;
+    let uploaderToSubscribe = null;
+    if (fileList.length > 0) {
+      const file: File = fileList[0];
+      uploaderToSubscribe = this.uploaderService.upload(file);
+    }
+    if (uploaderToSubscribe != null) {
+      uploaderToSubscribe.subscribe(success_data => {
+          console.log('SUCC', success_data);
+        },
+        err_data => {
+          console.log('ERR', err_data);
+        });
+    }
   }
 }

@@ -33,28 +33,34 @@ export class AuthService {
     });
   }
 
-  public register(firstName: string, lastName: string, email: string, username: string, password: string, file: File, success, error) {
-    // TODO Check if file not null
-    this.uploaderService.upload(file).subscribe(success_data => {
-        const file_data: FileUpload = success_data[0];
-
-        return this.httpService.post(this.signupUrl, {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          username: username,
-          password: password,
-          photo: file_data.id
-        }).subscribe(success, error);
-      },
-      err_data => {
-        // TODO Handle error
-        console.log('ERR', err_data);
-      });
-
-
+  private registerUserWithPhoto(firstName: string, lastName: string, email: string, username: string, password: string, photoId: string,
+                               success, error) {
+    this.httpService.post(this.signupUrl, {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      username: username,
+      password: password,
+      photo: photoId
+    }).subscribe(success, error);
   }
 
+  public register(firstName: string, lastName: string, email: string, username: string, password: string, file: File, success, error) {
+    if (file == null) {
+      // Register the user with no file
+      this.registerUserWithPhoto(firstName, lastName, email, username, password, null, success, error);
+    } else {
+      // Upload the file, then bind it to the user
+      this.uploaderService.upload(file).subscribe(success_data => {
+          const file_data: FileUpload = success_data[0];
+          this.registerUserWithPhoto(firstName, lastName, email, username, password, file_data.id, success, error);
+        },
+        err_data => {
+          // TODO Handle error
+          console.log('ERR', err_data);
+        });
+    }
+  }
   public authenticate(successData: any): void {
     this.constructAndPersistUser(successData);
     this.isAuthenticated = true;

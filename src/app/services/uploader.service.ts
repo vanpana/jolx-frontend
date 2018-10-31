@@ -12,9 +12,9 @@ export class UploaderService {
   }
 
   upload(file) {
-    // Create form data
     const formData: FormData = new FormData();
     formData.append(this.fileKey, file, file.name);
     return this.httpService.post(this.uploaderUrl, formData, true);
   }
+
 }

@@ -3,6 +3,7 @@ import {Error} from '../../models/error';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {UploaderService} from '../../services/uploader.service';
+import {FileUpload} from '../../models/file-upload';
 
 @Component({
   selector: 'app-signup',
@@ -15,9 +16,9 @@ export class SignupComponent implements OnInit {
   public username: string;
   public email: string;
   public password: string;
+  public file: File;
 
   constructor(private authService: AuthService,
-              private uploaderService: UploaderService,
               private router: Router) {
   }
 
@@ -29,31 +30,19 @@ export class SignupComponent implements OnInit {
   }
 
   signUp() {
-    this.authService.register(this.firstName, this.lastName, this.email, this.username, this.password).subscribe(
+    this.authService.register(this.firstName, this.lastName, this.email, this.username, this.password, this.file,
       successData => {
         this.authService.authenticate(successData);
-      },
-      errorData => {
+      }, errorData => {
         const error: Error = errorData['error'];
         alert(error.message);
-      }
-    );
+      });
   }
 
   fileChange(event) {
     const fileList: FileList = event.target.files;
-    let uploaderToSubscribe = null;
     if (fileList.length > 0) {
-      const file: File = fileList[0];
-      uploaderToSubscribe = this.uploaderService.upload(file);
-    }
-    if (uploaderToSubscribe != null) {
-      uploaderToSubscribe.subscribe(success_data => {
-          console.log('SUCC', success_data);
-        },
-        err_data => {
-          console.log('ERR', err_data);
-        });
+      this.file = fileList[0];
     }
   }
 }

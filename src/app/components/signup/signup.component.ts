@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Error} from '../../models/error';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
-import {UploaderService} from '../../services/uploader.service';
-import {FileUpload} from '../../models/file-upload';
 
 @Component({
   selector: 'app-signup',

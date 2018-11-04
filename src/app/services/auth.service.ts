@@ -33,34 +33,32 @@ export class AuthService {
     });
   }
 
-  private registerUserWithPhoto(firstName: string, lastName: string, email: string, username: string, password: string, photoId: string,
-                               success, error) {
-    this.httpService.post(this.signupUrl, {
+
+  public register(firstName: string, lastName: string, email: string, username: string, password: string, file: File, success, error) {
+    // First POST and register the user
+    const registrationPromise = this.httpService.post(this.signupUrl, {
       firstName: firstName,
       lastName: lastName,
       email: email,
       username: username,
       password: password,
-      photo: photoId
-    }).subscribe(success, error);
-  }
+    });
 
-  public register(firstName: string, lastName: string, email: string, username: string, password: string, file: File, success, error) {
+    // If no file was provided, call the success and error
     if (file == null) {
-      // Register the user with no file
-      this.registerUserWithPhoto(firstName, lastName, email, username, password, null, success, error);
+      registrationPromise.subscribe(success, error);
     } else {
-      // Upload the file, then bind it to the user
-      this.uploaderService.upload(file).subscribe(success_data => {
-          const file_data: FileUpload = success_data[0];
-          this.registerUserWithPhoto(firstName, lastName, email, username, password, file_data.id, success, error);
-        },
-        err_data => {
-          // TODO Handle error
-          console.log('ERR', err_data);
-        });
+      // If the file was provided, POST the file and bind it to the user
+      registrationPromise.subscribe((success_data) => {
+        this.authenticate(success_data);
+        this.uploaderService.upload(file, this.user.id, this.uploaderService.userKey).subscribe((data) => {
+          this.user.photo = data;
+          this.cookieService.saveUserCookie(this.user);
+        }, error);
+      });
     }
   }
+
   public authenticate(successData: any): void {
     this.constructAndPersistUser(successData);
     this.isAuthenticated = true;

@@ -20,6 +20,7 @@ import {ConfigService} from './services/config.service';
 import {AuthService} from './services/auth.service';
 import { HomeComponent } from './components/home/home.component';
 import {UploaderService} from './services/uploader.service';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {UploaderService} from './services/uploader.service';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,15 +6,5 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./card.component.css']
 })
 export class CardComponent {
-  @Input('title') title;
-  @Input('subtitle') subtitle;
-  @Input('content') content = '😄';
-
-  @Output() btnClicked = new EventEmitter<boolean>();
-
   constructor() {}
-
-  handleBtnClick() {
-    this.btnClicked.emit(true);
-  }
 }

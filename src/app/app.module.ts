@@ -20,8 +20,8 @@ import {AuthService} from './services/auth.service';
 import { HomeComponent } from './components/home/home.component';
 import {UploaderService} from './services/uploader.service';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
-import { CardComponent } from './card/card.component';
-import { CardListComponent } from './card-list/card-list.component';
+import { CardComponent } from './components/card/card.component';
+import { CardListComponent } from './components/card-list/card-list.component';
 
 @NgModule({
   declarations: [

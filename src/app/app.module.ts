@@ -4,7 +4,6 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CompsComponent} from './components/comps/comps.component';
-import {CardComponent} from './components/card/card.component';
 import {LoginComponent} from './components/login/login.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
@@ -21,18 +20,21 @@ import {AuthService} from './services/auth.service';
 import { HomeComponent } from './components/home/home.component';
 import {UploaderService} from './services/uploader.service';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { CardComponent } from './card/card.component';
+import { CardListComponent } from './card-list/card-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompsComponent,
-    CardComponent,
     LoginComponent,
     SignupComponent,
     HeaderComponent,
     FooterComponent,
     HomeComponent,
     EditProfileComponent,
+    CardComponent,
+    CardListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,11 @@
 <div class="card">
   <img class="card-img-top" src="../../../assets/dog-walking.jpg" alt="Card image cap">
   <div class="card-body">
-    <h3 class="card-title">Card title</h3>
-    <p class="posting_date">10/10/2018</p>
-    <p class="card-text">Descriere foarte interesanta despre job fgfhjgu ytredsxcvfbhnjuyt5erwfsdc </p>
-    <a href="#" class="card-price"> $120 </a>
-    <a href="#" class="btn btn-primary">Apply</a>
+    <h3 class="card-title">{{posting.name}}</h3>
+    <p class="posting_date">{{posting.startTime | date:'dd MMM yyyy'}}</p>
+    <p class="card-text">{{posting.description}}</p>
+    <a class="card-price">{{posting.price}} lei </a>
+    <a class="btn btn-primary">Apply</a>
   </div>
 </div>
 

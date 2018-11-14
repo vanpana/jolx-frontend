@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Posting} from '../../models/posting';
 
 @Component({
   selector: 'app-card-list',
@@ -7,11 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardListComponent implements OnInit {
 
-  range: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
+  @Input()
+  postings: Array<Posting>;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

@@ -7,7 +7,6 @@ import {CompsComponent} from './components/comps/comps.component';
 import {LoginComponent} from './components/login/login.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {UserService} from './services/user.service';
 import {HttpService} from './services/http.service';
 import {ReviewService} from './services/review.service';
 import {SkillService} from './services/skill.service';
@@ -22,6 +21,8 @@ import {UploaderService} from './services/uploader.service';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { CardComponent } from './components/card/card.component';
 import { CardListComponent } from './components/card-list/card-list.component';
+import {PostingSerializer} from './serializers/posting.serializer';
+import {PostingsService} from './services/postings.service';
 
 @NgModule({
   declarations: [
@@ -45,12 +46,12 @@ import { CardListComponent } from './components/card-list/card-list.component';
   providers: [
     CookiesService,
     HttpService,
-    UserService,
     ReviewService,
     SkillService,
     ConfigService,
     AuthService,
-    UploaderService
+    UploaderService,
+    PostingsService,
   ],
   bootstrap: [AppComponent]
 })

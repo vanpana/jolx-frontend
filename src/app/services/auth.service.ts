@@ -18,8 +18,7 @@ export class AuthService {
 
   constructor(private httpService: HttpService,
               private cookieService: CookiesService,
-              private uploaderService: UploaderService,
-              private cookieService: CookiesService) { this.broadcastIfAuthenicated(); }
+              private uploaderService: UploaderService) { this.broadcastIfAuthenicated(); }
 
   public constructAndPersistUser(data) {
     this.cookieService.saveUserCookie(data['user']);

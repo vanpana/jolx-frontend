@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {User} from '../../models/user';
 import {CookiesService} from '../../services/cookies.service';
 import {UploaderService} from '../../services/uploader.service';
+import {HttpService} from '../../services/http.service';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -12,7 +14,8 @@ export class EditProfileComponent implements OnInit {
   user: User;
   file: File;
 
-  constructor(private uploaderService: UploaderService,
+  constructor(private userService: UserService,
+              private uploaderService: UploaderService,
               private cookieService: CookiesService) {
     this.user = cookieService.getUserCookie();
   }
@@ -35,8 +38,12 @@ export class EditProfileComponent implements OnInit {
     }
 
     // PUT the user
-
-
-    console.log('updated');
+    this.userService.update(this.user).subscribe(
+      success_data => {
+        console.log(success_data);
+      },
+      error_data => {
+        console.log(error_data);
+      });
   }
 }

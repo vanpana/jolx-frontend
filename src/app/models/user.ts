@@ -6,6 +6,7 @@ export class User extends Resource {
   username: string;
   dob: Date;
   phone: string;
+  email: string;
   skillIds: Array<String>;
   reviewsGivenIds: Array<String>;
   reviewsReceivedIds: Array<String>;

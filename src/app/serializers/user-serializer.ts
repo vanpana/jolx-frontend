@@ -10,6 +10,7 @@ export class UserSerializer extends Serializer<User> {
       username: json.username,
       dob: json.dob,
       phone: json.phone,
+      email: json.email,
       skillIds: json.skills,
       reviewsGivenIds: json.reviewsGiven,
       reviewsReceivedIds: json.reviewsReceived

@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+        <!--<a routerLink="/edit" class="btn btn-round btn-default">Edit profile</a>-->
       </div>
     </div>
     <div class="row">
@@ -56,7 +56,7 @@
                 <label>User Id</label>
               </div>
               <div class="col-md-6">
-                <p>Kshiti123</p>
+                <p>{{authService.user.username}}</p>
               </div>
             </div>
             <div class="row">
@@ -64,7 +64,7 @@
                 <label>Name</label>
               </div>
               <div class="col-md-6">
-                <p>Kshiti Ghelani</p>
+                <p>{{authService.user.firstName}} {{authService.user.lastName}}</p>
               </div>
             </div>
             <div class="row">
@@ -72,7 +72,7 @@
                 <label>Email</label>
               </div>
               <div class="col-md-6">
-                <p>kshitighelani@gmail.com</p>
+                <p>{{authService.user.email}}</p>
               </div>
             </div>
             <div class="row">
@@ -80,15 +80,15 @@
                 <label>Phone</label>
               </div>
               <div class="col-md-6">
-                <p>123 456 7890</p>
+                <p>{{authService.user.phone}}</p>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <label>Profession</label>
+                <label>Date of birth</label>
               </div>
               <div class="col-md-6">
-                <p>Web Developer and Designer</p>
+                <p>{{authService.user.dob}}</p>
               </div>
             </div>
           </div>

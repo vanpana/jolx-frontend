@@ -15,7 +15,7 @@ export class AuthService {
   public userLoggedOut: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private httpService: HttpService,
-              private cookieService: CookiesService) { }
+              private cookieService: CookiesService) { this.broadcastIfAuthenicated(); }
 
   public constructAndPersistUser(data) {
     this.cookieService.saveUserCookie(data['user']);

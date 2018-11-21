@@ -20,6 +20,7 @@ import {ConfigService} from './services/config.service';
 import {AuthService} from './services/auth.service';
 import { HomeComponent } from './components/home/home.component';
 import {UploaderService} from './services/uploader.service';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
@@ -32,6 +33,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
+    EditProfileComponent,
     ProfileComponent,
   ],
   imports: [

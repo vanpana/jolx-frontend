@@ -8,9 +8,11 @@ export class UserSerializer extends Serializer<User> {
       firstName: json.firstName,
       lastName: json.lastName,
       username: json.username,
+      email: json.email,
       dob: json.dob,
       phone: json.phone,
       email: json.email,
+      photo: json.photo,
       skillIds: json.skills,
       reviewsGivenIds: json.reviewsGiven,
       reviewsReceivedIds: json.reviewsReceived

@@ -15,6 +15,6 @@ export class UserService {
     user.username = undefined;
 
     // PUT the user
-    return this.httpService.update(this.usersUrl, user.id, user);
+    return this.httpService.update(this.usersUrl, user._id, user);
   }
 }

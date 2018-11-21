@@ -63,6 +63,7 @@ export class AuthService {
     this.isAuthenticated = true;
     this.user = this.cookieService.getUserCookie();
     this.userAuthenticated.next(this.cookieService.getUserCookie());
+    console.log('User in authenticate', this.user);
   }
 
   public broadcastIfAuthenicated(): void {

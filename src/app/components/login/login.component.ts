@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
   public loginWithCredentials() {
     this.authService.login(this.email, this.password).subscribe(
       successData => {
-        console.log(successData);
+        console.log('Success data in login', successData);
         this.authService.authenticate(successData);
       },
       errorData => {

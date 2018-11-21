@@ -5,10 +5,10 @@ import {User} from '../models/user';
 export class UserSerializer extends Serializer<User> {
   fromJson(json: any): User {
     return {
+      _id: json._id,
       firstName: json.firstName,
       lastName: json.lastName,
       username: json.username,
-      email: json.email,
       dob: json.dob,
       phone: json.phone,
       email: json.email,

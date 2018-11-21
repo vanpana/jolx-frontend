@@ -1,0 +1,30 @@
+<body>
+<div class="container">
+  <img alt="{{user.username}} profile image" src="{{user.photo[0].url}}" height="50" width="50"/>
+  <div class="row">
+    <div class="form-group col-xs-6">
+      <input type="text" [(ngModel)]="user.firstName" value="" placeholder="First name" class="form-control"/>
+    </div>
+    <div class="form-group col-xs-6">
+      <input type="text" [(ngModel)]="user.lastName" value="" placeholder="Last name" class="form-control"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" [(ngModel)]="user.username" value="" placeholder="Username" class="form-control"/>
+  </div>
+
+  <div class="form-group">
+    <input type="email" [(ngModel)]="user.email" value="" placeholder="Email" class="form-control"/>
+  </div>
+
+  <div class="form-group">
+    <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".png,.jpg" class="form-control"/>
+  </div>
+
+  <div class="footer text-center">
+    <button (click)="update()" class="btn btn-info btn-round btn-wd"> Update</button>
+  </div>
+</div>
+
+</body>

@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
 
 
     window.fbAsyncInit = () => {
-      console.log('fbasyncinit');
 
       FB.init({
         appId: '306354349965234',

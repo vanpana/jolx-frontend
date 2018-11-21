@@ -21,6 +21,7 @@ import {AuthService} from './services/auth.service';
 import { HomeComponent } from './components/home/home.component';
 import {UploaderService} from './services/uploader.service';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     FooterComponent,
     HomeComponent,
     EditProfileComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

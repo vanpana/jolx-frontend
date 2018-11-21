@@ -38,7 +38,7 @@
           </a>
           <ul class="dropdown-menu dropdown-with-icons">
             <li>
-              <a href="#">
+              <a routerLink="profile">
                 <i class="pe-7s-user"></i> Account
               </a>
             </li>
@@ -73,7 +73,7 @@
         <li *ngIf="!authService.isAuthenticated"><a routerLink="register" class="btn btn-round btn-default">Register</a></li>
         <li *ngIf="!authService.isAuthenticated"><a routerLink="login" class="btn btn-round btn-default">Login</a></li>
         <li *ngIf="authService.isAuthenticated"><a>{{authService.user.username}}</a></li>
-        <li *ngIf="authService.isAuthenticated"><button (click)="authService.logout()" class="btn btn-round btn-default">Logout</button></li>
+        <li *ngIf="authService.isAuthenticated"><button (click)="authService.logout()" class="btn btn-round btn-default" routerLink="home">Logout</button></li>
       </ul>
 
     </div><!-- /.navbar-collapse -->

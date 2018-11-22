@@ -1,5 +1,6 @@
 import {Resource} from './resource';
 import {FileUpload} from './file-upload';
+import {Posting} from './posting';
 
 export class User extends Resource {
   id: string;
@@ -14,5 +15,5 @@ export class User extends Resource {
   reviewsGivenIds: Array<String>;
   reviewsReceivedIds: Array<String>;
   jobsPostedIds: Array<String>;
-  postingsAppliedForIds: Array<String>;
+  postingsAppliedFor: Array<Posting>;
 }

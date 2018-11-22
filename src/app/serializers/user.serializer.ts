@@ -17,7 +17,7 @@ export class UserSerializer extends Serializer<User> {
       reviewsGivenIds: json.reviewsGiven,
       reviewsReceivedIds: json.reviewsReceived,
       jobsPostedIds: json.jobsPosted,
-      postingsAppliedForIds: json.postingsAppliedFor
+      postingsAppliedFor: json.postingsAppliedFor
     };
   }
 }

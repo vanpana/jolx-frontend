@@ -15,22 +15,23 @@ export class CardComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private postingService: PostingsService) {
+    console.log('user', authService.user);
   }
 
   ngOnInit(): void {
   }
 
   apply() {
-    // TODO If user tried to apply, redirect him to login
-    this.postingService.userAppliesForPosting(this.posting.id).subscribe((successData) => {
-      console.log(successData);
-    }, (errorData) => {
-      console.log(errorData);
+    // TODO If unauthenticated user tried to apply, redirect him to login
+    this.postingService.userAppliesForPosting(this.posting._id).subscribe((s) => {
+      console.log(s);
+    }, (e) => {
+      console.log(e);
     });
   }
 
   unapply() {
-    this.postingService.userUnAppliesForPosting(this.posting.id);
+    this.postingService.userUnAppliesForPosting(this.posting._id);
   }
 
   /**
@@ -41,10 +42,10 @@ export class CardComponent implements OnInit {
       return false;
     }
 
-    if (this.authService.user.postingsAppliedForIds == null) {
+    if (this.authService.user.postingsAppliedFor == null) {
       return false;
     }
 
-    return this.authService.user.postingsAppliedForIds.indexOf(this.posting.id) > -1;
+    return this.authService.user.postingsAppliedFor.map((posting) => posting._id).indexOf(this.posting._id) > -1;
   }
 }

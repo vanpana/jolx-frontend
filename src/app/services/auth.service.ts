@@ -23,6 +23,7 @@ export class AuthService implements OnDestroy {
               private uploaderService: UploaderService) {
     // Subscribe so the user updates if it's modified on the server
     httpService.userChangedOnServer.subscribe( () => {
+      console.log('i\'m fetching the userrrrrrrr');
       this.fetchIfAuthenticated();
     });
   }

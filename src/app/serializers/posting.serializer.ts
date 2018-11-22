@@ -8,7 +8,7 @@ export class PostingSerializer extends Serializer<Posting> {
   fromJson(json: any): Posting {
 
     return {
-      id: json._id,
+      _id: json._id,
       name: json.name,
       description: json.description,
       price: json.price,

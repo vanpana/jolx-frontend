@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
+import {Posting} from '../../models/posting';
+import {PostingsService} from '../../services/postings.service';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +10,13 @@ import {AuthService} from '../../services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public authService: AuthService) { }
+  postings: Array<Posting>;
+
+  constructor(public authService: AuthService,
+              public postingsService: PostingsService) { }
 
   ngOnInit() {
+    this.postingsService.getAll().subscribe(success_data => this.postings = success_data);
   }
 
 }

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {UserService} from '../../services/user.service';
 import {Error} from '../../models/error';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
@@ -10,6 +11,7 @@ declare var FB: any;
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
+  providers: [UserService]
 })
 export class LoginComponent implements OnInit {
   public email: string;
@@ -78,7 +80,11 @@ export class LoginComponent implements OnInit {
     );
   }
 
-
+  public keyDownEvent(event: any) {
+    if (event.keyCode === 13) {
+      this.loginWithCredentials();
+    }
+  }
 
 // public socialSignIn(socialPlatform: string) {
 //   let socialPlatformProvider;

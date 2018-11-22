@@ -1,40 +1,55 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Posting} from '../../models/posting';
+import {AuthService} from '../../services/auth.service';
+import {PostingsService} from '../../services/postings.service';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styles: [
-    `
-    :host {
-      text-align: center;
-      background: white;
-      display: block;
-      padding: .45rem .65rem;
-      border-radius: 3px;
-      max-width: 325px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-      color: #c85f7f;
-    }
-
-    p {
-      text-align: center;
-    }
-  `
-  ]
+  styleUrls: ['./card.component.css']
 })
-export class CardComponent {
-  @Input('title') title;
-  @Input('subtitle') subtitle;
-  @Input('content') content = '😄';
+export class CardComponent implements OnInit {
 
-  @Output() btnClicked = new EventEmitter<boolean>();
+  @Input()
+  posting: Posting;
 
-  constructor() {}
+  constructor(private authService: AuthService,
+              private postingService: PostingsService) {
+    console.log('user', authService.user);
+  }
 
-  handleBtnClick() {
-    this.btnClicked.emit(true);
+  ngOnInit(): void {
+  }
+
+  apply() {
+    // TODO If unauthenticated user tried to apply, redirect him to login
+    this.postingService.userAppliesForPosting(this.posting._id).subscribe((s) => {
+      console.log(s);
+    }, (e) => {
+      console.log(e);
+    });
+  }
+
+  unapply() {
+    this.postingService.userUnAppliesForPosting(this.posting._id).subscribe((s) => {
+      console.log(s);
+    }, (e) => {
+      console.log(e);
+    });
+  }
+
+  /**
+   * Returns whether the user has applied for the current posting.
+   */
+  userApplied(): Boolean {
+    if (!this.authService.isAuthenticated) {
+      return false;
+    }
+
+    if (this.authService.user.postingsAppliedFor == null) {
+      return false;
+    }
+
+    return this.authService.user.postingsAppliedFor.map((posting) => posting._id).indexOf(this.posting._id) > -1;
   }
 }

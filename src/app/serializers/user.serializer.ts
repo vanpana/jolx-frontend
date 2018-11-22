@@ -4,18 +4,24 @@ import {User} from '../models/user';
 
 export class UserSerializer extends Serializer<User> {
   fromJson(json: any): User {
+    if (json == null) {
+      return null;
+    }
+
     return {
-      _id: json._id,
+      id: json._id,
       firstName: json.firstName,
       lastName: json.lastName,
       username: json.username,
+      email: json.email,
       dob: json.dob,
       phone: json.phone,
-      email: json.email,
       photo: json.photo,
       skillIds: json.skills,
       reviewsGivenIds: json.reviewsGiven,
-      reviewsReceivedIds: json.reviewsReceived
+      reviewsReceivedIds: json.reviewsReceived,
+      jobsPostedIds: json.jobsPosted,
+      postingsAppliedFor: json.postingsAppliedFor
     };
   }
 }

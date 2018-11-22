@@ -2,10 +2,18 @@
   <img class="card-img-top" src="../../../assets/dog-walking.jpg" alt="Card image cap">
   <div class="card-body">
     <h3 class="card-title">{{posting.name}}</h3>
-    <p class="posting_date">{{posting.startTime | date:'dd MMM yyyy'}}</p>
+    <!--<p class="posting_date">{{posting.startTime | date:'dd MMM yyyy'}}</p>-->
     <p class="card-text">{{posting.description}}</p>
     <a class="card-price">{{posting.price}} lei </a>
-    <a class="btn btn-primary">Apply</a>
+
+    <!--Apply button-->
+    <div *ngIf="!userApplied()">
+      <a (click)="apply()" class="btn btn-primary">Apply</a>
+    </div>
+    <div *ngIf="userApplied()">
+      <a (click)="unapply()" class="btn btn-warning">Unapply</a>
+    </div>
+
   </div>
 </div>
 

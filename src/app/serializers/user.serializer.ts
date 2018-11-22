@@ -8,6 +8,7 @@ export class UserSerializer extends Serializer<User> {
     }
 
     return {
+      id: json._id,
       firstName: json.firstName,
       lastName: json.lastName,
       username: json.username,
@@ -17,7 +18,9 @@ export class UserSerializer extends Serializer<User> {
       photo: json.photo,
       skillIds: json.skills,
       reviewsGivenIds: json.reviewsGiven,
-      reviewsReceivedIds: json.reviewsReceived
+      reviewsReceivedIds: json.reviewsReceived,
+      jobsPostedIds: json.jobsPosted,
+      postingsAppliedFor: json.postingsAppliedFor
     };
   }
 }

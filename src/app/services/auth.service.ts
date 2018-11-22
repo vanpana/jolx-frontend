@@ -1,17 +1,19 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {EventEmitter, Injectable, OnDestroy} from '@angular/core';
 import {HttpService} from './http.service';
 import {User} from '../models/user';
 import {CookiesService} from './cookies.service';
-import {FileUpload} from '../models/file-upload';
 import {UploaderService} from './uploader.service';
 
 @Injectable()
-export class AuthService {
+export class AuthService implements OnDestroy {
   public isAuthenticated = false;
   public user: User;
 
+  private jsonUserKey = 'user';
+  private baseUserUrl = 'users';
   private loginUrl = 'login';
   private signupUrl = 'signup';
+  private meUrl = this.baseUserUrl + '/me';
 
   public userAuthenticated: EventEmitter<User> = new EventEmitter<User>();
   public userLoggedOut: EventEmitter<void> = new EventEmitter<void>();
@@ -19,15 +21,25 @@ export class AuthService {
   constructor(private httpService: HttpService,
               private cookieService: CookiesService,
               private uploaderService: UploaderService) {
+    // Subscribe so the user updates if it's modified on the server
+    httpService.userChangedOnServer.subscribe( () => {
+      console.log('i\'m fetching the userrrrrrrr');
+      this.fetchIfAuthenticated();
+    });
+  }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from the event when the AuthService is destroyed
+    this.httpService.userChangedOnServer.unsubscribe();
   }
 
   public constructAndPersistUser(data) {
-    this.cookieService.saveUserCookie(data['user']);
+    this.cookieService.saveUserCookie(data[this.jsonUserKey]);
     this.cookieService.saveJWTCookie(data['jwt']);
   }
 
   public login(identifier: string, password: string) {
-    return this.httpService.post(this.loginUrl, {
+    return this.httpService.postNoEvent(this.loginUrl, {
       identifier: identifier,
       password: password
     });
@@ -36,7 +48,7 @@ export class AuthService {
 
   public register(firstName: string, lastName: string, email: string, username: string, password: string, file: File, success, error) {
     // First POST and register the user
-    const registrationPromise = this.httpService.post(this.signupUrl, {
+    const registrationPromise = this.httpService.postNoEvent(this.signupUrl, {
       firstName: firstName,
       lastName: lastName,
       email: email,
@@ -79,5 +91,13 @@ export class AuthService {
     this.isAuthenticated = false;
     this.user = null;
     this.userLoggedOut.next();
+  }
+
+  private fetchIfAuthenticated() {
+    if (this.isAuthenticated) {
+      this.httpService.readNoEvent(this.meUrl).subscribe((successData) => {
+        this.cookieService.saveUserCookie(successData);
+      });
+    }
   }
 }

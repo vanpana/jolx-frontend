@@ -3,10 +3,9 @@ import {HttpService} from './http.service';
 
 @Injectable()
 export class SkillService {
-  private httpService: HttpService;
   private skillsUrl = 'skills';
 
-  constructor(httpService: HttpService) {
+  constructor(private httpService: HttpService) {
     this.httpService = httpService;
   }
 

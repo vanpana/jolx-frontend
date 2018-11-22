@@ -1,7 +1,9 @@
 import {Resource} from './resource';
 import {FileUpload} from './file-upload';
+import {Posting} from './posting';
 
 export class User extends Resource {
+  id: string;
   firstName: string;
   lastName: string;
   username: string;
@@ -12,4 +14,6 @@ export class User extends Resource {
   skillIds: Array<String>;
   reviewsGivenIds: Array<String>;
   reviewsReceivedIds: Array<String>;
+  jobsPostedIds: Array<String>;
+  postingsAppliedFor: Array<Posting>;
 }

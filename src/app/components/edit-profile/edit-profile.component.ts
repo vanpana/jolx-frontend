@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {User} from '../../models/user';
 import {CookiesService} from '../../services/cookies.service';
 import {UploaderService} from '../../services/uploader.service';
-import {HttpService} from '../../services/http.service';
-import {UserService} from '../../services/user.service';
+import {AuthService} from '../../services/auth.service';
 // import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
 @Component({
@@ -16,7 +15,7 @@ export class EditProfileComponent implements OnInit {
   user: User;
   file: File;
 
-  constructor(private userService: UserService,
+  constructor(private authService: AuthService,
               private uploaderService: UploaderService,
               private cookieService: CookiesService) {
     this.user = cookieService.getUserCookie();
@@ -43,7 +42,7 @@ export class EditProfileComponent implements OnInit {
     console.log('user id', this.user._id);
 
     // PUT the user
-    this.userService.update(this.user).subscribe(
+    this.authService.update(this.user).subscribe(
       success_data => {
         console.log(success_data);
         // this.locationService.back();

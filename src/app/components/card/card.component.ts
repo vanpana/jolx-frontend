@@ -31,7 +31,11 @@ export class CardComponent implements OnInit {
   }
 
   unapply() {
-    this.postingService.userUnAppliesForPosting(this.posting._id);
+    this.postingService.userUnAppliesForPosting(this.posting._id).subscribe((s) => {
+      console.log(s);
+    }, (e) => {
+      console.log(e);
+    });
   }
 
   /**

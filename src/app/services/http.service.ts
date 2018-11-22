@@ -51,6 +51,7 @@ export class HttpService {
   public delete(endpoint: string, id: string) {
     return this.requestAndNotify(this.deleteNoNotify(endpoint, id));
   }
+
   // </editor-fold>
 
   // <editor-fold desc="Private methods">
@@ -71,7 +72,11 @@ export class HttpService {
   }
 
   private requestAndNotify(request): Observable<any> {
-    this.userChangedOnServer.emit();
+    request.subscribe(() => {
+      this.userChangedOnServer.emit();
+    }, () => {
+    });
+
     return request;
   }
 
@@ -92,5 +97,6 @@ export class HttpService {
     console.log(headers);
     return headers;
   }
+
   // </editor-fold>
 }

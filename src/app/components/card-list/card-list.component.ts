@@ -19,6 +19,6 @@ export class CardListComponent implements OnInit {
   }
 
   getPostings() {
-    this.postingsService.list().subscribe(success_data => this.postings = success_data);
+    this.postingsService.getAll().subscribe(success_data => this.postings = success_data);
   }
 }

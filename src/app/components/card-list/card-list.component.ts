@@ -11,7 +11,8 @@ export class CardListComponent implements OnInit {
   @Input()
   postings: Array<Posting>;
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

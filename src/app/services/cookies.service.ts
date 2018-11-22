@@ -12,6 +12,7 @@ export class CookiesService {
   public deleteCookie(name) {
     this.setCookie(name, '', -1);
   }
+
   public getCookie(name: string) {
     const ca: Array<string> = document.cookie.split(';');
     const caLen: number = ca.length;

@@ -16,8 +16,4 @@ export class AppComponent {
               private postingsService: PostingsService) {
     this.authService.broadcastIfAuthenicated();
   }
-
-  getPostings() {
-    this.postingsService.list().subscribe(success_data => console.log(success_data));
-  }
 }

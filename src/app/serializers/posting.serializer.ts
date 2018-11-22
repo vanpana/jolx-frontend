@@ -8,12 +8,13 @@ export class PostingSerializer extends Serializer<Posting> {
   fromJson(json: any): Posting {
 
     return {
-      name: json.Name,
-      description: json.Description,
-      price: json.Price,
-      user: json.User,
-      startTime: new Date(json.StartTime),
-      duration: json.Duration
+      id: json._id,
+      name: json.name,
+      description: json.description,
+      price: json.price,
+      user: json.user,
+      startTime: new Date(json.startTime),
+      duration: json.duration
     };
   }
 

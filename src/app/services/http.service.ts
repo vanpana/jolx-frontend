@@ -54,7 +54,6 @@ export class HttpService {
     if (bearer !== '') {
       headers = headers.append('Authorization', `Bearer ${bearer}`);
     }
-    console.log(headers);
     return headers;
   }
 }

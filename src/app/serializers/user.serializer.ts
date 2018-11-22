@@ -1,9 +1,12 @@
 import {Serializer} from './serializer';
-import {Resource} from '../models/resource';
 import {User} from '../models/user';
 
 export class UserSerializer extends Serializer<User> {
   fromJson(json: any): User {
+    if (json == null) {
+      return null;
+    }
+
     return {
       firstName: json.firstName,
       lastName: json.lastName,

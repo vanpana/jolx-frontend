@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Posting} from '../../models/posting';
+import {PostingsService} from '../../services/postings.service';
 
 @Component({
   selector: 'app-card-list',
@@ -8,12 +9,16 @@ import {Posting} from '../../models/posting';
 })
 export class CardListComponent implements OnInit {
 
-  @Input()
   postings: Array<Posting>;
 
-  constructor() {}
+  constructor(
+    private postingsService: PostingsService ) {}
 
   ngOnInit(): void {
+    this.getPostings();
   }
 
+  getPostings() {
+    this.postingsService.list().subscribe(success_data => this.postings = success_data);
+  }
 }

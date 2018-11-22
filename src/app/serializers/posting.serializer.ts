@@ -6,14 +6,24 @@ export class PostingSerializer extends Serializer<Posting> {
   private userSerializer: UserSerializer = new UserSerializer;
 
   fromJson(json: any): Posting {
-
     return {
-      name: json.Name,
-      description: json.Description,
-      price: json.Price,
-      user: json.User,
-      startTime: new Date(json.StartTime),
-      duration: json.Duration
+      name: json.name,
+      description: json.description,
+      price: json.price,
+      user: this.userSerializer.fromJson(json.user),
+      startTime: new Date(json.startTime),
+      duration: json.duration
+    };
+  }
+
+  toJson(posting: Posting): any {
+    return {
+      name: posting.name,
+      description: posting.description,
+      price: posting.price,
+      user: this.userSerializer.toJson(posting.user),
+      startTime: posting.startTime.toISOString(),
+      duration: posting.duration
     };
   }
 

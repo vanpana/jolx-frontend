@@ -14,6 +14,7 @@ export class AuthService implements OnDestroy {
   private loginUrl = 'login';
   private signupUrl = 'signup';
   private meUrl = this.baseUserUrl + '/me';
+  private userUrl = 'users';
 
   public userAuthenticated: EventEmitter<User> = new EventEmitter<User>();
   public userLoggedOut: EventEmitter<void> = new EventEmitter<void>();
@@ -23,7 +24,6 @@ export class AuthService implements OnDestroy {
               private uploaderService: UploaderService) {
     // Subscribe so the user updates if it's modified on the server
     httpService.userChangedOnServer.subscribe( () => {
-      console.log('i\'m fetching the userrrrrrrr');
       this.fetchIfAuthenticated();
     });
   }
@@ -45,6 +45,14 @@ export class AuthService implements OnDestroy {
     });
   }
 
+  update(user: User) {
+    // Delete user email and username to avoid 400
+    user.email = undefined;
+    user.username = undefined;
+
+    // PUT the user
+    return this.httpService.update(this.userUrl, user._id, user);
+  }
 
   public register(firstName: string, lastName: string, email: string, username: string, password: string, file: File, success, error) {
     // First POST and register the user

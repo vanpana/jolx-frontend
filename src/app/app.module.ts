@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CompsComponent} from './components/comps/comps.component';
+import {CardComponent} from './components/card/card.component';
 import {LoginComponent} from './components/login/login.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
@@ -18,8 +19,8 @@ import {ConfigService} from './services/config.service';
 import {AuthService} from './services/auth.service';
 import {HomeComponent} from './components/home/home.component';
 import {UploaderService} from './services/uploader.service';
-import {EditProfileComponent} from './components/edit-profile/edit-profile.component';
-import {CardComponent} from './components/card/card.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import {CardListComponent} from './components/card-list/card-list.component';
 import {PostingsService} from './services/postings.service';
 import {NewPostingComponent } from './components/new-posting/new-posting.component';
@@ -29,6 +30,7 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
   declarations: [
     AppComponent,
     CompsComponent,
+    CardComponent,
     LoginComponent,
     SignupComponent,
     HeaderComponent,
@@ -37,7 +39,8 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
     EditProfileComponent,
     CardComponent,
     CardListComponent,
-    NewPostingComponent
+    NewPostingComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

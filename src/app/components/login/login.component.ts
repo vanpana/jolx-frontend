@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {UserService} from '../../services/user.service';
 import {Error} from '../../models/error';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
@@ -9,7 +10,7 @@ declare var FB: any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   public email: string;
@@ -68,6 +69,7 @@ export class LoginComponent implements OnInit {
   public loginWithCredentials() {
     this.authService.login(this.email, this.password).subscribe(
       successData => {
+        console.log('Success data in login', successData);
         this.authService.authenticate(successData);
       },
       errorData => {

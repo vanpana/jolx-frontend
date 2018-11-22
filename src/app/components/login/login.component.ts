@@ -77,7 +77,11 @@ export class LoginComponent implements OnInit {
     );
   }
 
-
+  public keyDownEvent(event: any) {
+    if (event.keyCode === 13) {
+      this.loginWithCredentials();
+    }
+  }
 
 // public socialSignIn(socialPlatform: string) {
 //   let socialPlatformProvider;

@@ -63,7 +63,7 @@
               </a>
             </li>
             <li>
-              <a href="#" class="text-danger">
+              <a (click)="authService.logout()" class="text-danger">
                 <i class="pe-7s-close-circle"></i>
                 Log out
               </a>
@@ -73,7 +73,7 @@
         <li *ngIf="!authService.isAuthenticated"><a routerLink="register" class="btn btn-round btn-default">Register</a></li>
         <li *ngIf="!authService.isAuthenticated"><a routerLink="login" class="btn btn-round btn-default">Login</a></li>
         <li *ngIf="authService.isAuthenticated"><a>{{authService.user.username}}</a></li>
-        <li *ngIf="authService.isAuthenticated"><button (click)="authService.logout()" class="btn btn-round btn-default">Logout</button></li>
+        <li *ngIf="authService.isAuthenticated"><button routerLink="new_posting" class="btn btn-round btn-default">New Posting</button></li>
       </ul>
 
     </div><!-- /.navbar-collapse -->

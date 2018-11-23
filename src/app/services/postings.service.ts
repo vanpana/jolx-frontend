@@ -3,15 +3,20 @@ import {HttpService} from './http.service';
 import {Observable} from 'rxjs/Observable';
 import {map} from 'rxjs/operators';
 import {PostingSerializer} from '../serializers/posting.serializer';
+import {Posting} from '../models/posting';
+import {ResourceService} from './resource.service';
 
 @Injectable()
-export class PostingsService {
-  private postingsUrl = 'postings';
-  private applyUrl = this.postingsUrl + '/apply';
-  private unApplyUrl = this.postingsUrl + '/unapply';
+export class PostingsService extends ResourceService<Posting> {
+  private applyUrl = 'postings/apply';
+  private unApplyUrl = 'postings/unapply';
 
-  constructor(private httpService: HttpService) {
-    this.httpService = httpService;
+  constructor(httpService: HttpService) {
+    super(
+      httpService,
+      'postings',
+      new PostingSerializer()
+    );
   }
 
   /**
@@ -30,8 +35,4 @@ export class PostingsService {
     return this.httpService.post(this.unApplyUrl, {posting_id: postingId});
   }
 
-  public getAll(): Observable<any> {
-    // TODO Nu prea e ce trebe
-    return this.httpService.list(this.postingsUrl).pipe(map(data => data.map(item => new PostingSerializer().fromJson(item))));
-  }
 }

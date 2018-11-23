@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'register', component: SignupComponent },
   { path: 'home', component: HomeComponent},
   { path: 'edit', component: EditProfileComponent},
-  { path: 'new_posting', component: NewPostingComponent}
+  { path: 'new_posting', component: NewPostingComponent},
   { path: 'edit', component: EditProfileComponent},
   { path: 'profile', component: ProfileComponent}
 ];

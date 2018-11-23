@@ -36,10 +36,10 @@ export class EditProfileComponent implements OnInit {
   update() {
     // Update the photo if it has changed
     if (this.file != null) {
-      this.uploaderService.upload(this.file, this.user._id, this.uploaderService.userKey);
+      this.uploaderService.upload(this.file, this.user.id, this.uploaderService.userKey);
     }
 
-    console.log('user id', this.user._id);
+    console.log('user id', this.user.id);
 
     // PUT the user
     this.authService.update(this.user).subscribe(

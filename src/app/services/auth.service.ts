@@ -51,7 +51,7 @@ export class AuthService implements OnDestroy {
     user.username = undefined;
 
     // PUT the user
-    return this.httpService.update(this.userUrl, user._id, user);
+    return this.httpService.update(this.userUrl, user.id, user);
   }
 
   public register(firstName: string, lastName: string, email: string, username: string, password: string, file: File, success, error) {

@@ -29,6 +29,7 @@ export class NewPostingComponent implements OnInit {
 
   public createPosting(startTime: string): void {
     const newPosting: Posting = {
+      _id: undefined,
       name: this.name,
       description: this.description,
       price: this.price,
@@ -39,7 +40,6 @@ export class NewPostingComponent implements OnInit {
 
     this.postingService.create(newPosting).subscribe(
       success_data => {
-        alert('Posting added successfully');
         location.assign('/home');
       },
 

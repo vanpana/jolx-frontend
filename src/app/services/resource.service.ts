@@ -6,7 +6,7 @@ import {map} from 'rxjs/operators';
 
 export class ResourceService<T extends Resource> {
   constructor(
-    private httpService: HttpService,
+    protected httpService: HttpService,
     private endpoint: string,
     private serializer: Serializer<T>) {}
 

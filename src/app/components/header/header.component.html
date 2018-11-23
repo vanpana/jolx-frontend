@@ -70,10 +70,11 @@
             </li>
           </ul>
         </li>
-        <li *ngIf="!authService.isAuthenticated"><a routerLink="register" class="btn btn-round btn-default">Register</a></li>
-        <li *ngIf="!authService.isAuthenticated"><a routerLink="login" class="btn btn-round btn-default">Login</a></li>
-        <li *ngIf="authService.isAuthenticated"><a>{{authService.user.username}}</a></li>
-        <li *ngIf="authService.isAuthenticated"><button routerLink="new_posting" class="btn btn-round btn-default">New Posting</button></li>
+          <li *ngIf="!authService.isAuthenticated"><a routerLink="register" class="btn btn-round btn-default">Register</a></li>
+          <li *ngIf="!authService.isAuthenticated"><a routerLink="login" class="btn btn-round btn-default">Login</a></li>
+          <li *ngIf="authService.isAuthenticated"><a>{{authService.user.username}}</a></li>
+          <li *ngIf="authService.isAuthenticated"><a href = "http://localhost:4200/new_posting"  class="btn btn-round btn-default">New Posting</a>
+        </li>
       </ul>
 
     </div><!-- /.navbar-collapse -->

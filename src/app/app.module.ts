@@ -25,6 +25,7 @@ import {CardListComponent} from './components/card-list/card-list.component';
 import {PostingsService} from './services/postings.service';
 import {NewPostingComponent } from './components/new-posting/new-posting.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import {MessageBus} from './services/message-bus';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
     UploaderService,
     PostingsService,
     Location,
+    MessageBus,
     {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],
   bootstrap: [AppComponent]

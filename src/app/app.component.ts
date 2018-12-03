@@ -15,6 +15,6 @@ export class AppComponent {
 
   constructor(private authService: AuthService,
               private postingsService: PostingsService) {
-    this.authService.broadcastIfAuthenicated();
+    this.authService.broadcastIfAuthenticated();
   }
 }

@@ -1,17 +1,21 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from './http.service';
 import {Observable} from 'rxjs/Observable';
-import {map} from 'rxjs/operators';
+import {finalize} from 'rxjs/operators';
 import {PostingSerializer} from '../serializers/posting.serializer';
 import {Posting} from '../models/posting';
 import {ResourceService} from './resource.service';
+import {MessageBus} from './message-bus';
+import {UserMustUpdate} from '../models/message-bus-events/user-must-update';
+import 'rxjs/add/operator/finally';
 
 @Injectable()
 export class PostingsService extends ResourceService<Posting> {
   private applyUrl = 'postings/apply';
   private unApplyUrl = 'postings/unapply';
 
-  constructor(httpService: HttpService) {
+  constructor(httpService: HttpService,
+              private messageBus: MessageBus) {
     super(
       httpService,
       'postings',
@@ -24,7 +28,11 @@ export class PostingsService extends ResourceService<Posting> {
    * @param postingId - the posting id where the user applies to
    */
   userAppliesForPosting(postingId): Observable<any> {
-    return this.httpService.post(this.applyUrl, {posting_id: postingId});
+    return this.httpService
+      .post(this.applyUrl, {posting_id: postingId})
+      .pipe(finalize(() => {
+      this.messageBus.publish(new UserMustUpdate());
+    }));
   }
 
   /**
@@ -32,7 +40,9 @@ export class PostingsService extends ResourceService<Posting> {
    * @param postingId - the posting id where the user should be deleted from
    */
   userUnAppliesForPosting(postingId): Observable<any> {
-    return this.httpService.post(this.unApplyUrl, {posting_id: postingId});
+    return this.httpService.post(this.unApplyUrl, {posting_id: postingId}).pipe(finalize(() => {
+      this.messageBus.publish(new UserMustUpdate());
+    }));
   }
 
 }

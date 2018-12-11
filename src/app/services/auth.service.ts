@@ -1,13 +1,15 @@
-import {EventEmitter, Injectable, OnDestroy} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {HttpService} from './http.service';
 import {User} from '../models/user';
 import {CookiesService} from './cookies.service';
 import {UploaderService} from './uploader.service';
+import {MessageBus} from './message-bus';
+import {UserMustUpdate} from '../models/message-bus-events/user-must-update';
+import {UserHasUpdated} from '../models/message-bus-events/user-has-updated';
 
 @Injectable()
-export class AuthService implements OnDestroy {
+export class AuthService {
   public isAuthenticated = false;
-  public user: User;
 
   private jsonUserKey = 'user';
   private baseUserUrl = 'users';
@@ -21,16 +23,13 @@ export class AuthService implements OnDestroy {
 
   constructor(private httpService: HttpService,
               private cookieService: CookiesService,
-              private uploaderService: UploaderService) {
+              private uploaderService: UploaderService,
+              private messageBus: MessageBus) {
+
     // Subscribe so the user updates if it's modified on the server
-    httpService.userChangedOnServer.subscribe( () => {
+    messageBus.observe(new UserMustUpdate(), () => {
       this.fetchIfAuthenticated();
     });
-  }
-
-  ngOnDestroy(): void {
-    // Unsubscribe from the event when the AuthService is destroyed
-    this.httpService.userChangedOnServer.unsubscribe();
   }
 
   public constructAndPersistUser(data) {
@@ -39,7 +38,7 @@ export class AuthService implements OnDestroy {
   }
 
   public login(identifier: string, password: string) {
-    return this.httpService.postNoEvent(this.loginUrl, {
+    return this.httpService.post(this.loginUrl, {
       identifier: identifier,
       password: password
     });
@@ -56,7 +55,7 @@ export class AuthService implements OnDestroy {
 
   public register(firstName: string, lastName: string, email: string, username: string, password: string, file: File, success, error) {
     // First POST and register the user
-    const registrationPromise = this.httpService.postNoEvent(this.signupUrl, {
+    const registrationPromise = this.httpService.post(this.signupUrl, {
       firstName: firstName,
       lastName: lastName,
       email: email,
@@ -82,14 +81,12 @@ export class AuthService implements OnDestroy {
   public authenticate(successData: any): void {
     this.constructAndPersistUser(successData);
     this.isAuthenticated = true;
-    this.user = this.cookieService.getUserCookie();
     this.userAuthenticated.next(this.cookieService.getUserCookie());
   }
 
-  public broadcastIfAuthenicated(): void {
+  public broadcastIfAuthenticated(): void {
     if (this.cookieService.hasJWTCookie()) {
       this.isAuthenticated = true;
-      this.user = this.cookieService.getUserCookie();
       this.userAuthenticated.next(this.cookieService.getUserCookie());
     }
   }
@@ -97,14 +94,19 @@ export class AuthService implements OnDestroy {
   public logout(): void {
     this.cookieService.clearCookies();
     this.isAuthenticated = false;
-    this.user = null;
     this.userLoggedOut.next();
+  }
+
+  get user() {
+    return this.cookieService.getUserCookie();
   }
 
   private fetchIfAuthenticated() {
     if (this.isAuthenticated) {
-      this.httpService.readNoEvent(this.meUrl).subscribe((successData) => {
+      this.httpService.read(this.meUrl).subscribe((successData) => {
         this.cookieService.saveUserCookie(successData);
+        // Publish event on message bus
+        this.messageBus.publish(new UserHasUpdated(this.user));
       });
     }
   }

@@ -14,6 +14,6 @@ export class User extends Resource {
   skillIds: Array<String>;
   reviewsGivenIds: Array<String>;
   reviewsReceivedIds: Array<String>;
-  jobsPostedIds: Array<String>;
+  jobsPosted: Array<Posting>;
   postingsAppliedFor: Array<Posting>;
 }

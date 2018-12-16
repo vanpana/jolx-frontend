@@ -13,6 +13,7 @@ import {UserHasUpdated} from '../../models/message-bus-events/user-has-updated';
 export class CardComponent implements OnInit {
   @Input()
   posting: Posting;
+  isUserPosting: Boolean;
   hasUserApplied: Boolean;
 
   constructor(private authService: AuthService,
@@ -21,17 +22,26 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.checkIfUserApplied();
-
+    this.checkPropertiesOnObserve();
     this.messageBus.observe(new UserHasUpdated(), () => {
-      console.log('CC', 'da boss verific');
-      this.checkIfUserApplied();
+      this.checkPropertiesOnObserve();
     });
+  }
+
+  checkPropertiesOnObserve() {
+    this.checkIfUserPosting();
+
+    if (!this.isUserPosting) {
+      this.checkIfUserApplied();
+    }
   }
 
   apply() {
     // TODO If unauthenticated user tried to apply, redirect him to login
-    this.postingService.userAppliesForPosting(this.posting._id).subscribe(() => { console.log('APPLY', 'has clickd apply'); return; });
+    this.postingService.userAppliesForPosting(this.posting._id).subscribe(() => {
+      console.log('APPLY', 'has clickd apply');
+      return;
+    });
   }
 
   unapply() {
@@ -55,5 +65,13 @@ export class CardComponent implements OnInit {
     }
 
     this.hasUserApplied = this.authService.user.postingsAppliedFor.map((posting) => posting._id).indexOf(this.posting._id) > -1;
+  }
+
+  checkIfUserPosting() {
+    if (!this.authService.isAuthenticated) {
+      this.isUserPosting = false;
+    }
+
+    this.isUserPosting = this.authService.user.jobsPosted.map((posting) => posting._id).indexOf(this.posting._id) > -1;
   }
 }

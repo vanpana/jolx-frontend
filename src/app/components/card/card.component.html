@@ -7,13 +7,14 @@
     <a class="card-price">{{posting.price}} lei </a>
 
     <!--Apply button-->
-    <div *ngIf="!hasUserApplied">
-      <a (click)="apply()" class="btn btn-primary">Apply</a>
+    <div *ngIf="!isUserPosting">
+      <div *ngIf="!hasUserApplied">
+        <a (click)="apply()" class="btn btn-primary">Apply</a>
+      </div>
+      <div *ngIf="hasUserApplied">
+        <a (click)="unapply()" class="btn btn-warning">Unapply</a>
+      </div>
     </div>
-    <div *ngIf="hasUserApplied">
-      <a (click)="unapply()" class="btn btn-warning">Unapply</a>
-    </div>
-
   </div>
 </div>
 

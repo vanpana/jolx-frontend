@@ -20,7 +20,7 @@ export class UserSerializer extends Serializer<User> {
       skillIds: json.skills,
       reviewsGivenIds: json.reviewsGiven,
       reviewsReceivedIds: json.reviewsReceived,
-      jobsPostedIds: json.jobsPosted,
+      jobsPosted: json.jobsPosted,
       postingsAppliedFor: json.postingsAppliedFor
     };
   }

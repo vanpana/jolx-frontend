@@ -1,0 +1,30 @@
+<div class="container">
+
+  <div *ngIf="loading">
+    <div class="loader"></div>
+  </div>
+
+  <div *ngIf="!loading">
+    <h1>{{posting.name}}</h1>
+    <h3>{{posting.description}}</h3>
+
+    <!-- TODO if the ctx user posted this, show the applicants -->
+    <div *ngIf="isOwnPosting">
+      <h4>Applicants</h4>
+      <div *ngFor="let applicant of posting.applicantUsers">
+        <!--TODO Link the user to his page-->
+        <a><h5>{{applicant.username}}</h5></a>
+      </div>
+    </div>
+    <div *ngIf="!isOwnPosting">
+      <div *ngIf="!hasUserApplied">
+        <a (click)="apply()" class="btn btn-primary">Apply</a>
+      </div>
+      <div *ngIf="hasUserApplied">
+        <a (click)="unapply()" class="btn btn-warning">Unapply</a>
+      </div>
+    </div>
+
+
+  </div>
+</div>

@@ -6,6 +6,8 @@ import {UploaderService} from './uploader.service';
 import {MessageBus} from './message-bus';
 import {UserMustUpdate} from '../models/message-bus-events/user-must-update';
 import {UserHasUpdated} from '../models/message-bus-events/user-has-updated';
+import {PostingsUpdated} from '../models/message-bus-events/postings-updated';
+import {UserPostingsUpdated} from '../models/message-bus-events/user-postings-updated';
 
 @Injectable()
 export class AuthService {
@@ -29,6 +31,15 @@ export class AuthService {
     // Subscribe so the user updates if it's modified on the server
     messageBus.observe(new UserMustUpdate(), () => {
       this.fetchIfAuthenticated();
+    });
+
+    this.messageBus.observe(new PostingsUpdated(), (postingsUpdated) => {
+      console.log(postingsUpdated.postings);
+      this.user.jobsPosted = postingsUpdated.postings.filter((posting) => {
+        console.log(posting);
+        return posting.creatorUser.id === this.user.id;
+      });
+      this.messageBus.publish(new UserPostingsUpdated(this.user.jobsPosted));
     });
   }
 
@@ -105,6 +116,9 @@ export class AuthService {
     if (this.isAuthenticated) {
       this.httpService.read(this.meUrl).subscribe((successData) => {
         this.cookieService.saveUserCookie(successData);
+
+        console.log('updated user', this.user);
+
         // Publish event on message bus
         this.messageBus.publish(new UserHasUpdated(this.user));
       });

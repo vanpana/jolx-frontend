@@ -8,6 +8,8 @@ import {ResourceService} from './resource.service';
 import {MessageBus} from './message-bus';
 import {UserMustUpdate} from '../models/message-bus-events/user-must-update';
 import 'rxjs/add/operator/finally';
+import {AuthService} from './auth.service';
+import {PostingsUpdated} from 'app/models/message-bus-events/postings-updated';
 
 @Injectable()
 export class PostingsService extends ResourceService<Posting> {
@@ -15,6 +17,7 @@ export class PostingsService extends ResourceService<Posting> {
   private unApplyUrl = 'postings/unapply';
 
   constructor(httpService: HttpService,
+              private authService: AuthService,
               private messageBus: MessageBus) {
     super(
       httpService,
@@ -45,4 +48,9 @@ export class PostingsService extends ResourceService<Posting> {
     }));
   }
 
+  fetchPostings() {
+    super.list().subscribe((success_data) => {
+      this.messageBus.publish(new PostingsUpdated(success_data));
+    });
+  }
 }

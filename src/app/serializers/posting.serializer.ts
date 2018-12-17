@@ -13,7 +13,8 @@ export class PostingSerializer extends Serializer<Posting> {
       price: json.price,
       user: json.user,
       startTime: new Date(json.startTime),
-      duration: json.duration
+      duration: json.duration,
+      creatorUser: json.creatorUser
     };
   }
 

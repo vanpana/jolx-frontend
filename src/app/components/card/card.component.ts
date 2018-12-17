@@ -58,18 +58,28 @@ export class CardComponent implements OnInit {
   checkIfUserApplied() {
     if (!this.authService.isAuthenticated) {
       this.hasUserApplied = false;
+      return;
     }
 
     if (this.authService.user.postingsAppliedFor == null) {
       this.hasUserApplied = false;
+      return;
     }
 
     this.hasUserApplied = this.authService.user.postingsAppliedFor.map((posting) => posting._id).indexOf(this.posting._id) > -1;
   }
 
   checkIfUserPosting() {
+    console.log('user', this.authService.user);
+
     if (!this.authService.isAuthenticated) {
       this.isUserPosting = false;
+      return;
+    }
+
+    if (this.authService.user.jobsPosted == null) {
+      this.isUserPosting = false;
+      return;
     }
 
     this.isUserPosting = this.authService.user.jobsPosted.map((posting) => posting._id).indexOf(this.posting._id) > -1;

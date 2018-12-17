@@ -10,4 +10,5 @@ export class Posting extends Resource {
   startTime: Date;
   duration: number;
   creatorUser: User;
+  applicantUsers: User[];
 }

@@ -36,7 +36,8 @@ export class NewPostingComponent implements OnInit {
       user: this.authService.user,
       startTime: new Date(startTime),
       duration: this.duration,
-      creatorUser: this.authService.user
+      creatorUser: this.authService.user,
+      applicantUsers: []
     };
 
     this.postingService.create(newPosting).subscribe(

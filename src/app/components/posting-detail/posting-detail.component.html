@@ -1,0 +1,13 @@
+<div class="container">
+
+  <div *ngIf="loading">
+    <div class="loader"></div>
+  </div>
+
+  <div *ngIf="!loading">
+    <h1>{{posting.name}}</h1>
+    <h3>{{posting.description}}</h3>
+
+    <!-- TODO if the ctx user posted this, show the applicants -->
+  </div>
+</div>

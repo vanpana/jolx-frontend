@@ -26,6 +26,7 @@ import {PostingsService} from './services/postings.service';
 import {NewPostingComponent } from './components/new-posting/new-posting.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {MessageBus} from './services/message-bus';
+import { PostingDetailComponent } from './components/posting-detail/posting-detail.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import {MessageBus} from './services/message-bus';
     CardComponent,
     CardListComponent,
     NewPostingComponent,
+    PostingDetailComponent,
     ProfileComponent,
+    PostingDetailComponent,
   ],
   imports: [
     BrowserModule,

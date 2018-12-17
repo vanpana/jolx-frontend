@@ -1,7 +1,7 @@
 <div class="card">
   <img class="card-img-top" src="../../../assets/dog-walking.jpg" alt="Card image cap">
   <div class="card-body">
-    <h3 class="card-title">{{posting.name}}</h3>
+    <a href="http://localhost:4200/postings/{{posting._id}}"><h3 class="card-title">{{posting.name}}</h3></a>
     <!--<p class="posting_date">{{posting.startTime | date:'dd MMM yyyy'}}</p>-->
     <p class="card-text">{{posting.description}}</p>
     <a class="card-price">{{posting.price}} lei </a>

@@ -92,7 +92,6 @@ export class AuthService {
   public authenticate(successData: any): void {
     this.constructAndPersistUser(successData);
     this.isAuthenticated = true;
-    console.log('user comes from server as', successData);
     this.userAuthenticated.next(this.cookieService.getUserCookie());
   }
 

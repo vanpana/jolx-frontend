@@ -46,7 +46,7 @@
           <a href="">Bootply Profile</a>
           <p>JOBS POSTED</p>
           <div *ngFor="let posting of postings">
-            <p>{{posting.name}}</p>
+            <a href="http://localhost:4200/postings/{{posting._id}}"><p>{{posting.name}}</p></a>
           </div>
         </div>
       </div>

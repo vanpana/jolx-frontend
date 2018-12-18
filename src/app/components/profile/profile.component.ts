@@ -12,7 +12,7 @@ import {UserPostingsUpdated} from '../../models/message-bus-events/user-postings
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  private postings: Posting[];
+  public postings: Posting[];
   constructor(public authService: AuthService,
               private postingsService: PostingsService,
               private messageBus: MessageBus

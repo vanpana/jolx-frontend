@@ -40,13 +40,13 @@
     <div class="row">
       <div class="col-md-4">
         <div class="profile-work">
-          <p>WORK LINK</p>
-          <a href="">Website Link</a><br/>
-          <a href="">Bootsnipp Profile</a><br/>
-          <a href="">Bootply Profile</a>
           <p>JOBS POSTED</p>
           <div *ngFor="let posting of postings">
             <a href="http://localhost:4200/postings/{{posting._id}}"><p>{{posting.name}}</p></a>
+          </div>
+          <p>YOUR SKILLS</p>
+          <div *ngFor = "let skill of skills">
+            <p>{{skill.name}}</p>
           </div>
         </div>
       </div>

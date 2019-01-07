@@ -25,6 +25,8 @@ import {CardListComponent} from './components/card-list/card-list.component';
 import {PostingsService} from './services/postings.service';
 import {NewPostingComponent } from './components/new-posting/new-posting.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import {SearchService} from './services/search.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
     CardListComponent,
     NewPostingComponent,
     ProfileComponent,
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,7 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
     AuthService,
     UploaderService,
     PostingsService,
+    SearchService,
     Location,
     {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],

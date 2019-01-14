@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Posting} from '../../../models/posting';
-import {AuthService} from '../../../services/auth.service';
-import {PostingsService} from '../../../services/postings.service';
+import {Posting} from '../../models/posting';
+import {AuthService} from '../../services/auth.service';
+import {PostingsService} from '../../services/postings.service';
 
 @Component({
   selector: 'app-card',

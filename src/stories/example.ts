@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/angular';
 import { withNotes } from '@storybook/addon-notes';
 import { action } from '@storybook/addon-actions';
-import {CardComponent} from '../app/components/card/card.component';
+import {CardComponent} from '../app/components/card-list/card/card.component';
 
 
 storiesOf('Card', module)

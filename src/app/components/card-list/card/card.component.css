@@ -6,8 +6,8 @@
 .card-img-top{
   width: 280px;
   max-height:max-content;
-  padding-left: 10px;
-  padding-top: 10px;
+  /*padding-left: 10px;*/
+  /*padding-top: 10px;*/
 }
 .card-price{
   color:#36B5CD;
@@ -20,7 +20,7 @@
   font-size: small;
 }
 .card-body{
-  padding-left: 5px;
+  padding-left: 10px;
   padding-bottom: 10px;
 }
 .btn{
@@ -31,7 +31,6 @@
 }
 
 :host {
-  background: white;
   display: block;
   padding: .40rem .60rem;
   border-radius: 3px;

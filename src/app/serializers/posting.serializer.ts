@@ -15,7 +15,8 @@ export class PostingSerializer extends Serializer<Posting> {
       startTime: new Date(json.startTime),
       duration: json.duration,
       creatorUser: json.creatorUser,
-      applicantUsers: json.applicantUsers
+      applicantUsers: json.applicantUsers,
+      photo: json.photo
     };
   }
 

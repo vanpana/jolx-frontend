@@ -4,6 +4,7 @@ import {AuthService} from '../../services/auth.service';
 import {PostingsService} from '../../services/postings.service';
 import {MessageBus} from '../../services/message-bus';
 import {UserHasUpdated} from '../../models/message-bus-events/user-has-updated';
+import {AppComponent} from '../../app.component';
 
 @Component({
   selector: 'app-card',
@@ -26,6 +27,7 @@ export class CardComponent implements OnInit {
     this.messageBus.observe(new UserHasUpdated(), () => {
       this.checkPropertiesOnObserve();
     });
+    console.log('img', this.posting.photo);
   }
 
   checkPropertiesOnObserve() {
@@ -39,16 +41,13 @@ export class CardComponent implements OnInit {
   apply() {
     // TODO If unauthenticated user tried to apply, redirect him to login
     this.postingService.userAppliesForPosting(this.posting._id).subscribe(() => {
-      console.log('APPLY', 'has clickd apply');
       return;
     });
   }
 
   unapply() {
     this.postingService.userUnAppliesForPosting(this.posting._id).subscribe((s) => {
-      console.log(s);
     }, (e) => {
-      console.log(e);
     });
   }
 
@@ -70,8 +69,6 @@ export class CardComponent implements OnInit {
   }
 
   checkIfUserPosting() {
-    console.log('user', this.authService.user);
-
     if (!this.authService.isAuthenticated) {
       this.isUserPosting = false;
       return;
@@ -83,5 +80,9 @@ export class CardComponent implements OnInit {
     }
 
     this.isUserPosting = this.authService.user.jobsPosted.map((posting) => posting._id).indexOf(this.posting._id) > -1;
+  }
+
+  get serverRoute(): string {
+    return AppComponent.serverRoute;
   }
 }

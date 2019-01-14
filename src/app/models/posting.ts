@@ -1,5 +1,6 @@
 import {User} from './user';
 import {Resource} from './resource';
+import {FileUpload} from './file-upload';
 
 export class Posting extends Resource {
   _id: string;
@@ -11,4 +12,5 @@ export class Posting extends Resource {
   duration: number;
   creatorUser: User;
   applicantUsers: User[];
+  photo: FileUpload;
 }

@@ -5,6 +5,7 @@ import {PostingsService} from '../../services/postings.service';
 import {PostingsUpdated} from '../../models/message-bus-events/postings-updated';
 import {MessageBus} from '../../services/message-bus';
 import {UserPostingsUpdated} from '../../models/message-bus-events/user-postings-updated';
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,8 @@ import {UserPostingsUpdated} from '../../models/message-bus-events/user-postings
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  private postings: Posting[];
+  postings: Posting[];
+
   constructor(public authService: AuthService,
               private postingsService: PostingsService,
               private messageBus: MessageBus

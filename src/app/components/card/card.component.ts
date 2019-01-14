@@ -37,7 +37,10 @@ export class CardComponent implements OnInit {
   }
 
   apply() {
-    // TODO If unauthenticated user tried to apply, redirect him to login
+    if (!this.authService.isAuthenticated) {
+      alert('You are not authenticated');
+      return;
+    }
     this.postingService.userAppliesForPosting(this.posting._id).subscribe(() => {
       console.log('APPLY', 'has clickd apply');
       return;

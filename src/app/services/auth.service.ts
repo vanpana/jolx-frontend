@@ -8,6 +8,7 @@ import {UserMustUpdate} from '../models/message-bus-events/user-must-update';
 import {UserHasUpdated} from '../models/message-bus-events/user-has-updated';
 import {PostingsUpdated} from '../models/message-bus-events/postings-updated';
 import {UserPostingsUpdated} from '../models/message-bus-events/user-postings-updated';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
@@ -26,7 +27,8 @@ export class AuthService {
   constructor(private httpService: HttpService,
               private cookieService: CookiesService,
               private uploaderService: UploaderService,
-              private messageBus: MessageBus) {
+              private messageBus: MessageBus,
+              private router: Router) {
 
     // Subscribe so the user updates if it's modified on the server
     messageBus.observe(new UserMustUpdate(), () => {
@@ -34,9 +36,9 @@ export class AuthService {
     });
 
     this.messageBus.observe(new PostingsUpdated(), (postingsUpdated) => {
-      console.log(postingsUpdated.postings);
+      // console.log(postingsUpdated.postings);
       this.user.jobsPosted = postingsUpdated.postings.filter((posting) => {
-        console.log(posting);
+        // console.log(posting);
         return posting.creatorUser.id === this.user.id;
       });
       this.messageBus.publish(new UserPostingsUpdated(this.user.jobsPosted));
@@ -106,6 +108,7 @@ export class AuthService {
     this.cookieService.clearCookies();
     this.isAuthenticated = false;
     this.userLoggedOut.next();
+    this.router.navigate(['/login']);
   }
 
   get user() {

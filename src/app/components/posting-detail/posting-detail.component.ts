@@ -18,7 +18,7 @@ export class PostingDetailComponent implements OnInit {
   posting: Posting;
   loading: boolean;
   isOwnPosting = false;
-  hasUserApplied: boolean;
+  public hasUserApplied: boolean;
 
   constructor(private route: ActivatedRoute,
               private postingsService: PostingsService,

@@ -8,22 +8,18 @@
             <img
               src="{{serverRoute}}{{authService.user.photo.url}}"
               alt=""/>
-            <div class="file btn btn-lg btn-primary">
-              Change Photo
-              <input type="file" name="file"/>
-            </div>
           </div>
           <!-- else display stock image -->
           <div *ngIf="authService.user.photo == null || authService.user.photo == undefined">
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
               alt=""/>
-            <div class="file btn btn-lg btn-primary">
-              Change Photo
-              <input type="file" name="file"/>
             </div>
-          </div>
-
+          <!--Button to change photo-->
+          <!--<div class="file btn btn-lg btn-primary">-->
+            <!--Change Photo-->
+            <!--<input type="file" name="file"/>-->
+          <!--</div>-->
         </div>
       </div>
       <div class="col-md-6">

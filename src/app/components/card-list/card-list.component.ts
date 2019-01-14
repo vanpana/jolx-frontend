@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Posting} from '../../models/posting';
-import {PostingsService} from '../../services/postings.service';
-import {SearchService} from '../../services/search.service';
+import {SearchPostingsService} from '../../services/search-postings.service';
 
 @Component({
   selector: 'app-card-list',
@@ -13,7 +12,7 @@ export class CardListComponent implements OnInit {
   postings: Array<Posting>;
 
   constructor(
-    private searchService: SearchService, ) {}
+    private searchService: SearchPostingsService, ) {}
 
   ngOnInit(): void {
     this.getPostings();

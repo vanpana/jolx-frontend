@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Posting} from '../../models/posting';
-import {AuthService} from '../../services/auth.service';
-import {PostingsService} from '../../services/postings.service';
+import {Posting} from '../../../models/posting';
+import {AuthService} from '../../../services/auth.service';
+import {PostingsService} from '../../../services/postings.service';
 
 @Component({
   selector: 'app-card',
@@ -15,7 +15,6 @@ export class CardComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private postingService: PostingsService) {
-    console.log('user', authService.user);
   }
 
   ngOnInit(): void {

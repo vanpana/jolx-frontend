@@ -1,5 +1,4 @@
 import {Serializer} from './serializer';
-import {Resource} from '../models/resource';
 import {User} from '../models/user';
 
 export class UserSerializer extends Serializer<User> {

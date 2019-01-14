@@ -13,8 +13,7 @@ import {User} from './models/user';
 export class AppComponent {
   title = 'app';
 
-  constructor(private authService: AuthService,
-              private postingsService: PostingsService) {
+  constructor(private authService: AuthService) {
     this.authService.broadcastIfAuthenicated();
   }
 }

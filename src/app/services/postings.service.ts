@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from './http.service';
 import {Observable} from 'rxjs/Observable';
-import {map} from 'rxjs/operators';
 import {PostingSerializer} from '../serializers/posting.serializer';
 import {Posting} from '../models/posting';
 import {ResourceService} from './resource.service';

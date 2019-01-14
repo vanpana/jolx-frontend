@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CompsComponent} from './components/comps/comps.component';
-import {CardComponent} from './components/card/card.component';
+import {CardComponent} from './components/card-list/card/card.component';
 import {LoginComponent} from './components/login/login.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
@@ -25,8 +25,45 @@ import {CardListComponent} from './components/card-list/card-list.component';
 import {PostingsService} from './services/postings.service';
 import {NewPostingComponent } from './components/new-posting/new-posting.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import {SearchService} from './services/search.service';
+import { SearchBarPostingsComponent } from './components/search-bar-postings/search-bar-postings.component';
+import {SearchPostingsService} from './services/search-postings.service';
+import { JobSeekersComponent } from './components/job-seekers/job-seekers.component';
+import { UsersListComponent } from './components/users-list/users-list.component';
+import {
+  MatButtonModule,
+  MatSidenavModule,
+  MatCheckboxModule,
+  MatAutocompleteModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatRadioModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatMenuModule,
+  MatToolbarModule,
+  MatListModule,
+  MatTabsModule,
+  MatGridListModule,
+  MatStepperModule,
+  MatCardModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatSnackBarModule,
+  MatTableModule,
+  MatTooltipModule,
+  MatProgressBarModule,
+  MatDialogModule,
+  MatProgressSpinnerModule,
+  MatIconModule,
+  MatButtonToggleModule, MatChipsModule, MatExpansionModule
+} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {UserService} from './services/user.service';
+import {SearchUsersService} from './services/search-users.service';
+import { UserListItemComponent } from './components/users-list/user-list-item/user-list-item.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -43,13 +80,51 @@ import {SearchService} from './services/search.service';
     CardListComponent,
     NewPostingComponent,
     ProfileComponent,
-    SearchBarComponent,
+    SearchBarPostingsComponent,
+    JobSeekersComponent,
+    UsersListComponent,
+    UserListItemComponent,
+    UserProfileComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    // angular material modules
+    MatCheckboxModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatGridListModule,
+    MatCardModule,
+    MatStepperModule,
+    MatTabsModule,
+    MatExpansionModule,
+    MatButtonToggleModule,
+    MatChipsModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
+    //
   ],
   providers: [
     CookiesService,
@@ -60,8 +135,10 @@ import {SearchService} from './services/search.service';
     AuthService,
     UploaderService,
     PostingsService,
-    SearchService,
+    SearchPostingsService,
     Location,
+    UserService,
+    SearchUsersService,
     {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],
   bootstrap: [AppComponent]

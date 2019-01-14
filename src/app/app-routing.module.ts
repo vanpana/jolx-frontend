@@ -7,6 +7,8 @@ import {HomeComponent} from './components/home/home.component';
 import {EditProfileComponent} from './components/edit-profile/edit-profile.component';
 import {ProfileComponent} from './components/profile/profile.component';
 import {NewPostingComponent} from './components/new-posting/new-posting.component';
+import {JobSeekersComponent} from './components/job-seekers/job-seekers.component';
+import {UserProfileComponent} from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -17,7 +19,15 @@ const routes: Routes = [
   { path: 'edit', component: EditProfileComponent},
   { path: 'new_posting', component: NewPostingComponent},
   { path: 'edit', component: EditProfileComponent},
-  { path: 'profile', component: ProfileComponent}
+  { path: 'profile', component: ProfileComponent},
+  {
+    path: 'job_seekers',
+    component: JobSeekersComponent,
+    children: [
+      { path: ':userId/profile', component: UserProfileComponent },
+      { path: ':userId/messages', component: UserProfileComponent }
+    ]
+  },
 ];
 
 @NgModule({

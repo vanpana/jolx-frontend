@@ -1,10 +1,9 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {PostingsService} from './postings.service';
 import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class SearchService {
+export class SearchPostingsService {
   private query: string;
   public queryChanged: EventEmitter<void> = new EventEmitter<void>();
 

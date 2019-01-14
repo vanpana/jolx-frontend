@@ -3,6 +3,7 @@ import {User} from '../../models/user';
 import {CookiesService} from '../../services/cookies.service';
 import {UploaderService} from '../../services/uploader.service';
 import {AuthService} from '../../services/auth.service';
+import {AppComponent} from '../../app.component';
 // import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
 @Component({
@@ -49,5 +50,9 @@ export class EditProfileComponent implements OnInit {
       error_data => {
         console.log(error_data);
       });
+  }
+
+  get serverRoute() {
+    return AppComponent.serverRoute;
   }
 }

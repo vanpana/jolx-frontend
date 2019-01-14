@@ -1,5 +1,10 @@
 <div class="card">
-  <img class="card-img-top" src="../../../assets/dog-walking.jpg" alt="Card image cap">
+  <div *ngIf="posting.photo == undefined || posting.photo == null">
+    <img class="card-img-top" src="../../../assets/dog-walking.jpg" alt="Card image cap">
+  </div>
+  <div *ngIf="posting.photo != undefined && posting.photo != null">
+    <img class="card-img-top" src="http://localhost:1337/{{posting.photo.url}}" alt="Card image cap">
+  </div>
   <div class="card-body">
     <a href="http://localhost:4200/postings/{{posting._id}}"><h3 class="card-title">{{posting.name}}</h3></a>
     <!--<p class="posting_date">{{posting.startTime | date:'dd MMM yyyy'}}</p>-->

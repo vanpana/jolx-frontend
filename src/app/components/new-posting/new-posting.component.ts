@@ -17,6 +17,7 @@ export class NewPostingComponent implements OnInit {
   price: number;
   user: User;
   duration: number;
+  public file: File;
 
   constructor(
     private postingService: PostingsService,
@@ -37,18 +38,24 @@ export class NewPostingComponent implements OnInit {
       startTime: new Date(startTime),
       duration: this.duration,
       creatorUser: this.authService.user,
-      applicantUsers: []
+      applicantUsers: [],
+      photo: null
     };
 
-    this.postingService.create(newPosting).subscribe(
-      success_data => {
+    this.postingService.createWithFile(newPosting, this.file, _ => {
         location.assign('/home');
       },
 
       error_data => {
         console.log(error_data);
-      }
-    );
+      });
+  }
+
+  fileChange(event) {
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      this.file = fileList[0];
+    }
   }
 
 }

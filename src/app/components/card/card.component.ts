@@ -26,6 +26,7 @@ export class CardComponent implements OnInit {
     this.messageBus.observe(new UserHasUpdated(), () => {
       this.checkPropertiesOnObserve();
     });
+    console.log('img', this.posting.photo);
   }
 
   checkPropertiesOnObserve() {
@@ -39,16 +40,13 @@ export class CardComponent implements OnInit {
   apply() {
     // TODO If unauthenticated user tried to apply, redirect him to login
     this.postingService.userAppliesForPosting(this.posting._id).subscribe(() => {
-      console.log('APPLY', 'has clickd apply');
       return;
     });
   }
 
   unapply() {
     this.postingService.userUnAppliesForPosting(this.posting._id).subscribe((s) => {
-      console.log(s);
     }, (e) => {
-      console.log(e);
     });
   }
 
@@ -70,8 +68,6 @@ export class CardComponent implements OnInit {
   }
 
   checkIfUserPosting() {
-    console.log('user', this.authService.user);
-
     if (!this.authService.isAuthenticated) {
       this.isUserPosting = false;
       return;

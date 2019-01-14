@@ -4,6 +4,9 @@ import {CookiesService} from '../../services/cookies.service';
 import {UploaderService} from '../../services/uploader.service';
 import {AuthService} from '../../services/auth.service';
 import {AppComponent} from '../../app.component';
+import {UserMustUpdate} from '../../models/message-bus-events/user-must-update';
+import {MessageBus} from '../../services/message-bus';
+
 // import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
 @Component({
@@ -18,7 +21,8 @@ export class EditProfileComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private uploaderService: UploaderService,
-              private cookieService: CookiesService) {
+              private cookieService: CookiesService,
+              private messageBus: MessageBus) {
     this.user = cookieService.getUserCookie();
     console.log('User in constructor', this.user);
   }
@@ -35,15 +39,10 @@ export class EditProfileComponent implements OnInit {
   }
 
   update() {
-    // Update the photo if it has changed
-    if (this.file != null) {
-      this.uploaderService.upload(this.file, this.user.id, this.uploaderService.userKey);
-    }
-
-    console.log('user id', this.user.id);
-
     // PUT the user
     this.authService.update(this.user, this.file, success_data => {
+        // Pull user data from the server
+        this.messageBus.publish(new UserMustUpdate());
         location.assign('/profile');
       },
       error_data => {

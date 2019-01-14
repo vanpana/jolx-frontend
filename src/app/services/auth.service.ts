@@ -8,6 +8,7 @@ import {UserMustUpdate} from '../models/message-bus-events/user-must-update';
 import {UserHasUpdated} from '../models/message-bus-events/user-has-updated';
 import {PostingsUpdated} from '../models/message-bus-events/postings-updated';
 import {UserPostingsUpdated} from '../models/message-bus-events/user-postings-updated';
+import {UserSerializer} from '../serializers/user.serializer';
 
 enum Action {
   Add, Update
@@ -60,12 +61,16 @@ export class AuthService {
   }
 
   public update(user: User, file: File, success, error) {
+    // Clone the user
+    const clonedUser = new UserSerializer().fromJson(user).clone();
+
     // Delete user email and username to avoid 400
-    user.email = undefined;
-    user.username = undefined;
+    clonedUser.email = undefined;
+    clonedUser.username = undefined;
+    clonedUser.password = undefined;
 
     // PUT the user
-    const updatePromise = this.httpService.update(this.userUrl, user.id, user);
+    const updatePromise = this.httpService.update(this.userUrl, clonedUser.id, clonedUser);
 
     this.submitPromiseAndUploadFile(updatePromise, file, success, error, Action.Update);
   }
@@ -89,16 +94,18 @@ export class AuthService {
       promise.subscribe(success, error);
     } else {
       promise.subscribe((success_data) => {
+        const uploaderPromise = this.uploaderService.upload(file, this.user.id, this.uploaderService.userKey);
         // If the user if being added, POST the file and bind it to the user
         if (action === Action.Add) {
           this.authenticate(success_data);
-          this.uploaderService.upload(file, this.user.id, this.uploaderService.userKey).subscribe((data) => {
+          uploaderPromise.subscribe((data) => {
             this.user.photo = data;
             this.cookieService.saveUserCookie(this.user);
           }, error);
         } else {  // If the user is being updated, only save the photo in the cookies
-          this.uploaderService.upload(file, this.user.id, this.uploaderService.userKey).subscribe((data) => {
+          uploaderPromise.subscribe((data) => {
             this.user.photo = data;
+            success();
           }, error);
         }
       });
@@ -132,8 +139,6 @@ export class AuthService {
     if (this.isAuthenticated) {
       this.httpService.read(this.meUrl).subscribe((successData) => {
         this.cookieService.saveUserCookie(successData);
-
-        console.log('updated user', this.user);
 
         // Publish event on message bus
         this.messageBus.publish(new UserHasUpdated(this.user));

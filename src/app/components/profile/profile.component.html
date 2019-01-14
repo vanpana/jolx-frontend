@@ -3,13 +3,27 @@
     <div class="row">
       <div class="col-md-4">
         <div class="profile-img">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
-            alt=""/>
-          <div class="file btn btn-lg btn-primary">
-            Change Photo
-            <input type="file" name="file"/>
+          <!--if user has set his profile picture -->
+          <div *ngIf="authService.user.photo != null && authService.user.photo != undefined">
+            <img
+              src="{{serverRoute}}{{authService.user.photo.url}}"
+              alt=""/>
+            <div class="file btn btn-lg btn-primary">
+              Change Photo
+              <input type="file" name="file"/>
+            </div>
           </div>
+          <!-- else display stock image -->
+          <div *ngIf="authService.user.photo == null || authService.user.photo == undefined">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+              alt=""/>
+            <div class="file btn btn-lg btn-primary">
+              Change Photo
+              <input type="file" name="file"/>
+            </div>
+          </div>
+
         </div>
       </div>
       <div class="col-md-6">
@@ -45,9 +59,15 @@
           <a href="">Bootsnipp Profile</a><br/>
           <a href="">Bootply Profile</a>
           <p>JOBS POSTED</p>
-          <div *ngFor="let posting of postings">
-            <a href="http://localhost:4200/postings/{{posting._id}}"><p>{{posting.name}}</p></a>
+          <div *ngIf="jobsLoading">
+            <div class="loader"></div>
           </div>
+          <div *ngIf="!jobsLoading">
+            <div *ngFor="let posting of postings">
+              <a href="http://localhost:4200/postings/{{posting._id}}"><p>{{posting.name}}</p></a>
+            </div>
+          </div>
+
         </div>
       </div>
       <div class="col-md-8">

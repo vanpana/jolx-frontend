@@ -27,7 +27,6 @@ export class CardComponent implements OnInit {
     this.messageBus.observe(new UserHasUpdated(), () => {
       this.checkPropertiesOnObserve();
     });
-    console.log('img', this.posting.photo);
   }
 
   checkPropertiesOnObserve() {

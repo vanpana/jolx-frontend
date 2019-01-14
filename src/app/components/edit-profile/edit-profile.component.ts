@@ -42,8 +42,7 @@ export class EditProfileComponent implements OnInit {
     console.log('user id', this.user.id);
 
     // PUT the user
-    this.authService.update(this.user).subscribe(
-      success_data => {
+    this.authService.update(this.user, this.file, success_data => {
         console.log(success_data);
         // this.locationService.back();
       },

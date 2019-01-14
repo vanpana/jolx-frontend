@@ -6,6 +6,7 @@ export class MessageBus {
   }
 
   publish<T>(obj: T) {
+    console.log('obs', this.observers);
     this.observers.forEach((observer) => {
       if (obj.constructor.name === observer[0].constructor.name) {
         observer[1](obj);

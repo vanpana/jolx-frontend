@@ -71,6 +71,7 @@ export class PostingsService extends ResourceService<Posting> {
 
   fetchPostings() {
     super.list().subscribe((success_data) => {
+      console.log(success_data.length);
       this.messageBus.publish(new PostingsUpdated(success_data));
     });
   }

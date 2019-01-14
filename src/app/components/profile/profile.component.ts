@@ -6,6 +6,7 @@ import {PostingsUpdated} from '../../models/message-bus-events/postings-updated'
 import {MessageBus} from '../../services/message-bus';
 import {UserPostingsUpdated} from '../../models/message-bus-events/user-postings-updated';
 import {Skill} from '../../models/skill';
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-profile',

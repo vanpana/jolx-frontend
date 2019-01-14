@@ -46,6 +46,7 @@ export class NewPostingComponent implements OnInit {
       },
 
       error_data => {
+        alert(error_data);
         console.log(error_data);
       }
     );

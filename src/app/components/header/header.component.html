@@ -8,7 +8,7 @@
         <span class="icon-bar bar2"></span>
         <span class="icon-bar bar3"></span>
       </button>
-      <a routerLink="home" class="navbar-brand">
+      <a routerLink="/home" class="navbar-brand">
         <img src="../../../assets/images/jolx_white.png">
       </a>
     </div>
@@ -22,8 +22,8 @@
           </a>
         </li>
         <li>
-          <a href="#">
-            Employers
+          <a routerLink="/home">
+            Home
           </a>
         </li>
         <li>
@@ -31,49 +31,31 @@
             Contact
           </a>
         </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Settings
+
+        <li *ngIf="!authService.isAuthenticated"><a routerLink="register" class="btn btn-round btn-default">Register</a>
+        </li>
+        <li *ngIf="!authService.isAuthenticated"><a routerLink="login" class="btn btn-round btn-default">Login</a></li>
+        <li *ngIf="authService.isAuthenticated" class="dropdown" >
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{authService.user.username}}
             <b class="caret"></b>
           </a>
-          <ul class="dropdown-menu dropdown-with-icons">
-            <li>
-              <a routerLink="profile">
-                <i class="pe-7s-user"></i> Account
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="pe-7s-mail"></i> Messages
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="pe-7s-portfolio"></i> Business Area
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="pe-7s-light"></i> Smart Area
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="pe-7s-tools"></i> Settings
-              </a>
-            </li>
-            <li>
-              <a (click)="authService.logout()" class="text-danger">
-                <i class="pe-7s-close-circle"></i>
-                Log out
-              </a>
-            </li>
-          </ul>
+            <ul class="dropdown-menu dropdown-with-icons">
+              <li>
+                <a routerLink="profile">
+                  <i class="pe-7s-user"></i> Account
+                </a>
+              </li>
+
+              <li>
+                <a (click)="authService.logout()" class="text-danger">
+                  <i class="pe-7s-close-circle"></i>
+                  Log out
+                </a>
+              </li>
+            </ul>
         </li>
-          <li *ngIf="!authService.isAuthenticated"><a routerLink="register" class="btn btn-round btn-default">Register</a></li>
-          <li *ngIf="!authService.isAuthenticated"><a routerLink="login" class="btn btn-round btn-default">Login</a></li>
-          <li *ngIf="authService.isAuthenticated"><a>{{authService.user.username}}</a></li>
-          <li *ngIf="authService.isAuthenticated"><a href = "http://localhost:4200/new_posting"  class="btn btn-round btn-default">New Posting</a>
+        <li *ngIf="authService.isAuthenticated"><a href="http://localhost:4200/new_posting"
+                                                   class="btn btn-round btn-default">New Posting</a>
         </li>
       </ul>
 

@@ -5,26 +5,34 @@
   </div>
 
   <div *ngIf="!loading">
-    <h1>{{posting.name}}</h1>
-    <h3>{{posting.description}}</h3>
+    <div class="card">
+      <img class="card-img-top" src="../../../assets/dog-walking.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h3 class="card-title">{{posting.name}}</h3>
+        <!--<p class="posting_date">{{posting.startTime | date:'dd MMM yyyy'}}</p>-->
+        <p class="card-text">{{posting.description}}</p>
+        <div class="bot">
+          <a class="card-price">{{posting.price}} lei</a>
 
-    <!-- TODO if the ctx user posted this, show the applicants -->
-    <div *ngIf="isOwnPosting">
-      <h4>Applicants</h4>
-      <div *ngFor="let applicant of posting.applicantUsers">
-        <!--TODO Link the user to his page-->
-        <a><h5>{{applicant.username}}</h5></a>
+          <!-- TODO if the ctx user posted this, show the applicants -->
+          <div *ngIf="isOwnPosting">
+            <h4>Applicants</h4>
+            <div *ngFor="let applicant of posting.applicantUsers">
+              <!--TODO Link the user to his page-->
+              <a><h5>{{applicant.username}}</h5></a>
+            </div>
+          </div>
+          <div *ngIf="!isOwnPosting">
+            <div *ngIf="!hasUserApplied">
+              <a (click)="apply()" class="btn btn-primary">Apply</a>
+            </div>
+            <div *ngIf="hasUserApplied">
+              <a (click)="unapply()" class="btn btn-warning">Unapply</a>
+            </div>
+          </div>
+        </div>
+        <!--Apply button-->
       </div>
     </div>
-    <div *ngIf="!isOwnPosting">
-      <div *ngIf="!hasUserApplied">
-        <a (click)="apply()" class="btn btn-primary">Apply</a>
-      </div>
-      <div *ngIf="hasUserApplied">
-        <a (click)="unapply()" class="btn btn-warning">Unapply</a>
-      </div>
-    </div>
-
-
   </div>
 </div>

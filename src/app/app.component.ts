@@ -14,6 +14,6 @@ export class AppComponent {
   title = 'app';
 
   constructor(private authService: AuthService) {
-    this.authService.broadcastIfAuthenicated();
+    this.authService.broadcastIfAuthenticated();
   }
 }

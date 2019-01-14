@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'edit', component: EditProfileComponent},
   { path: 'new_posting', component: NewPostingComponent},
   { path: 'edit', component: EditProfileComponent},
-  { path: 'postings/:id', component: PostingDetailComponent}
+  { path: 'postings/:id', component: PostingDetailComponent},
   { path: 'profile', component: ProfileComponent},
   {
     path: 'job_seekers',

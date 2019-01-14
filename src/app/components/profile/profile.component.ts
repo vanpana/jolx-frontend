@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Posting} from '../../models/posting';
 import {PostingsService} from '../../services/postings.service';
-import {PostingsUpdated} from '../../models/message-bus-events/postings-updated';
 import {MessageBus} from '../../services/message-bus';
 import {UserPostingsUpdated} from '../../models/message-bus-events/user-postings-updated';
+import {AppComponent} from '../../app.component';
+import {User} from '../../models/user';
+import {UserHasUpdated} from '../../models/message-bus-events/user-has-updated';
+import {UserMustUpdate} from '../../models/message-bus-events/user-must-update';
 
 @Component({
   selector: 'app-profile',
@@ -12,18 +15,42 @@ import {UserPostingsUpdated} from '../../models/message-bus-events/user-postings
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  private postings: Posting[];
+  postings: Posting[];
+  private jobsLoading: boolean;
+  private user: User;
+
   constructor(public authService: AuthService,
               private postingsService: PostingsService,
               private messageBus: MessageBus
               ) {
+    // Assign user
+    this.user = authService.user;
+
+    // Fetch and display postings
+    this.jobsLoading = true;
     postingsService.fetchPostings();
     this.messageBus.observe(new UserPostingsUpdated(), (postingsUpdated) => {
-      this.postings = postingsUpdated.postings;
+      this.jobsLoaded(postingsUpdated.postings);
+    });
+
+    // Fetch user
+    this.messageBus.publish(new UserMustUpdate());
+
+    // Subscribe to user changes
+    this.messageBus.observe(new UserHasUpdated(), (userHasUpdated) => {
+      this.user = userHasUpdated.user;
     });
   }
 
   ngOnInit() {
   }
 
+  get serverRoute() {
+    return AppComponent.serverRoute;
+  }
+
+  jobsLoaded(newPostings) {
+    this.jobsLoading = false;
+    this.postings = newPostings;
+  }
 }

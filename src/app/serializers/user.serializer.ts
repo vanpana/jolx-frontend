@@ -8,20 +8,22 @@ export class UserSerializer extends Serializer<User> {
       return null;
     }
 
-    return {
-      id: json._id,
-      firstName: json.firstName,
-      lastName: json.lastName,
-      username: json.username,
-      email: json.email,
-      dob: json.dob,
-      phone: json.phone,
-      photo: json.photo,
-      skillIds: json.skills,
-      reviewsGivenIds: json.reviewsGiven,
-      reviewsReceivedIds: json.reviewsReceived,
-      jobsPosted: json.jobsPosted,
-      postingsAppliedFor: json.postingsAppliedFor
-    };
+    const user = new User();
+    user.id = json._id;
+    user.firstName = json.firstName;
+    user.lastName = json.lastName;
+    user.username = json.username;
+    user.email = json.email;
+    user.password = json.password;
+    user.dob = json.dob;
+    user.phone = json.phone;
+    user.photo = json.photo;
+    user.skillIds = json.skills;
+    user.reviewsGivenIds = json.reviewsGiven;
+    user.reviewsReceivedIds = json.reviewsReceived;
+    user.jobsPosted = json.jobsPosted;
+    user.postingsAppliedFor = json.postingsAppliedFor;
+
+    return user;
   }
 }

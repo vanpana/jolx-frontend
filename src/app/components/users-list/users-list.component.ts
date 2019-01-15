@@ -10,7 +10,8 @@ import {Router} from '@angular/router';
 })
 export class UsersListComponent implements OnInit {
 
-  users: Array<User>;
+  users: Array<User> = [];
+  public query: string;
 
   constructor(
     private searchUseresService: SearchUsersService,
@@ -19,9 +20,14 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit() {
     this.getUsersAndSetView();
-    this.searchUseresService.queryChanged.subscribe(
+    this.searchUseresService.queryChanged.subscribe( () =>
       this.getUsers()
     );
+  }
+
+  search() {
+    this.searchUseresService.changeQuery(this.query);
+    this.getUsers();
   }
 
   getUsersAndSetView() {

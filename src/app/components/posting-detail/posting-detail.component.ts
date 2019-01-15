@@ -111,6 +111,6 @@ export class PostingDetailComponent implements OnInit {
   }
 
   get serverRoute(): string {
-    return AppComponent.serverRoute;
+    return "http://localhost:1337";
   }
 }

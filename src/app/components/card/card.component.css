@@ -4,10 +4,8 @@
   text-align: left;
 }
 .card-img-top{
-  width: 280px;
+  width: 288px;
   max-height:max-content;
-  /*padding-left: 10px;*/
-  /*padding-top: 10px;*/
 }
 .card-price{
   color:#36B5CD;
@@ -22,12 +20,6 @@
 .card-body{
   padding-left: 10px;
   padding-bottom: 10px;
-}
-.btn{
-  background: #36B5CD;
-  border-color: #36B5CD;
-  color: white;
-  width: 90px;
 }
 
 :host {

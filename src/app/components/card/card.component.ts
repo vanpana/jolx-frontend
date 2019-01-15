@@ -28,7 +28,6 @@ export class CardComponent implements OnInit {
       this.checkPropertiesOnObserve();
     });
 
-    // this.posting.description = this.postingdescription[primele 4 propozitii ] TODO What?
   }
 
   checkPropertiesOnObserve() {
@@ -83,10 +82,15 @@ export class CardComponent implements OnInit {
       return;
     }
 
+    if (this.authService.user.jobsPosted == null) {
+      this.isUserPosting = false;
+      return;
+    }
+
     this.isUserPosting = this.authService.user.jobsPosted.map((posting) => posting._id).indexOf(this.posting._id) > -1;
   }
 
   get serverRoute(): string {
-    return AppComponent.serverRoute;
+    return 'http://localhost:1337';
   }
 }

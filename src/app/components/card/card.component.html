@@ -1,6 +1,6 @@
 <div class="card">
   <div *ngIf="posting.photo == undefined || posting.photo == null">
-    <img class="card-img-top" src="../../../assets/dog-walking.jpg" alt="Card image cap">
+    <img class="card-img-top" src="../../../assets/images/unavailable-image.jpg" alt="Card image cap">
   </div>
   <div *ngIf="posting.photo != undefined && posting.photo != null">
     <img class="card-img-top" src="{{serverRoute}}{{posting.photo.url}}" alt="Card image cap">
@@ -12,10 +12,10 @@
       <a class="card-price">{{posting.price}} lei</a>
       <div *ngIf="!isUserPosting">
         <div *ngIf="!hasUserApplied">
-          <a (click)="apply()" class="btn btn-primary">Apply</a>
+          <a (click)="apply()" class="btn btn-primary btn-fill">Apply</a>
         </div>
         <div *ngIf="hasUserApplied">
-          <a (click)="unapply()" class="btn btn-warning">Unapply</a>
+          <a (click)="unapply()" class="btn btn-fill">Unapply</a>
         </div>
       </div>
     </div>

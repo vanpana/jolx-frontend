@@ -4,6 +4,9 @@ import {PostingsService} from '../../services/postings.service';
 import {AuthService} from '../../services/auth.service';
 import {Posting} from '../../models/posting';
 import {LocationStrategy} from '@angular/common';
+import {MessageBus} from '../../services/message-bus';
+import {UserMustUpdate} from '../../models/message-bus-events/user-must-update';
+import {UserHasUpdated} from '../../models/message-bus-events/user-has-updated';
 
 @Component({
   selector: 'app-new-posting',
@@ -23,6 +26,7 @@ export class NewPostingComponent implements OnInit {
     private postingService: PostingsService,
     private authService: AuthService,
     private location: LocationStrategy,
+    private messageBus: MessageBus
   ) { }
 
   ngOnInit() {
@@ -42,11 +46,17 @@ export class NewPostingComponent implements OnInit {
       photo: null
     };
 
-    this.postingService.createWithFile(newPosting, this.file, _ => {
-        location.assign('/home');
+    this.postingService.createWithFile(newPosting, this.file, success_data => {
+        this.messageBus.publish(new UserMustUpdate());
+
+        // Go back only after user has been updated TODO quite lame
+        this.messageBus.observe(new UserHasUpdated(), () => {
+          location.assign('/home');
+        });
       },
 
       error_data => {
+        alert(error_data);
         console.log(error_data);
       });
   }

@@ -7,19 +7,17 @@
   </div>
   <div class="card-body">
     <a href="http://localhost:4200/postings/{{posting._id}}"><h3 class="card-title">{{posting.name}}</h3></a>
-    <!--<p class="posting_date">{{posting.startTime | date:'dd MMM yyyy'}}</p>-->
     <p class="card-text">{{posting.description}}</p>
-    <a class="card-price">{{posting.price}} lei </a>
-
-    <!--Apply button-->
-    <div *ngIf="!isUserPosting">
-      <div *ngIf="!hasUserApplied">
-        <a (click)="apply()" class="btn btn-primary">Apply</a>
-      </div>
-      <div *ngIf="hasUserApplied">
-        <a (click)="unapply()" class="btn btn-warning">Unapply</a>
+    <div class="bot">
+      <a class="card-price">{{posting.price}} lei</a>
+      <div *ngIf="!isUserPosting">
+        <div *ngIf="!hasUserApplied">
+          <a (click)="apply()" class="btn btn-primary">Apply</a>
+        </div>
+        <div *ngIf="hasUserApplied">
+          <a (click)="unapply()" class="btn btn-warning">Unapply</a>
+        </div>
       </div>
     </div>
   </div>
 </div>
-

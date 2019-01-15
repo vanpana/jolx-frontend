@@ -27,6 +27,45 @@ import {NewPostingComponent } from './components/new-posting/new-posting.compone
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {MessageBus} from './services/message-bus';
 import { PostingDetailComponent } from './components/posting-detail/posting-detail.component';
+import { SearchBarPostingsComponent } from './components/search-bar-postings/search-bar-postings.component';
+import {SearchPostingsService} from './services/search-postings.service';
+import { JobSeekersComponent } from './components/job-seekers/job-seekers.component';
+import { UsersListComponent } from './components/users-list/users-list.component';
+import {
+  MatButtonModule,
+  MatSidenavModule,
+  MatCheckboxModule,
+  MatAutocompleteModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatRadioModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatMenuModule,
+  MatToolbarModule,
+  MatListModule,
+  MatTabsModule,
+  MatGridListModule,
+  MatStepperModule,
+  MatCardModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatSnackBarModule,
+  MatTableModule,
+  MatTooltipModule,
+  MatProgressBarModule,
+  MatDialogModule,
+  MatProgressSpinnerModule,
+  MatIconModule,
+  MatButtonToggleModule, MatChipsModule, MatExpansionModule
+} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {UserService} from './services/user.service';
+import {SearchUsersService} from './services/search-users.service';
+import { UserListItemComponent } from './components/users-list/user-list-item/user-list-item.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -44,13 +83,52 @@ import { PostingDetailComponent } from './components/posting-detail/posting-deta
     NewPostingComponent,
     PostingDetailComponent,
     ProfileComponent,
+    SearchBarPostingsComponent,
+    JobSeekersComponent,
+    UsersListComponent,
+    UserListItemComponent,
+    UserProfileComponent,
     PostingDetailComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    // angular material modules
+    MatCheckboxModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatGridListModule,
+    MatCardModule,
+    MatStepperModule,
+    MatTabsModule,
+    MatExpansionModule,
+    MatButtonToggleModule,
+    MatChipsModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
+    //
   ],
   providers: [
     CookiesService,
@@ -61,7 +139,10 @@ import { PostingDetailComponent } from './components/posting-detail/posting-deta
     AuthService,
     UploaderService,
     PostingsService,
+    SearchPostingsService,
     Location,
+    UserService,
+    SearchUsersService,
     MessageBus,
     {provide: LocationStrategy, useClass: PathLocationStrategy}
   ],

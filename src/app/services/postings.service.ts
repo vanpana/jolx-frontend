@@ -11,6 +11,7 @@ import 'rxjs/add/operator/finally';
 import {AuthService} from './auth.service';
 import {PostingsUpdated} from 'app/models/message-bus-events/postings-updated';
 import {UploaderService} from './uploader.service';
+import {PostingFetched} from '../models/message-bus-events/posting-fetched';
 
 @Injectable()
 export class PostingsService extends ResourceService<Posting> {
@@ -67,6 +68,12 @@ export class PostingsService extends ResourceService<Posting> {
     return this.httpService.post(this.unApplyUrl, {posting_id: postingId}).pipe(finalize(() => {
       this.messageBus.publish(new UserMustUpdate());
     }));
+  }
+
+  fetchPosting(id) {
+    super.read(id).subscribe((success_data) => {
+      this.messageBus.publish(new PostingFetched(success_data));
+    });
   }
 
   fetchPostings() {

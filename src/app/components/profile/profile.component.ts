@@ -5,9 +5,10 @@ import {PostingsService} from '../../services/postings.service';
 import {MessageBus} from '../../services/message-bus';
 import {UserPostingsUpdated} from '../../models/message-bus-events/user-postings-updated';
 import {AppComponent} from '../../app.component';
-import {User} from '../../models/user';
 import {UserHasUpdated} from '../../models/message-bus-events/user-has-updated';
 import {UserMustUpdate} from '../../models/message-bus-events/user-must-update';
+import {Skill} from '../../models/skill';
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +16,7 @@ import {UserMustUpdate} from '../../models/message-bus-events/user-must-update';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  public skills: Skill[];
   postings: Posting[];
   private jobsLoading: boolean;
   private user: User;
@@ -29,6 +31,7 @@ export class ProfileComponent implements OnInit {
     // Fetch and display postings
     this.jobsLoading = true;
     postingsService.fetchPostings();
+    this.skills = this.authService.user.skills;
     this.messageBus.observe(new UserPostingsUpdated(), (postingsUpdated) => {
       this.jobsLoaded(postingsUpdated.postings);
     });

@@ -23,10 +23,16 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.posting.name === 'postao cu pozao') {
+      console.log(this.posting.photo);
+    }
+
     this.checkPropertiesOnObserve();
     this.messageBus.observe(new UserHasUpdated(), () => {
       this.checkPropertiesOnObserve();
     });
+
+    // this.posting.description = this.postingdescription[primele 4 propozitii ] TODO What?
   }
 
   checkPropertiesOnObserve() {
@@ -38,7 +44,10 @@ export class CardComponent implements OnInit {
   }
 
   apply() {
-    // TODO If unauthenticated user tried to apply, redirect him to login
+    if (!this.authService.isAuthenticated) {
+      alert('You are not authenticated');
+      return;
+    }
     this.postingService.userAppliesForPosting(this.posting._id).subscribe(() => {
       return;
     });

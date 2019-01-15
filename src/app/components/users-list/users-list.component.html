@@ -1,0 +1,7 @@
+<mat-list>
+  <h3 mat-subheader style="width: 400px">Users</h3>
+  <mat-list-item *ngFor="let user of users">
+    <app-user-list-item [user]="user"></app-user-list-item>
+  </mat-list-item>
+</mat-list>
+

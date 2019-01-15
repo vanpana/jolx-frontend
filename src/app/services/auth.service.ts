@@ -143,6 +143,7 @@ export class AuthService {
       this.httpService.read(this.meUrl).subscribe((successData) => {
         this.cookieService.saveUserCookie(successData);
 
+
         // Publish event on message bus
         this.messageBus.publish(new UserHasUpdated(this.user));
       });

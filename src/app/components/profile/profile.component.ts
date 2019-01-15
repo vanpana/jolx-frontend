@@ -42,7 +42,6 @@ export class ProfileComponent implements OnInit {
     // Subscribe to user changes
     this.messageBus.observe(new UserHasUpdated(), (userHasUpdated) => {
       this.user = userHasUpdated.user;
-      console.log('mbusrprofile', userHasUpdated.user);
     });
   }
 
@@ -55,6 +54,6 @@ export class ProfileComponent implements OnInit {
 
   jobsLoaded(newPostings: Posting[]) {
     this.jobsLoading = false;
-    this.postings = newPostings; // newPostings.filter(posting => posting.creatorUser.id === this.user.id);
+    this.postings = newPostings.filter(posting => posting.creatorUser.id === this.user.id);
   }
 }

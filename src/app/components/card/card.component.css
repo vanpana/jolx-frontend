@@ -4,10 +4,8 @@
   text-align: left;
 }
 .card-img-top{
-  width: 280px;
+  width: 288px;
   max-height:max-content;
-  /*padding-left: 10px;*/
-  /*padding-top: 10px;*/
 }
 .card-price{
   color:#36B5CD;

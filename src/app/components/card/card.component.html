@@ -1,6 +1,6 @@
 <div class="card">
   <div *ngIf="posting.photo == undefined || posting.photo == null">
-    <img class="card-img-top" src="../../../assets/dog-walking.jpg" alt="Card image cap">
+    <img class="card-img-top" src="../../../assets/images/unavailable-image.jpg" alt="Card image cap">
   </div>
   <div *ngIf="posting.photo != undefined && posting.photo != null">
     <img class="card-img-top" src="{{serverRoute}}{{posting.photo.url}}" alt="Card image cap">

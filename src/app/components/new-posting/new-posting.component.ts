@@ -4,6 +4,9 @@ import {PostingsService} from '../../services/postings.service';
 import {AuthService} from '../../services/auth.service';
 import {Posting} from '../../models/posting';
 import {LocationStrategy} from '@angular/common';
+import {MessageBus} from '../../services/message-bus';
+import {UserMustUpdate} from '../../models/message-bus-events/user-must-update';
+import {UserHasUpdated} from '../../models/message-bus-events/user-has-updated';
 
 @Component({
   selector: 'app-new-posting',
@@ -22,6 +25,7 @@ export class NewPostingComponent implements OnInit {
     private postingService: PostingsService,
     private authService: AuthService,
     private location: LocationStrategy,
+    private messageBus: MessageBus
   ) { }
 
   ngOnInit() {
@@ -42,7 +46,12 @@ export class NewPostingComponent implements OnInit {
 
     this.postingService.create(newPosting).subscribe(
       success_data => {
-        location.assign('/home');
+        this.messageBus.publish(new UserMustUpdate());
+
+        // Go back only after user has been updated TODO quite lame
+        this.messageBus.observe(new UserHasUpdated(), () => {
+          location.assign('/home');
+        });
       },
 
       error_data => {

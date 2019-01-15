@@ -86,7 +86,7 @@ export class CardComponent implements OnInit {
       this.checkPropertiesOnObserve();
     });
 
-    this.posting.description = this.postingdescription[primele 4 propozitii ]
+    // this.posting.description = this.postingdescription[primele 4 propozitii ] TODO What?
   }
 
   checkPropertiesOnObserve() {
@@ -120,15 +120,15 @@ export class CardComponent implements OnInit {
    * Returns whether the user has applied for the current posting.
    */
   checkIfUserApplied() {
-    // if (!this.authService.isAuthenticated) {
-    //   this.hasUserApplied = false;
-    //   return;
-    // }
-    //
-    // if (this.authService.user.postingsAppliedFor == null) {
-    //   this.hasUserApplied = false;
-    //   return;
-    // }
+    if (!this.authService.isAuthenticated) {
+      this.hasUserApplied = false;
+      return;
+    }
+
+    if (this.authService.user.postingsAppliedFor == null) {
+      this.hasUserApplied = false;
+      return;
+    }
 
     this.hasUserApplied = this.authService.user.postingsAppliedFor.map((posting) => posting._id).indexOf(this.posting._id) > -1;
   }
@@ -136,15 +136,15 @@ export class CardComponent implements OnInit {
   checkIfUserPosting() {
     console.log('user', this.authService.user);
 
-    // if (!this.authService.isAuthenticated) {
-    //   this.isUserPosting = false;
-    //   return;
-    // }
-    //
-    // if (this.authService.user.jobsPosted == null) {
-    //   this.isUserPosting = false;
-    //   return;
-    // }
+    if (!this.authService.isAuthenticated) {
+      this.isUserPosting = false;
+      return;
+    }
+
+    if (this.authService.user.jobsPosted == null) {
+      this.isUserPosting = false;
+      return;
+    }
 
     this.isUserPosting = this.authService.user.jobsPosted.map((posting) => posting._id).indexOf(this.posting._id) > -1;
   }

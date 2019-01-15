@@ -14,7 +14,7 @@ import {UserHasUpdated} from '../../models/message-bus-events/user-has-updated';
   styleUrls: ['./new-posting.component.css']
 })
 export class NewPostingComponent implements OnInit {
-
+  isCreating: boolean;
   name: string;
   description: string;
   price: number;
@@ -27,9 +27,11 @@ export class NewPostingComponent implements OnInit {
     private authService: AuthService,
     private location: LocationStrategy,
     private messageBus: MessageBus
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
+    this.isCreating = false;
   }
 
   public createPosting(startTime: string): void {
@@ -46,16 +48,24 @@ export class NewPostingComponent implements OnInit {
       photo: null
     };
 
+    // Set as creating
+    this.isCreating = true;
+
+    // Really create the posting
     this.postingService.createWithFile(newPosting, this.file, success_data => {
+        // Pull the user from the server
         this.messageBus.publish(new UserMustUpdate());
+
 
         // Go back only after user has been updated TODO quite lame
         this.messageBus.observe(new UserHasUpdated(), () => {
+          this.isCreating = false;
           location.assign('/home');
         });
       },
 
       error_data => {
+        this.isCreating = false;
         alert(error_data);
         console.log(error_data);
       });

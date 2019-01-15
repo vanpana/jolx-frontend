@@ -13,4 +13,5 @@ export class Posting extends Resource {
   creatorUser: User;
   applicantUsers: User[];
   photo: FileUpload;
+  status: string;
 }

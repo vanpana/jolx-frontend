@@ -3,12 +3,8 @@ import {User} from '../../models/user';
 import {UserService} from '../../services/user.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
-import {UserPostingsUpdated} from '../../models/message-bus-events/user-postings-updated';
-import {PostingsService} from '../../services/postings.service';
 import {Posting} from '../../models/posting';
-import {MessageBus} from '../../services/message-bus';
 import {Skill} from '../../models/skill';
-import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-user-profile',

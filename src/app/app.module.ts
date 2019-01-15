@@ -66,6 +66,7 @@ import {UserService} from './services/user.service';
 import {SearchUsersService} from './services/search-users.service';
 import { UserListItemComponent } from './components/users-list/user-list-item/user-list-item.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ReviewComponent } from './components/user-profile/review/review.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     UserListItemComponent,
     UserProfileComponent,
     PostingDetailComponent,
+    ReviewComponent,
   ],
   imports: [
     BrowserAnimationsModule,

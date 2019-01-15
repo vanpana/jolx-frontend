@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class UsersListComponent implements OnInit {
 
-  users: Array<User>;
+  users: Array<User> = [];
   public query: string;
 
   constructor(

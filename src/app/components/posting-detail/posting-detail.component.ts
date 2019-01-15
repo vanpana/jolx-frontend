@@ -7,6 +7,7 @@ import {PostingsUpdated} from '../../models/message-bus-events/postings-updated'
 import {AuthService} from '../../services/auth.service';
 import {UserHasUpdated} from '../../models/message-bus-events/user-has-updated';
 import {PostingFetched} from '../../models/message-bus-events/posting-fetched';
+import {AppComponent} from '../../app.component';
 
 @Component({
   selector: 'app-posting-detail',
@@ -107,5 +108,9 @@ export class PostingDetailComponent implements OnInit {
     }, (e) => {
       console.log(e);
     });
+  }
+
+  get serverRoute(): string {
+    return AppComponent.serverRoute;
   }
 }

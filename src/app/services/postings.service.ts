@@ -10,6 +10,7 @@ import {UserMustUpdate} from '../models/message-bus-events/user-must-update';
 import 'rxjs/add/operator/finally';
 import {AuthService} from './auth.service';
 import {PostingsUpdated} from 'app/models/message-bus-events/postings-updated';
+import {UploaderService} from './uploader.service';
 import {PostingFetched} from '../models/message-bus-events/posting-fetched';
 
 @Injectable()
@@ -19,12 +20,32 @@ export class PostingsService extends ResourceService<Posting> {
 
   constructor(httpService: HttpService,
               private authService: AuthService,
+              private uploaderService: UploaderService,
               private messageBus: MessageBus) {
     super(
       httpService,
       'postings',
       new PostingSerializer()
     );
+  }
+
+  createWithFile(posting: Posting, file: File, success, error) {
+    // Create the promise
+    const creationPromise = super.create(posting);
+
+    if (file == null) {
+      creationPromise.subscribe(success, error);
+    } else {
+      // If the file was provided, POST the file and bind it to the user
+      creationPromise.subscribe((success_data) => {
+        console.log('added posting', success_data);
+        this.uploaderService.upload(file, success_data._id, this.uploaderService.postingKey).subscribe((data) => {
+          console.log(data);
+          posting.photo = data;
+          success();
+        }, error);
+      });
+    }
   }
 
   /**

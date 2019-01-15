@@ -3,19 +3,29 @@
     <div class="row">
       <div class="col-md-4">
         <div class="profile-img">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
-            alt=""/>
-          <div class="file btn btn-lg btn-primary">
-            Change Photo
-            <input type="file" name="file"/>
+          <!--if user has set his profile picture -->
+          <div *ngIf="user.photo != null && user.photo != undefined">
+            <img
+              src="{{serverRoute}}{{user.photo.url}}"
+              alt=""/>
           </div>
+          <!-- else display stock image -->
+          <div *ngIf="user.photo == null || user.photo == undefined">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+              alt=""/>
+            </div>
+          <!--Button to change photo-->
+          <!--<div class="file btn btn-lg btn-primary">-->
+            <!--Change Photo-->
+            <!--<input type="file" name="file"/>-->
+          <!--</div>-->
         </div>
       </div>
       <div class="col-md-6">
         <div class="profile-head">
           <h5>
-            {{authService.user.firstName}} {{authService.user.lastName}}
+            {{user.firstName}} {{user.lastName}}
           </h5>
           <h6>
             Web Developer and Designer
@@ -40,9 +50,15 @@
     <div class="row">
       <div class="col-md-4">
         <div class="profile-work">
-          <p>JOBS POSTED</p>
-          <div *ngFor="let posting of postings">
-            <a href="http://localhost:4200/postings/{{posting._id}}"><p>{{posting.name}}</p></a>
+          <!--jobs posted by the user-->
+          <p *ngIf="jobsLoading || postings.length > 0">JOBS POSTED</p>
+          <div *ngIf="jobsLoading">
+            <div class="loader loader-sml"></div>
+          </div>
+          <div *ngIf="!jobsLoading">
+            <div *ngFor="let posting of postings">
+              <a href="http://localhost:4200/postings/{{posting._id}}"><p>{{posting.name}}</p></a>
+            </div>
           </div>
           <p>YOUR SKILLS</p>
           <div *ngFor = "let skill of skills">
@@ -58,7 +74,7 @@
                 <label>User Id</label>
               </div>
               <div class="col-md-6">
-                <p>{{authService.user.username}}</p>
+                <p>{{user.username}}</p>
               </div>
             </div>
             <div class="row">
@@ -66,7 +82,7 @@
                 <label>Name</label>
               </div>
               <div class="col-md-6">
-                <p>{{authService.user.firstName}} {{authService.user.lastName}}</p>
+                <p>{{user.firstName}} {{user.lastName}}</p>
               </div>
             </div>
             <div class="row">
@@ -74,7 +90,7 @@
                 <label>Email</label>
               </div>
               <div class="col-md-6">
-                <p>{{authService.user.email}}</p>
+                <p>{{user.email}}</p>
               </div>
             </div>
             <div class="row">
@@ -82,7 +98,7 @@
                 <label>Phone</label>
               </div>
               <div class="col-md-6">
-                <p>{{authService.user.phone}}</p>
+                <p>{{user.phone}}</p>
               </div>
             </div>
             <div class="row">
@@ -90,7 +106,7 @@
                 <label>Date of birth</label>
               </div>
               <div class="col-md-6">
-                <p>{{authService.user.dob}}</p>
+                <p>{{user.dob}}</p>
               </div>
             </div>
           </div>

@@ -11,6 +11,7 @@ import {User} from './models/user';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  public static serverRoute = 'http://localhost:1337/';
   title = 'app';
 
   constructor(private authService: AuthService) {

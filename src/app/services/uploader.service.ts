@@ -13,6 +13,7 @@ export class UploaderService {
 
   private sourceValue = 'users-permissions';
   public userKey = 'user';
+  public postingKey = 'posting';
   private userFieldValue = 'photo';
   constructor(httpService: HttpService) {
     this.httpService = httpService;
@@ -25,8 +26,10 @@ export class UploaderService {
     formData.append(this.refKey, key);
     if (key === this.userKey) {
       formData.append(this.fieldKey, this.userFieldValue);
+      formData.append(this.sourceKey, this.sourceValue);
+    } else if (key === this.postingKey) {
+      formData.append(this.fieldKey, this.userFieldValue);
     }
-    formData.append(this.sourceKey, this.sourceValue);
     return this.httpService.post(this.uploaderUrl, formData, true);
   }
 

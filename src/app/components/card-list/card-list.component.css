@@ -6,3 +6,9 @@
   margin-top: 10px;
   padding-left: 60px;
 }
+
+.inner-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}

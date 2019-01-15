@@ -134,8 +134,6 @@ export class CardComponent implements OnInit {
   }
 
   checkIfUserPosting() {
-    console.log('user', this.authService.user);
-
     if (!this.authService.isAuthenticated) {
       this.isUserPosting = false;
       return;

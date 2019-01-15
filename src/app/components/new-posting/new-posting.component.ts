@@ -1,8 +1,8 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../models/user';
 import {PostingsService} from '../../services/postings.service';
 import {AuthService} from '../../services/auth.service';
-import {Posting} from '../../models/posting';
+import {Posting, PostingStatus} from '../../models/posting';
 import {LocationStrategy} from '@angular/common';
 import {MessageBus} from '../../services/message-bus';
 import {UserMustUpdate} from '../../models/message-bus-events/user-must-update';
@@ -45,7 +45,8 @@ export class NewPostingComponent implements OnInit {
       duration: this.duration,
       creatorUser: this.authService.user,
       applicantUsers: [],
-      photo: null
+      photo: null,
+      status: PostingStatus.Open
     };
 
     // Set as creating

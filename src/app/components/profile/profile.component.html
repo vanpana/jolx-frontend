@@ -52,7 +52,7 @@
         <div class="profile-work">
           <p>JOBS POSTED</p>
           <div *ngIf="jobsLoading">
-            <div class="loader">Loading...</div>
+            <div class="loader-sml">Loading...</div>
           </div>
           <div *ngIf="!jobsLoading">
             <div *ngFor="let posting of postings">

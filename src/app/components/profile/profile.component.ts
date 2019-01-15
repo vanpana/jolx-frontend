@@ -18,7 +18,7 @@ import {User} from '../../models/user';
 export class ProfileComponent implements OnInit {
   public skills: Skill[];
   postings: Posting[];
-  private jobsLoading: boolean;
+  jobsLoading: boolean;
   private user: User;
 
   constructor(public authService: AuthService,
@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
     // Subscribe to user changes
     this.messageBus.observe(new UserHasUpdated(), (userHasUpdated) => {
       this.user = userHasUpdated.user;
+      console.log('mbusrprofile', userHasUpdated.user);
     });
   }
 
@@ -52,8 +53,8 @@ export class ProfileComponent implements OnInit {
     return AppComponent.serverRoute;
   }
 
-  jobsLoaded(newPostings) {
+  jobsLoaded(newPostings: Posting[]) {
     this.jobsLoading = false;
-    this.postings = newPostings;
+    this.postings = newPostings; // newPostings.filter(posting => posting.creatorUser.id === this.user.id);
   }
 }

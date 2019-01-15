@@ -55,7 +55,12 @@ export class CookiesService {
   }
 
   public getUserCookie(): any {
-    return JSON.parse(this.getCookie(this.userKey));
+    const userJson = this.getCookie(this.userKey);
+
+    if (userJson === undefined || userJson === null || userJson === '' ) {
+      return undefined;
+    }
+    return JSON.parse(userJson);
   }
 
   public getJWTCookie(): string {

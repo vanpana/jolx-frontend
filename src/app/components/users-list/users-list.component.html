@@ -8,6 +8,9 @@
     </div>
   </mat-list-item>
 
+  <mat-list-item *ngIf="users.length === 0">
+    <h4>No results found</h4>
+  </mat-list-item>
 
   <mat-list-item *ngFor="let user of users">
     <app-user-list-item [user]="user"></app-user-list-item>

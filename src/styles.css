@@ -19,13 +19,16 @@ body {
   height: 60px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
-  float: none;
-  margin: 0 auto;
 }
 
-.loader .loader-sml {
+.loader-sml {
   width: 20px;
   height: 20px;
+}
+
+.loader-center {
+  float: none;
+  margin: 0 auto;
 }
 
 /* Safari */

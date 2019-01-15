@@ -53,7 +53,7 @@
           <!--jobs posted by the user-->
           <p *ngIf="jobsLoading || postings.length > 0">JOBS POSTED</p>
           <div *ngIf="jobsLoading">
-            <div class="loader-sml">Loading...</div>
+            <div class="loader loader-sml"></div>
           </div>
           <div *ngIf="!jobsLoading">
             <div *ngFor="let posting of postings">

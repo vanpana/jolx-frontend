@@ -23,12 +23,6 @@
   padding-left: 10px;
   padding-bottom: 10px;
 }
-.btn{
-  background: #36B5CD;
-  border-color: #36B5CD;
-  color: white;
-  width: 90px;
-}
 
 :host {
   display: block;

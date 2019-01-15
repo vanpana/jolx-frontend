@@ -1,5 +1,14 @@
 <mat-list>
   <h3 mat-subheader style="width: 400px">Users</h3>
+
+  <mat-list-item>
+    <div class="input-group" style="width: 432px">
+      <input type="text" [(ngModel)]="query" (ngModelChange)="search()" placeholder="Search users..." class="form-control" >
+      <span class="input-group-addon"><i class="fa fa-search"></i></span>
+    </div>
+  </mat-list-item>
+
+
   <mat-list-item *ngFor="let user of users">
     <app-user-list-item [user]="user"></app-user-list-item>
   </mat-list-item>

@@ -8,7 +8,7 @@ import {Posting} from '../models/posting';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class ReviewService extends ResourceService< Review> {
+export class ReviewService extends ResourceService<Review> {
   constructor(httpService: HttpService) {
     super(
       httpService,
@@ -26,24 +26,15 @@ export class ReviewService extends ResourceService< Review> {
    * @param reviewDescription - a description of the work performed
    */
   addReview(jobPosterId: string, jobWorkerId: string, postingId: string, stars: number, reviewDescription: string): Observable<any> {
-    // Create job poster user entity
-    const jobPoster = new User(); jobPoster.id = jobPosterId;
-
-    // Create job worker user entity
-    const jobWorker = new User(); jobWorker.id = jobWorkerId;
-
-    // Create posting entity
-    const posting = new Posting(); posting._id = postingId;
-
-    // Create review entity
-    const review = new Review();
-    review.fromUser = jobPoster;
-    review.toUser = jobWorker;
-    review.posting = posting;
-    review.stars = stars;
-    review.description = reviewDescription;
+    const jsonToBeSent = {
+      fromUser: jobPosterId,
+      toUser: jobWorkerId,
+      posting: postingId,
+      stars: stars,
+      description: reviewDescription
+    };
 
     // Return the promise
-    return super.create(review);
+    return this.httpService.post('reviews', jsonToBeSent);
   }
 }

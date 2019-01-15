@@ -1,0 +1,21 @@
+<p>
+  rating works!
+</p>
+
+<div class="container">
+  <div class="row">
+    <h2>Thanks for collaborating with {{workerUser.firstName}} for posting: {{posting.name}}</h2>
+    <h3><small>Click on a star to rate his work</small></h3>
+  </div>
+  <div class="row lead">
+    <div id="stars" class="starrr"></div>
+    You gave a rating of <span id="count">0</span> star(s)
+  </div>
+
+  <div class="form-group">
+    <textarea [(ngModel)]="description" class="form-control" placeholder="Describe why you gave this rating" rows="8"></textarea>
+  </div>
+
+  <button (click)="submit()" class="btn btn-default btn-fill">Submit review</button>
+  <div *ngIf="isSending" class="loader loader-center loader-sml"></div>
+</div>

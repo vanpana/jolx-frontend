@@ -10,6 +10,7 @@ import {NewPostingComponent} from './components/new-posting/new-posting.componen
 import {PostingDetailComponent} from './components/posting-detail/posting-detail.component';
 import {JobSeekersComponent} from './components/job-seekers/job-seekers.component';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
+import {RatingComponent} from './components/rating/rating.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'edit', component: EditProfileComponent},
   { path: 'postings/:id', component: PostingDetailComponent},
   { path: 'profile', component: ProfileComponent},
+  { path: 'rating', component: RatingComponent},
   {
     path: 'job_seekers',
     component: JobSeekersComponent,

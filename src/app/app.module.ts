@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CompsComponent} from './components/comps/comps.component';
 import {CardComponent} from './components/card/card.component';
-import {LoginComponent} from './components/login/login.component';
+import {LoginModule} from './components/login/login.module';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpService} from './services/http.service';
@@ -76,7 +76,6 @@ import { ApplicantsListItemComponent } from './components/posting-detail/applica
     AppComponent,
     CompsComponent,
     CardComponent,
-    LoginComponent,
     SignupComponent,
     HeaderComponent,
     FooterComponent,
@@ -103,6 +102,7 @@ import { ApplicantsListItemComponent } from './components/posting-detail/applica
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    LoginModule,
     HttpClientModule,
     // angular material modules
     MatCheckboxModule,

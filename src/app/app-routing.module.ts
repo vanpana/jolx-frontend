@@ -32,6 +32,7 @@ const routes: Routes = [
       { path: ':userId/messages', component: UserProfileComponent }
     ]
   },
+  { path: 'users/:id', component: UserProfileComponent },
 ];
 
 @NgModule({

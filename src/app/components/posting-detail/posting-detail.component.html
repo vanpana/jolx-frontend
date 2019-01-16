@@ -6,37 +6,50 @@
 
   <div *ngIf="!loading">
     <div class="card">
-      <div *ngIf="posting.photo != null && posting.photo != undefined">
-        <img class="card-img-top" src="{{serverRoute}}{{posting.photo.url}}" alt="Card image cap">
-      </div>
-      <div *ngIf="posting.photo == null || posting.photo == undefined">
-        <img class="card-img-top" src="../../../assets/images/unavailable-image.jpg" alt="Card image cap">
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">{{posting.name}}</h3>
-        <!--<p class="posting_date">{{posting.startTime | date:'dd MMM yyyy'}}</p>-->
-        <p class="card-text">{{posting.description}}</p>
-        <div class="bot">
-          <a class="card-price">{{posting.price}} lei</a>
-
-          <!-- TODO if the ctx user posted this, show the applicants -->
-          <div *ngIf="isOwnPosting">
-            <h4>Applicants</h4>
-            <div *ngFor="let applicant of posting.applicantUsers">
-              <!--TODO Link the user to his page-->
-              <a><h5>{{applicant.username}}</h5></a>
-            </div>
+      <div class="flex-container">
+        <div class="leftContent">
+          <div *ngIf="posting.photo != null && posting.photo != undefined">
+            <img class="card-img-top" src="{{serverRoute}}{{posting.photo.url}}" alt="Card image cap">
           </div>
-          <div *ngIf="!isOwnPosting">
-            <div *ngIf="!hasUserApplied">
-              <a (click)="apply()" class="btn btn-primary">Apply</a>
+          <div *ngIf="posting.photo == null || posting.photo == undefined">
+            <img class="card-img-top" src="../../../assets/images/unavailable-image.jpg" alt="Card image cap">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">{{posting.name}}</h3>
+            <!--<p class="posting_date">{{posting.startTime | date:'dd MMM yyyy'}}</p>-->
+            <p class="card-text">{{posting.description}}</p>
+            <div class="bot">
+
+              <!-- TODO if the ctx user posted this, show the applicants -->
+              <div *ngIf="isOwnPosting">
+                <h4>Applicants</h4>
+                <div *ngFor="let applicant of posting.applicantUsers">
+                  <!--TODO Link the user to his page-->
+                  <a><h5>{{applicant.username}}</h5></a>
+                </div>
+              </div>
+              <div *ngIf="!isOwnPosting">
+                <div *ngIf="!hasUserApplied">
+                  <a (click)="apply()" class="btn btn-primary">Apply</a>
+                </div>
+                <div *ngIf="hasUserApplied">
+                  <a (click)="unapply()" class="btn btn-warning">Unapply</a>
+                </div>
+              </div>
             </div>
-            <div *ngIf="hasUserApplied">
-              <a (click)="unapply()" class="btn btn-warning">Unapply</a>
-            </div>
+            <!--Apply button-->
           </div>
         </div>
-        <!--Apply button-->
+        <div class="rightContent">
+          <div class="flex-container">
+            <div class="arrow-left"></div>
+            <p class="card-price">{{posting.price}} lei</p>
+          </div>
+          <p class="userPhone"> &#9742;  {{posting.creatorUser.phone}}</p>
+          <img class="userImage" src={{posting.creatorUser.photo}} alt="Avatar">
+          <p class="userFirstName">Name: {{posting.creatorUser.firstName}}</p>
+          <button *ngIf="isOwnPosting" class="btn" (click)="deletePosting()"><i class="fa fa-trash"></i></button>
+        </div>
       </div>
     </div>
   </div>

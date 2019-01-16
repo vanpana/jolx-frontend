@@ -68,6 +68,8 @@ import { UserListItemComponent } from './components/users-list/user-list-item/us
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ReviewComponent } from './components/user-profile/review/review.component';
 import { RatingComponent } from './components/rating/rating.component';
+import { ApplicantsListComponent } from './components/posting-detail/applicants-list/applicants-list.component';
+import { ApplicantsListItemComponent } from './components/posting-detail/applicants-list/applicants-list-item/applicants-list-item.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +95,8 @@ import { RatingComponent } from './components/rating/rating.component';
     PostingDetailComponent,
     ReviewComponent,
     RatingComponent,
+    ApplicantsListComponent,
+    ApplicantsListItemComponent,
   ],
   imports: [
     BrowserAnimationsModule,

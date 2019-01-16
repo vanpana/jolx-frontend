@@ -17,7 +17,6 @@ import {User} from '../../models/user';
 })
 export class ProfileComponent implements OnInit {
   public skills: Skill[];
-  postings: Posting[];
   jobsLoading: boolean;
   user: User;
 
@@ -32,15 +31,13 @@ export class ProfileComponent implements OnInit {
     this.jobsLoading = true;
     postingsService.fetchPostings();
     this.skills = this.authService.user.skills;
-    this.messageBus.observe(new UserPostingsUpdated(), (postingsUpdated) => {
-      this.jobsLoaded(postingsUpdated.postings);
-    });
 
     // Fetch user
     this.messageBus.publish(new UserMustUpdate());
 
     // Subscribe to user changes
     this.messageBus.observe(new UserHasUpdated(), (userHasUpdated) => {
+      this.jobsLoading = false;
       this.user = userHasUpdated.user;
     });
   }
@@ -50,10 +47,5 @@ export class ProfileComponent implements OnInit {
 
   get serverRoute() {
     return AppComponent.serverRoute;
-  }
-
-  jobsLoaded(newPostings: Posting[]) {
-    this.jobsLoading = false;
-    this.postings = newPostings.filter(posting => posting.creatorUser.id === this.user.id);
   }
 }

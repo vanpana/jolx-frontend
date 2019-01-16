@@ -7,7 +7,7 @@
 
   <div class="inner-flex-container">
     <div *ngFor="let posting of postings; let i = index">
-      <app-card *ngIf="i % 5 === 1"[posting]="posting"></app-card>
+      <app-card *ngIf="i % 5 === 1" [posting]="posting"></app-card>
     </div>
   </div>
 

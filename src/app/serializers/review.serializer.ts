@@ -8,13 +8,14 @@ export class ReviewSerializer extends Serializer<Review> {
   private postingSerializer: PostingSerializer = new PostingSerializer();
 
   fromJson(json: any): Review {
-    return {
-      fromUser: this.userSerializer.fromJson(json.fromUser),
-      toUser: this.userSerializer.fromJson(json.toUser),
-      posting: this.postingSerializer.fromJson(json.posting),
-      stars: json.stars,
-      description: json.description
-    };
+    const review = new Review();
+    review.id = json.id;
+    review.description = json.description;
+    review.fromUser = this.userSerializer.fromJson(json.fromUser);
+    review.toUser = this.userSerializer.fromJson(json.toUser);
+    review.posting = this.postingSerializer.fromJson(json.posting);
+    review.stars = json.stars;
+    return review;
   }
 
 }

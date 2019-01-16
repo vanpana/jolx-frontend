@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   public skills: Skill[];
   postings: Posting[];
   jobsLoading: boolean;
-  private user: User;
+  user: User;
 
   constructor(public authService: AuthService,
               private postingsService: PostingsService,

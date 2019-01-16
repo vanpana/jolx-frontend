@@ -18,8 +18,8 @@ export class UserSerializer extends Serializer<User> {
     user.phone = json.phone;
     user.photo = json.photo;
     user.skillIds = json.skills;
-    user.reviewsGivenIds = json.reviewsGiven;
-    user.reviewsReceivedIds = json.reviewsReceived;
+    user.reviewsGiven = json.reviewsGiven;
+    user.reviewsReceived = json.reviewsReceived;
     user.jobsPosted = json.jobsPosted;
     user.postingsAppliedFor = json.postingsAppliedFor;
 

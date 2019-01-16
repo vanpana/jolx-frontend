@@ -32,12 +32,12 @@ export class RatingComponent implements OnInit {
 
     // TODO fetch the correct posting
     this.posting = new Posting();
-    this.posting.id = '5bf6d34164a16f851e6cf526';
+    this.posting.id = '5c3dfcdd94eb5387b2e5fae1';
     this.posting.name = 'Cutting trees';
 
     // TODO fetch the correct user
     this.workerUser = new User();
-    this.workerUser.id = '5bcf796430f85b07d7af4d14';
+    this.workerUser.id = '5c3dfcbe94eb5387b2e5fae0';
     this.workerUser.firstName = 'Dorinel';
   }
 

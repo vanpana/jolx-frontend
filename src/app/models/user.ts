@@ -1,6 +1,7 @@
 import {Resource} from './resource';
 import {FileUpload} from './file-upload';
 import {Posting} from './posting';
+import {Review} from './review';
 
 export class User extends Resource {
   public id: string;
@@ -13,8 +14,8 @@ export class User extends Resource {
   public phone: string;
   public photo: FileUpload;
   public skillIds: Array<String>;
-  public reviewsGivenIds: Array<String>;
-  public reviewsReceivedIds: Array<String>;
+  public reviewsGiven: Array<Review>;
+  public reviewsReceived: Array<Review>;
   public jobsPosted: Array<Posting>;
   public postingsAppliedFor: Array<Posting>;
 

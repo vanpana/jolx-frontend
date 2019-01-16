@@ -150,13 +150,9 @@
     </div>
   </form>
 
-  <app-review></app-review>
-
-  <app-review></app-review>
-
-  <app-review></app-review>
-
-  <app-review></app-review>
+  <div *ngFor="let review of user.reviewsReceived">
+    <app-review [review]="review"></app-review>
+  </div>
 </div>
 <!------ Include the above in your HEAD tag ---------->
 

@@ -1,21 +1,22 @@
-<div class="media">
-  <a class="pull-left" href="#">
-    <div class="avatar">
-      <img class="media-object" src="../../../../assets/images/default-user-photo.png" alt="...">
-    </div>
-  </a>
-  <div class="media-body">
-    <h4 class="media-heading">Jay Z</h4>
-    <h6 class="pull-right text-muted">Sep 11, 11:57 AM</h6>
+<div *ngIf="review != null && review != undefined">
+  <div class="media">
+    <a class="pull-left" href="#">
+      <div class="avatar">
+        <img class="media-object" src="../../../../assets/images/default-user-photo.png" alt="...">
+      </div>
+    </a>
+    <div class="media-body">
+      <h4 class="media-heading">{{review.fromUser.firstName}} {{review.fromUser.lastName[0]}}.</h4>
+      <!--<h6 class="pull-right text-muted">Sep 11, 11:57 AM</h6>-->
 
-    <p>Hello guys, nice to have you on the platform! There will be a lot of great stuff coming soon. We will keep you posted for the latest news.</p>
-    <p> Don't forget, You're Awesome!</p>
+      <p>{{review.description}}</p>
 
-    <div class="media-footer">
-      <a href="#" class="btn btn-info btn-simple "> <i class="fa fa-reply"></i> Reply</a>
-      <a href="#" class="btn btn-default btn-simple pull-right">
-        <i class="fa fa-heart-o"></i> 24
-      </a>
+      <div class="media-footer">
+        <a href="#" class="btn btn-info btn-simple "> <i class="fa fa-reply"></i> Reply</a>
+        <a href="#" class="btn btn-default btn-simple pull-right">
+          <i class="fa fa-heart-o"></i> 24
+        </a>
+      </div>
     </div>
   </div>
 </div>

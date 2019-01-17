@@ -1,37 +1,41 @@
 <body>
-<div class="container">
-  <!--Only display photo if user has one-->
-  <div *ngIf="user.photo != null && user.photo != undefined">
-    <img alt="{{user.username}} profile image" src="{{serverRoute}}{{user.photo.url}}" height="50" width="50"/>
-  </div>
-  <div class="row">
-    <div class="form-group col-xs-6">
-      <input type="text" [(ngModel)]="user.firstName" value="" placeholder="First name" class="form-control"/>
+<div class="wrapper">
+  <div class="inner">
+    <div class="formReplacer">
+    <h3>Update</h3>
+    <div class="form-wrapper">
+      <label>Username</label>
+      <input [(ngModel)]="user.username"  type="text" class="form-control" placeholder="UserName">
     </div>
-    <div class="form-group col-xs-6">
-      <input type="text" [(ngModel)]="user.lastName" value="" placeholder="Last name" class="form-control"/>
+    <br>
+    <div class="form-row">
+      <div class="form-wrapper">
+        <label>First Name *</label>
+        <input [(ngModel)]="user.firstName"  type="text" class="form-control" placeholder="First Name">
+      </div>
+      <div class="form-wrapper">
+        <label>Last Name *</label>
+        <input [(ngModel)]="user.lastName"  type="text" class="form-control" placeholder="Last Name">
+      </div>
     </div>
-  </div>
+    <div class="form-row last">
+      <div class="form-wrapper">
+        <label>Email *</label>
+        <input [(ngModel)]="user.email"  type="text" class="form-control" placeholder="Email">
+      </div>
+      <div class="form-wrapper">
+        <label>Phone * </label>
+        <input [(ngModel)]="user.phone"  type="text" class="form-control" placeholder="Phone">
+      </div>
+    </div>
 
-  <div class="form-group">
-    <input type="text" [(ngModel)]="user.username" value="" placeholder="Username" class="form-control"/>
-  </div>
-
-  <div class="form-group">
-    <input type="email" [(ngModel)]="user.email" value="" placeholder="Email" class="form-control"/>
-  </div>
-
-  <div class="form-group">
-    <input type="phone" [(ngModel)]="user.phone" value="" placeholder="Phone" class="form-control"/>
-  </div>
-
-  <div class="form-group">
-    <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".png,.jpg" class="form-control"/>
-  </div>
-
-  <div class="footer text-center">
-    <button (click)="update()" class="btn btn-info btn-round btn-wd"> Update</button>
+    <label class="btn btn-default btn-file">
+      Upload Image <input type="file" style="display: none;" accept=".png,.jpg">
+    </label>
+    <button data-text="Update" (click)="update()" >
+      <span>Update</span>
+    </button>
+    </div>
   </div>
 </div>
-
 </body>

@@ -7,11 +7,8 @@ import {AppComponent} from '../../app.component';
 import {UserMustUpdate} from '../../models/message-bus-events/user-must-update';
 import {MessageBus} from '../../services/message-bus';
 
-// import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
-
 @Component({
   selector: 'app-edit-profile',
-  // providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.css']
 })
@@ -44,6 +41,7 @@ export class EditProfileComponent implements OnInit {
         // Pull user data from the server
         this.messageBus.publish(new UserMustUpdate());
         location.assign('/profile');
+        console.log('user updated');
       },
       error_data => {
         console.log(error_data);

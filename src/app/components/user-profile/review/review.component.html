@@ -2,8 +2,8 @@
   <div class="media">
     <a class="pull-left" href="#">
       <div class="avatar">
-        <img *ngIf="review.fromUser.photo.url === undefined" class="media-object" src="../../../../assets/images/default-user-photo.png" alt="...">
-        <img *ngIf="review.fromUser.photo.url !== undefined" class="media-object" src="{{serverRoute}}{{review.fromUser.photo.url}}" alt="...">
+        <img *ngIf="review.fromUser.photo === undefined" class="media-object" src="../../../../assets/images/default-user-photo.png" alt="...">
+        <img *ngIf="review.fromUser.photo !== undefined" class="media-object" src="{{serverRoute}}{{review.fromUser.photo.url}}" alt="...">
       </div>
     </a>
     <div class="media-body">

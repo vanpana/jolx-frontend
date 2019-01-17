@@ -1,0 +1,72 @@
+<div class="container">
+
+  <div *ngIf="loading">
+    <div class="loader loader-center"></div>
+  </div>
+
+  <div *ngIf="!loading">
+    <div class="card">
+      <div class="flex-container">
+        <div class="leftContent">
+          <div *ngIf="posting.photo != null && posting.photo != undefined">
+            <img class="card-img-top" src="{{serverRoute}}{{posting.photo.url}}" alt="Card image cap">
+          </div>
+          <div *ngIf="posting.photo == null || posting.photo == undefined">
+            <img class="card-img-top" src="../../../assets/images/unavailable-image.jpg" alt="Card image cap">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">{{posting.name}}</h3>
+            <!--<p class="posting_date">{{posting.startTime | date:'dd MMM yyyy'}}</p>-->
+            <p class="card-text">{{posting.description}}</p>
+            <div class="bot">
+
+              <!-- TODO if the ctx user posted this, show the applicants -->
+              <div *ngIf="isOwnPosting">
+                <h4>Applicants</h4>
+                <div *ngFor="let applicant of posting.applicantUsers">
+                  <!--TODO Link the user to his page-->
+                  <a><h5>{{applicant.username}}</h5></a>
+                </div>
+              </div>
+              <div *ngIf="!isOwnPosting">
+                <div *ngIf="!hasUserApplied">
+                  <a (click)="apply()" class="btn btn-left btn-primary">Apply</a>
+                </div>
+                <div *ngIf="hasUserApplied">
+                  <a (click)="unapply()" class="btn btn-left btn-warning">Unapply</a>
+                </div>
+              </div>
+            </div>
+            <!--Apply button-->
+            <app-applicants-list *ngIf="isOwnPosting" [posting]="posting"></app-applicants-list>
+          </div>
+        </div>
+        <div class="rightContent">
+          <div class="flex-container">
+            <div class="arrow-left"></div>
+            <p class="card-price">{{posting.price}} lei</p>
+          </div>
+          <p class="userPhone"> &#9742;  {{creatorUser.phone}}</p>
+          <div *ngIf="creatorUser.photo != null && creatorUser.photo != undefined">
+            <img class="userPhoto"
+              src="{{serverRoute}}{{creatorUser.photo.url}}"
+              alt=""/>
+          </div>
+          <!-- else display stock image -->
+          <div *ngIf="creatorUser.photo == null || creatorUser.photo == undefined">
+            <img class="userPhoto"
+              src="../../../assets/images/default-user-photo.png"
+              alt=""/>
+          </div>
+
+          <p class="userFirstName">Poster Details</p>
+          <p class="userFirstName">UserName: {{creatorUser.username}}</p>
+          <p class="userFirstName">First Name: {{creatorUser.firstName}}</p>
+          <p class="userFirstName">Last Name: {{creatorUser.lastName}}</p>
+
+          <button *ngIf="isOwnPosting" class="btn btn-danger btn-right" (click)="deletePosting()"><i class="fa fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

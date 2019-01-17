@@ -1,0 +1,9 @@
+<button mat-flat-button>
+  <div class="content">
+    <a [routerLink]="'../../users/' + user.id">
+      {{user.username}} {{user.firstName}}
+    </a>
+
+    <button class="btn btn-success" (click)="openReview()">Mark as done</button>
+  </div>
+</button>

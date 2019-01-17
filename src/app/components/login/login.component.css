@@ -1,0 +1,8 @@
+body {
+  background: url("../../../assets/images/teamwork_wallpaper.jpg");
+  background-size: cover;
+}
+
+.center {
+  margin-top: 5%;
+}

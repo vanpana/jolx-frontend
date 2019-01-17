@@ -1,0 +1,51 @@
+<body>
+
+<div class="col-md-3 col-lg-offset-8 center">
+  <div class="card card-price">
+    <div class="content">
+      <div class="text-center">
+        <h1>New Posting
+          <small class="subtitle">What do you want to get done?</small>
+        </h1>
+      </div>
+
+      <div class="form-group">
+        <input type="text" [(ngModel)]="name" value="" placeholder="Name" class="form-control"/>
+      </div>
+
+
+      <div class="form-group">
+        <input #startdate class="datepicker form-control" type="text" placeholder="Start Time"/>
+      </div>
+
+      <div class="form-group">
+        <textarea [(ngModel)]="description" class="form-control" placeholder="Description" rows="8"></textarea>
+      </div>
+
+      <div class="form-group">
+        <input type="number" [(ngModel)]="price" value="" placeholder="Price" class="form-control"/>
+      </div>
+
+      <div class="form-group">
+        <input type="number" [(ngModel)]="duration" value="" placeholder="Duration" class="form-control"/>
+      </div>
+
+      <div class="form-group">
+        <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".png,.jpg"
+               class="form-control"/>
+      </div>
+
+    </div>
+
+    <div class="footer text-center">
+      <button (click)="createPosting(startdate.value)" class="btn btn-info btn-round btn-wd"> Create</button>
+    </div>
+
+    <div *ngIf="isCreating" class="loader loader-center"></div>
+
+
+  </div>
+</div>
+
+</body>
+

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {ReviewService} from './services/review.service';
+import {Component} from '@angular/core';
+import {AuthService} from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +7,10 @@ import {ReviewService} from './services/review.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  public static serverRoute = 'http://localhost:1337';
   title = 'app';
 
-  constructor(private reviewService: ReviewService) {}
-
-  getReviews() {
-    this.reviewService.list().subscribe(reviews => console.log(reviews));
+  constructor(private authService: AuthService) {
+    this.authService.broadcastIfAuthenticated();
   }
 }

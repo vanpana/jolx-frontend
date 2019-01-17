@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>
+  Leave a review
+</h2>
+
+<div mat-dialog-content>
+
+  <h5>Thanks for collaborating with
+    <span class="orange"><b>{{data.user.username}}</b></span> for posting:
+    <span class="green"><b>{{data.posting.name}}</b></span></h5>
+
+    <h3><small>Click on a star to rate his/her work</small></h3>
+    <app-star-selector></app-star-selector>
+
+    <div class="form-group">
+      <textarea [(ngModel)]="description" class="form-control" placeholder="Describe why you gave this rating" rows="8"></textarea>
+    </div>
+</div>
+
+<div mat-dialog-actions>
+  <button [ngClass]="{ 'active' : description.length !== 0 }" (click)="submit()" class="btn btn-success btn-fill">Submit review</button>
+  <button mat-dialog-close="" class="btn btn-danger btn-fill">This Job is not complete yet! </button>
+  <div *ngIf="isSending" class="loader loader-center loader-sml"></div>
+</div>
+
+

@@ -1,0 +1,36 @@
+.posting_date{
+  color:#36B5CD;
+  font-size: medium;
+  text-align: left;
+}
+.card-img-top{
+  width: 288px;
+  max-height:max-content;
+}
+.card-price{
+  color:#36B5CD;
+  font-size: 26px;
+  font-weight: bold;
+  padding-right: 90px;
+  padding-left: 5px;
+}
+.card-text{
+  font-size: small;
+}
+.card-body{
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+:host {
+  display: block;
+  padding: .40rem .60rem;
+  border-radius: 3px;
+  max-width: 300px;
+}
+
+h2 {
+  color: #c85f7f;
+}
+
+

@@ -546,7 +546,7 @@
       };
 
       if (this.options.title && !this.multiple) {
-        // this option doesn't create a new <li> element, but does add a new option, so liIndex is decreased
+        // this option doesn't post a new <li> element, but does add a new option, so liIndex is decreased
         // since liObj is recalculated on every refresh, liIndex needs to be decreased even if the titleOption is already appended
         liIndex--;
 
@@ -767,7 +767,7 @@
       menuInner.appendChild(divider);
       if (header) menu.appendChild(header);
       if (search) {
-        // create a span instead of input as creating an input element is slower
+        // post a span instead of input as creating an input element is slower
         var input = document.createElement('span');
         search.className = 'bs-searchbox';
         input.className = 'form-control';

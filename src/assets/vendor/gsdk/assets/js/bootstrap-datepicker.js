@@ -1,5 +1,5 @@
 /* =========================================================
- * bootstrap-datepicker.js 
+ * bootstrap-datepicker.js
  * http://www.eyecon.ro/bootstrap-datepicker
  * =========================================================
  * Copyright 2012 Stefan Petre
@@ -18,21 +18,21 @@
  * ========================================================= */
  var color = '';
 !function( $ ) {
-	
+
 	// Picker object
 
 	var Datepicker = function(element, options){
 		this.element = $(element);
 		this.format = DPGlobal.parseFormat(options.format||this.element.data('date-format')||'mm/dd/yyyy');
 		this.picker = $(DPGlobal.template)
-							.appendTo('body')
+							.appendTo('#main-body')
 							.on({
 								click: $.proxy(this.click, this)//,
 								//mousedown: $.proxy(this.mousedown, this)
 							});
 		this.isInput = this.element.is('input');
 		this.component = this.element.is('.date') ? this.element.find('.add-on') : false;
-		
+
 		if (this.isInput) {
 			this.element.on({
 				focus: $.proxy(this.show, this),
@@ -43,10 +43,10 @@
 			if (this.component){
 				this.component.on('click', $.proxy(this.show, this));
 			} else {
-				this.element.on('click', $.proxy(this.show, this));
+				// this.element.on('click', $.proxy(this.show, this));
 			}
 		}
-	
+
 		this.minViewMode = options.minViewMode||this.element.data('date-minviewmode')||0;
 		if (typeof this.minViewMode === 'string') {
 			switch (this.minViewMode) {
@@ -84,14 +84,14 @@
 		this.fillMonths();
 		this.update();
 		this.showMode();
-		
+
 	};
-	
-	
-	
+
+
+
 	Datepicker.prototype = {
 		constructor: Datepicker,
-		
+
 		show: function(e) {
 		    var datepicker = this.picker;
 
@@ -115,20 +115,20 @@
 				type: 'show',
 				date: this.date
 			});
-			
+
 			setTimeout(function(){
     			datepicker.addClass('open');
 			}, 170);
 		},
-		
+
 		hide: function(){
 			var datepicker = this.picker;
 			datepicker.removeClass('open');
-			
+
 			setTimeout(function(){
-    			this.picker.hide();
+    			// this.picker.hide();
 			}, 500);
-			
+
 			$(window).off('resize', this.place);
 			this.viewMode = this.startViewMode;
 			this.showMode();
@@ -140,9 +140,9 @@
 				type: 'hide',
 				date: this.date
 			});
-			
+
     	},
-		
+
 		set: function() {
 			var formated = DPGlobal.formatDate(this.date, this.format);
 			if (!this.isInput) {
@@ -154,7 +154,7 @@
 				this.element.prop('value', formated);
 			}
 		},
-		
+
 		setValue: function(newDate) {
 			if (typeof newDate === 'string') {
 				this.date = DPGlobal.parseDate(newDate, this.format);
@@ -165,7 +165,7 @@
 			this.viewDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0, 0);
 			this.fill();
 		},
-		
+
 		place: function(){
 			var offset = this.component ? this.component.offset() : this.element.offset();
 			this.picker.css({
@@ -173,7 +173,7 @@
 				left: offset.left
 			});
 		},
-		
+
 		update: function(newDate){
 			this.date = DPGlobal.parseDate(
 				typeof newDate === 'string' ? newDate : (this.isInput ? this.element.prop('value') : this.element.data('date')),
@@ -182,7 +182,7 @@
 			this.viewDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0, 0);
 			this.fill();
 		},
-		
+
 		fillDow: function(){
 			var dowCnt = this.weekStart;
 			var html = '<tr>';
@@ -192,7 +192,7 @@
 			html += '</tr>';
 			this.picker.find('.datepicker-days thead').append(html);
 		},
-		
+
 		fillMonths: function(){
 			var html = '';
 			var i = 0
@@ -201,7 +201,7 @@
 			}
 			this.picker.find('.datepicker-months td').append(html);
 		},
-		
+
 		fill: function() {
 			var d = new Date(this.viewDate),
 				year = d.getFullYear(),
@@ -243,7 +243,7 @@
 			}
 			this.picker.find('.datepicker-days tbody').empty().append(html.join(''));
 			var currentYear = this.date.getFullYear();
-			
+
 			var months = this.picker.find('.datepicker-months')
 						.find('th:eq(1)')
 							.text(year)
@@ -252,7 +252,7 @@
 			if (currentYear === year) {
 				months.eq(this.date.getMonth()).addClass('active').addClass(this.color);
 			}
-			
+
 			html = '';
 			year = parseInt(year/10, 10) * 10;
 			var yearCont = this.picker.find('.datepicker-years')
@@ -267,7 +267,7 @@
 			}
 			yearCont.html(html);
 		},
-		
+
 		click: function(e) {
 			e.stopPropagation();
 			e.preventDefault();
@@ -283,7 +283,7 @@
 							case 'next':
 								this.viewDate['set'+DPGlobal.modes[this.viewMode].navFnc].call(
 									this.viewDate,
-									this.viewDate['get'+DPGlobal.modes[this.viewMode].navFnc].call(this.viewDate) + 
+									this.viewDate['get'+DPGlobal.modes[this.viewMode].navFnc].call(this.viewDate) +
 									DPGlobal.modes[this.viewMode].navStep * (target[0].className === 'prev' ? -1 : 1)
 								);
 								this.fill();
@@ -335,12 +335,12 @@
 				}
 			}
 		},
-		
+
 		mousedown: function(e){
 			e.stopPropagation();
 			e.preventDefault();
 		},
-		
+
 		showMode: function(dir) {
 			if (dir) {
 				this.viewMode = Math.max(this.minViewMode, Math.min(2, this.viewMode + dir));
@@ -348,7 +348,7 @@
 			this.picker.find('>div').hide().filter('.datepicker-'+DPGlobal.modes[this.viewMode].clsName).show();
 		}
 	};
-	
+
 	$.fn.datepicker = function ( option, val ) {
 		return this.each(function () {
 			var $this = $(this),
@@ -367,7 +367,7 @@
 		}
 	};
 	$.fn.datepicker.Constructor = Datepicker;
-	
+
 	var DPGlobal = {
 		modes: [
 			{
@@ -467,7 +467,7 @@
 						'</thead>',
 		contTemplate: '<tbody><tr><td colspan="7"></td></tr></tbody>'
 	};
-	
+
 	DPGlobal.template = '<div class="datepicker dropdown-menu">'+
 							'<div class="datepicker-days">'+
 								'<table class=" table-condensed">'+

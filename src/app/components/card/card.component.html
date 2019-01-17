@@ -1,0 +1,23 @@
+<div class="card">
+  <div *ngIf="posting.photo == undefined || posting.photo == null">
+    <img class="card-img-top" src="../../../assets/images/unavailable-image.jpg" alt="Card image cap">
+  </div>
+  <div *ngIf="posting.photo != undefined && posting.photo != null">
+    <img class="card-img-top" src="{{serverRoute}}{{posting.photo.url}}" alt="Card image cap">
+  </div>
+  <div class="card-body">
+    <a href="http://localhost:4200/postings/{{posting._id}}"><h3 class="card-title">{{posting.name}}</h3></a>
+    <p class="card-text">{{posting.description}}</p>
+    <div class="bot">
+      <a class="card-price">{{posting.price}} lei</a>
+      <div *ngIf="!isUserPosting">
+        <div *ngIf="!hasUserApplied">
+          <a (click)="apply()" class="btn btn-primary btn-fill">Apply</a>
+        </div>
+        <div *ngIf="hasUserApplied">
+          <a (click)="unapply()" class="btn btn-fill">Unapply</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

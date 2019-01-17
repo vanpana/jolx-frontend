@@ -137,7 +137,7 @@ import {StarComponent} from './components/star/star.component';
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
     //
   ],
   providers: [

@@ -5,6 +5,7 @@ import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {Posting} from '../../models/posting';
 import {Skill} from '../../models/skill';
+import {AppComponent} from '../../app.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -57,5 +58,9 @@ export class UserProfileComponent implements OnInit {
         console.log(user);
       }
     );
+  }
+
+  get serverRoute() {
+    return AppComponent.serverRoute;
   }
 }

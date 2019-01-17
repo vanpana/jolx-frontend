@@ -2,6 +2,12 @@ import {User} from './user';
 import {Resource} from './resource';
 import {FileUpload} from './file-upload';
 
+export enum PostingStatus {
+  Open = 'open',
+  InProgress = 'inprogress',
+  Done = 'done'
+}
+
 export class Posting extends Resource {
   _id: string;
   name: string;
@@ -13,4 +19,5 @@ export class Posting extends Resource {
   creatorUser: User;
   applicantUsers: User[];
   photo: FileUpload;
+  status: PostingStatus;
 }

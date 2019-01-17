@@ -7,11 +7,8 @@ import {AppComponent} from '../../app.component';
 import {UserMustUpdate} from '../../models/message-bus-events/user-must-update';
 import {MessageBus} from '../../services/message-bus';
 
-// import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
-
 @Component({
   selector: 'app-edit-profile',
-  // providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.css']
 })
@@ -24,11 +21,9 @@ export class EditProfileComponent implements OnInit {
               private cookieService: CookiesService,
               private messageBus: MessageBus) {
     this.user = cookieService.getUserCookie();
-    console.log('User in constructor', this.user);
   }
 
   ngOnInit() {
-    console.log('img', this.user);
   }
 
   fileChange(event) {
@@ -46,7 +41,6 @@ export class EditProfileComponent implements OnInit {
         location.assign('/profile');
       },
       error_data => {
-        console.log(error_data);
       });
   }
 

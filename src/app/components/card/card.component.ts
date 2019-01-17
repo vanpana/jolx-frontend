@@ -27,7 +27,6 @@ export class CardComponent implements OnInit {
     this.messageBus.observe(new UserHasUpdated(), () => {
       this.checkPropertiesOnObserve();
     });
-
   }
 
   checkPropertiesOnObserve() {
@@ -91,6 +90,6 @@ export class CardComponent implements OnInit {
   }
 
   get serverRoute(): string {
-    return 'http://localhost:1337';
+    return AppComponent.serverRoute;
   }
 }

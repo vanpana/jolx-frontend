@@ -10,6 +10,7 @@ import {PostingsUpdated} from '../models/message-bus-events/postings-updated';
 import {UserPostingsUpdated} from '../models/message-bus-events/user-postings-updated';
 import {Router} from '@angular/router';
 import {UserSerializer} from '../serializers/user.serializer';
+import {Observable} from 'rxjs/Observable';
 
 enum Action {
   Add, Update
@@ -41,9 +42,7 @@ export class AuthService {
     });
 
     this.messageBus.observe(new PostingsUpdated(), (postingsUpdated) => {
-      // console.log(postingsUpdated.postings);
       this.user.jobsPosted = postingsUpdated.postings.filter((posting) => {
-        // console.log(posting);
         return posting.creatorUser.id === this.user.id;
       });
       this.messageBus.publish(new UserPostingsUpdated(this.user.jobsPosted));
@@ -96,15 +95,17 @@ export class AuthService {
       promise.subscribe(success, error);
     } else {
       promise.subscribe((success_data) => {
-        const uploaderPromise = this.uploaderService.upload(file, this.user.id, this.uploaderService.userKey);
+        let uploaderPromise: Observable<any>;
         // If the user if being added, POST the file and bind it to the user
         if (action === Action.Add) {
           this.authenticate(success_data);
+          uploaderPromise = this.uploaderService.upload(file, this.user.id, this.uploaderService.userKey);
           uploaderPromise.subscribe((data) => {
             this.user.photo = data;
             this.cookieService.saveUserCookie(this.user);
           }, error);
         } else {  // If the user is being updated, only save the photo in the cookies
+          uploaderPromise = this.uploaderService.upload(file, this.user.id, this.uploaderService.userKey);
           uploaderPromise.subscribe((data) => {
             this.user.photo = data;
             success();

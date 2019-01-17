@@ -3,7 +3,7 @@ import {HttpService} from './http.service';
 import {Observable} from 'rxjs/Observable';
 import {finalize} from 'rxjs/operators';
 import {PostingSerializer} from '../serializers/posting.serializer';
-import {Posting} from '../models/posting';
+import {Posting, PostingStatus} from '../models/posting';
 import {ResourceService} from './resource.service';
 import {MessageBus} from './message-bus';
 import {UserMustUpdate} from '../models/message-bus-events/user-must-update';
@@ -17,6 +17,7 @@ import {PostingFetched} from '../models/message-bus-events/posting-fetched';
 export class PostingsService extends ResourceService<Posting> {
   private applyUrl = 'postings/apply';
   private unApplyUrl = 'postings/unapply';
+  private postingsUrl = 'postings';
 
   constructor(httpService: HttpService,
               private authService: AuthService,
@@ -24,11 +25,18 @@ export class PostingsService extends ResourceService<Posting> {
               private messageBus: MessageBus) {
     super(
       httpService,
-      'postings',
+      'postings', // TODO must call this somehow
       new PostingSerializer()
     );
   }
 
+  /**
+   * Creates a posting, uploads an images and links them together.
+   * @param posting
+   * @param file
+   * @param success
+   * @param error
+   */
   createWithFile(posting: Posting, file: File, success, error) {
     // Create the promise
     const creationPromise = super.create(posting);
@@ -38,9 +46,7 @@ export class PostingsService extends ResourceService<Posting> {
     } else {
       // If the file was provided, POST the file and bind it to the user
       creationPromise.subscribe((success_data) => {
-        console.log('added posting', success_data);
         this.uploaderService.upload(file, success_data._id, this.uploaderService.postingKey).subscribe((data) => {
-          console.log(data);
           posting.photo = data;
           success();
         }, error);
@@ -58,6 +64,15 @@ export class PostingsService extends ResourceService<Posting> {
       .pipe(finalize(() => {
       this.messageBus.publish(new UserMustUpdate());
     }));
+  }
+
+  /**
+   * Returns a promise that will update the status of the posting.
+   * @param postingId
+   * @param status
+   */
+  updatePostingStatus(postingId: string, status: PostingStatus): Observable<any> {
+    return this.httpService.update(this.postingsUrl, postingId, { status: status.toString() });
   }
 
   /**

@@ -1,14 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../models/user';
 import {UserService} from '../../services/user.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
-import {UserPostingsUpdated} from '../../models/message-bus-events/user-postings-updated';
-import {PostingsService} from '../../services/postings.service';
 import {Posting} from '../../models/posting';
-import {MessageBus} from '../../services/message-bus';
 import {Skill} from '../../models/skill';
-import {AuthService} from '../../services/auth.service';
+import {AppComponent} from '../../app.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,7 +13,6 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-
   user: User = new User();
 
   public postings: Posting[];
@@ -26,8 +22,14 @@ export class UserProfileComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router
-
   ) {
+    this.setUserFromUrl();
+  }
+
+  ngOnInit() {
+  }
+
+  setUserFromUrl() {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(({urlAfterRedirects}: NavigationEnd) => {
@@ -36,12 +38,27 @@ export class UserProfileComponent implements OnInit {
       });
   }
 
-  ngOnInit() {}
-
   getUser(id) {
     this.userService.read(id).subscribe(
-      user => { this.user = user; console.log(this.user); }
+      user => {
+        this.user = user;
+
+        if (this.user.reviewsReceived !== undefined) {
+          this.user.reviewsReceived.forEach(review => this.setFromUserForReview(review));
+        }
+      }
     );
   }
 
+  setFromUserForReview(review) {
+    this.userService.read(review.fromUser).subscribe(
+      user => {
+        review.fromUser = user;
+      }
+    );
+  }
+
+  get serverRoute() {
+    return AppComponent.serverRoute;
+  }
 }

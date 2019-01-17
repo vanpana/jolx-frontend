@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Error} from '../../models/error';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import {FormsModule} from '@angular/forms';
 
 declare var window: any;
 declare var FB: any;
@@ -9,7 +10,7 @@ declare var FB: any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   public email: string;
@@ -68,7 +69,6 @@ export class LoginComponent implements OnInit {
   public loginWithCredentials() {
     this.authService.login(this.email, this.password).subscribe(
       successData => {
-        console.log('Success data in login', successData);
         this.authService.authenticate(successData);
       },
       errorData => {
@@ -83,19 +83,4 @@ export class LoginComponent implements OnInit {
       this.loginWithCredentials();
     }
   }
-
-// public socialSignIn(socialPlatform: string) {
-//   let socialPlatformProvider;
-//   if (socialPlatform === 'facebook') {
-//     socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-//   }
-//
-//   this.socialAuthService.signIn(socialPlatformProvider).then(
-//     (userData) => {
-//       console.log(socialPlatform + ' sign in data : ', userData);
-//       // TODO Sign-in with userData
-//     }
-//   );
-// }
-
 }

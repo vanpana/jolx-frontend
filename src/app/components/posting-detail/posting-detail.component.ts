@@ -8,6 +8,8 @@ import {AuthService} from '../../services/auth.service';
 import {UserHasUpdated} from '../../models/message-bus-events/user-has-updated';
 import {PostingFetched} from '../../models/message-bus-events/posting-fetched';
 import {AppComponent} from '../../app.component';
+import {UserService} from '../../services/user.service';
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-posting-detail',
@@ -20,12 +22,14 @@ export class PostingDetailComponent implements OnInit {
   loading: boolean;
   isOwnPosting = false;
   public hasUserApplied: boolean;
+  public creatorUser: User;
 
   constructor(private route: ActivatedRoute,
               private postingsService: PostingsService,
               private authService: AuthService,
               private messageBus: MessageBus,
-              private router: Router) {
+              private router: Router,
+              private userService: UserService) {
   }
 
   ngOnInit() {
@@ -41,10 +45,10 @@ export class PostingDetailComponent implements OnInit {
     // Listen for change
     this.messageBus.observe(new PostingFetched(), (postingFetched) => {
       if (postingFetched.posting._id === this.id) {
-        console.log('posting', postingFetched.posting);
         // Disable loading and set the posting
         this.loading = false;
         this.posting = postingFetched.posting;
+        this.getPostingUser();
         this.checkPropertiesOnObserve();
         this.messageBus.observe(new UserHasUpdated(), () => {
           this.checkPropertiesOnObserve();
@@ -53,6 +57,11 @@ export class PostingDetailComponent implements OnInit {
     });
   }
 
+  getPostingUser() {
+    this.userService.read(this.posting.creatorUser.id).subscribe( user => {
+      this.creatorUser = user;
+    });
+  }
   checkPropertiesOnObserve() {
     this.checkIfUserPosting();
     if (!this.isOwnPosting) {
@@ -75,8 +84,6 @@ export class PostingDetailComponent implements OnInit {
   }
 
   checkIfUserPosting() {
-    console.log('user', this.authService.user);
-
     if (!this.authService.isAuthenticated) {
       this.isOwnPosting = false;
       return;
@@ -96,21 +103,27 @@ export class PostingDetailComponent implements OnInit {
       return;
     }
     this.postingsService.userAppliesForPosting(this.posting._id).subscribe(() => {
-      console.log('APPLY', 'has clickd apply');
       return;
     });
   }
 
   unapply() {
     this.postingsService.userUnAppliesForPosting(this.posting._id).subscribe((s) => {
-      console.log(s);
       return;
     }, (e) => {
-      console.log(e);
+    });
+  }
+
+  deletePosting() {
+    this.postingsService.delete(this.posting._id).subscribe((s) => {
+      this.router.navigate(['/']);
+      alert('Successfully deleted');
+      return;
+    }, (e) => {
     });
   }
 
   get serverRoute(): string {
-    return "http://localhost:1337";
+    return AppComponent.serverRoute;
   }
 }

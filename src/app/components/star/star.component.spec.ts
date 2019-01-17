@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PostingDetailComponent } from './posting-detail.component';
+import { StarComponent } from './star.component';
 
-describe('PostingDetailComponent', () => {
-  let component: PostingDetailComponent;
-  let fixture: ComponentFixture<PostingDetailComponent>;
+describe('StarComponent', () => {
+  let component: StarComponent;
+  let fixture: ComponentFixture<StarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PostingDetailComponent ]
+      declarations: [ StarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PostingDetailComponent);
+    fixture = TestBed.createComponent(StarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

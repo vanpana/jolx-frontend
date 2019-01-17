@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CompsComponent} from './components/comps/comps.component';
 import {CardComponent} from './components/card/card.component';
-import {LoginComponent} from './components/login/login.component';
+import {LoginModule} from './components/login/login.module';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpService} from './services/http.service';
@@ -66,13 +66,17 @@ import {UserService} from './services/user.service';
 import {SearchUsersService} from './services/search-users.service';
 import { UserListItemComponent } from './components/users-list/user-list-item/user-list-item.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ReviewComponent } from './components/user-profile/review/review.component';
+import { RatingComponent } from './components/rating/rating.component';
+import { ApplicantsListComponent } from './components/posting-detail/applicants-list/applicants-list.component';
+import { ApplicantsListItemComponent } from './components/posting-detail/applicants-list/applicants-list-item/applicants-list-item.component';
+import {StarComponent} from './components/star/star.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompsComponent,
     CardComponent,
-    LoginComponent,
     SignupComponent,
     HeaderComponent,
     FooterComponent,
@@ -89,12 +93,18 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     UserListItemComponent,
     UserProfileComponent,
     PostingDetailComponent,
+    ReviewComponent,
+    RatingComponent,
+    ApplicantsListComponent,
+    ApplicantsListItemComponent,
+    StarComponent
   ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    LoginModule,
     HttpClientModule,
     // angular material modules
     MatCheckboxModule,
@@ -127,7 +137,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
     //
   ],
   providers: [

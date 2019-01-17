@@ -1,0 +1,12 @@
+<mat-list>
+  <h3 mat-subheader style="width: 400px">Applicants</h3>
+
+  <mat-list-item *ngIf="posting.applicantUsers.length === 0">
+    <h4>No results found</h4>
+  </mat-list-item>
+
+  <mat-list-item *ngFor="let user of posting.applicantUsers">
+    <app-applicants-list-item [user]="user" [posting]="posting"></app-applicants-list-item>
+  </mat-list-item>
+</mat-list>
+

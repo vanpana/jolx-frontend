@@ -1,9 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {User} from '../../models/user';
-import {ReviewSerializer} from '../../serializers/review.serializer';
 import {ReviewService} from '../../services/review.service';
 import {AuthService} from '../../services/auth.service';
 import {Posting} from '../../models/posting';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+
+export interface DialogData {
+  user: User;
+  posting: Posting;
+}
+
 
 @Component({
   selector: 'app-rating',
@@ -11,42 +17,27 @@ import {Posting} from '../../models/posting';
   styleUrls: ['./rating.component.css']
 })
 export class RatingComponent implements OnInit {
-  workerUser: User;
-  posting: Posting;
-
+  stars = 3;
   description: string;
-
   isSending: boolean;
-  /**
-   * Get the number of stars displayed in the count span
-   */
-  get stars(): number {
-    return parseInt(document.getElementById('count').innerText);
-  }
 
-  constructor(private authService: AuthService,
-    private reviewService: ReviewService) { }
+  constructor(
+    private authService: AuthService,
+    private reviewService: ReviewService,
+    public dialogRef: MatDialogRef<RatingComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   ngOnInit() {
     this.isSending = false;
-
-    // TODO fetch the correct posting
-    this.posting = new Posting();
-    this.posting.id = '5c3dfcdd94eb5387b2e5fae1';
-    this.posting.name = 'Cutting trees';
-
-    // TODO fetch the correct user
-    this.workerUser = new User();
-    this.workerUser.id = '5c3dfcbe94eb5387b2e5fae0';
-    this.workerUser.firstName = 'Dorinel';
   }
 
   submit() {
     this.isSending = true;
-    this.reviewService.addReview(this.authService.user._id, this.workerUser.id, this.posting.id, this.stars, this.description)
+    this.reviewService.addReview(this.authService.user._id, this.data.user.id, this.data.posting.id, this.stars, this.description)
       .subscribe((s) => {
         this.isSending = false;
         console.log('review added', s);
+        this.dialogRef.close();
       }, (e) => {
         this.isSending = false;
         console.log('review not added', e);

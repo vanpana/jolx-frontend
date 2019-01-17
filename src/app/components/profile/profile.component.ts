@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
-import {Posting} from '../../models/posting';
 import {PostingsService} from '../../services/postings.service';
 import {MessageBus} from '../../services/message-bus';
-import {UserPostingsUpdated} from '../../models/message-bus-events/user-postings-updated';
 import {AppComponent} from '../../app.component';
 import {UserHasUpdated} from '../../models/message-bus-events/user-has-updated';
 import {UserMustUpdate} from '../../models/message-bus-events/user-must-update';

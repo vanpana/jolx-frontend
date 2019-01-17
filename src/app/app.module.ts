@@ -70,6 +70,7 @@ import { ReviewComponent } from './components/user-profile/review/review.compone
 import { RatingComponent } from './components/rating/rating.component';
 import { ApplicantsListComponent } from './components/posting-detail/applicants-list/applicants-list.component';
 import { ApplicantsListItemComponent } from './components/posting-detail/applicants-list/applicants-list-item/applicants-list-item.component';
+import {StarComponent} from './components/star/star.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { ApplicantsListItemComponent } from './components/posting-detail/applica
     RatingComponent,
     ApplicantsListComponent,
     ApplicantsListItemComponent,
+    StarComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -135,7 +137,7 @@ import { ApplicantsListItemComponent } from './components/posting-detail/applica
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
     //
   ],
   providers: [

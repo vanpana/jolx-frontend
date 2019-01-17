@@ -30,10 +30,10 @@
               </div>
               <div *ngIf="!isOwnPosting">
                 <div *ngIf="!hasUserApplied">
-                  <a (click)="apply()" class="btn btn-primary">Apply</a>
+                  <a (click)="apply()" class="btn btn-left btn-primary">Apply</a>
                 </div>
                 <div *ngIf="hasUserApplied">
-                  <a (click)="unapply()" class="btn btn-warning">Unapply</a>
+                  <a (click)="unapply()" class="btn btn-left btn-warning">Unapply</a>
                 </div>
               </div>
             </div>
@@ -46,25 +46,25 @@
             <div class="arrow-left"></div>
             <p class="card-price">{{posting.price}} lei</p>
           </div>
-          <p class="userPhone"> &#9742;  {{posting.creatorUser.phone}}</p>
-          <div *ngIf="posting.creatorUser.photo != null && posting.creatorUser.photo != undefined">
+          <p class="userPhone"> &#9742;  {{creatorUser.phone}}</p>
+          <div *ngIf="creatorUser.photo != null && creatorUser.photo != undefined">
             <img class="userPhoto"
-              src="{{serverRoute}}{{posting.creatorUser.photo.url}}"
+              src="{{serverRoute}}{{creatorUser.photo.url}}"
               alt=""/>
           </div>
           <!-- else display stock image -->
-          <div *ngIf="posting.creatorUser.photo == null || posting.creatorUser.photo == undefined">
+          <div *ngIf="creatorUser.photo == null || creatorUser.photo == undefined">
             <img class="userPhoto"
-              src="../../../assets/images/unavailable-image.jpg"
+              src="../../../assets/images/default-user-photo.png"
               alt=""/>
           </div>
 
           <p class="userFirstName">Poster Details</p>
-          <p class="userFirstName">UserName: {{posting.creatorUser.username}}</p>
-          <p class="userFirstName">First Name: {{posting.creatorUser.firstName}}</p>
-          <p class="userFirstName">Last Name: {{posting.creatorUser.lastName}}</p>
+          <p class="userFirstName">UserName: {{creatorUser.username}}</p>
+          <p class="userFirstName">First Name: {{creatorUser.firstName}}</p>
+          <p class="userFirstName">Last Name: {{creatorUser.lastName}}</p>
 
-          <button *ngIf="isOwnPosting" class="btn" (click)="deletePosting()"><i class="fa fa-trash"></i></button>
+          <button *ngIf="isOwnPosting" class="btn btn-danger btn-right" (click)="deletePosting()"><i class="fa fa-trash"></i></button>
         </div>
       </div>
     </div>

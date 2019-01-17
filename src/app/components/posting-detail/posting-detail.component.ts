@@ -8,6 +8,8 @@ import {AuthService} from '../../services/auth.service';
 import {UserHasUpdated} from '../../models/message-bus-events/user-has-updated';
 import {PostingFetched} from '../../models/message-bus-events/posting-fetched';
 import {AppComponent} from '../../app.component';
+import {UserService} from '../../services/user.service';
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-posting-detail',
@@ -20,12 +22,14 @@ export class PostingDetailComponent implements OnInit {
   loading: boolean;
   isOwnPosting = false;
   public hasUserApplied: boolean;
+  public creatorUser: User;
 
   constructor(private route: ActivatedRoute,
               private postingsService: PostingsService,
               private authService: AuthService,
               private messageBus: MessageBus,
-              private router: Router) {
+              private router: Router,
+              private userService: UserService) {
   }
 
   ngOnInit() {
@@ -44,6 +48,7 @@ export class PostingDetailComponent implements OnInit {
         // Disable loading and set the posting
         this.loading = false;
         this.posting = postingFetched.posting;
+        this.getPostingUser();
         this.checkPropertiesOnObserve();
         this.messageBus.observe(new UserHasUpdated(), () => {
           this.checkPropertiesOnObserve();
@@ -52,6 +57,11 @@ export class PostingDetailComponent implements OnInit {
     });
   }
 
+  getPostingUser() {
+    this.userService.read(this.posting.creatorUser.id).subscribe( user => {
+      this.creatorUser = user;
+    });
+  }
   checkPropertiesOnObserve() {
     this.checkIfUserPosting();
     if (!this.isOwnPosting) {

@@ -24,7 +24,6 @@ export class ProfileComponent implements OnInit {
               ) {
     // Assign user
     this.user = authService.user;
-
     // Fetch and display postings
     this.jobsLoading = true;
     postingsService.fetchPostings();

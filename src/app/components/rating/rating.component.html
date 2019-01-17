@@ -16,7 +16,7 @@
 </div>
 
 <div mat-dialog-actions>
-  <button [ngClass]="{ 'active' : description !== 0 }" (click)="submit()" class="btn btn-success btn-fill">Submit review</button>
+  <button [ngClass]="{ 'active' : description.length !== 0 }" (click)="submit()" class="btn btn-success btn-fill">Submit review</button>
   <button mat-dialog-close="" class="btn btn-danger btn-fill">This Job is not complete yet! </button>
   <div *ngIf="isSending" class="loader loader-center loader-sml"></div>
 </div>

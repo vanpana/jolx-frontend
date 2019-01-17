@@ -29,6 +29,9 @@ export class RatingComponent implements OnInit {
 
   ngOnInit() {
     this.isSending = false;
+
+    // Set description to nothing
+    this.description = '';
   }
 
   submit() {
@@ -44,4 +47,7 @@ export class RatingComponent implements OnInit {
       });
   }
 
+  setStars(number) {
+    this.stars = number;
+  }
 }

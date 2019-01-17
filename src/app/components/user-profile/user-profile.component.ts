@@ -41,9 +41,21 @@ export class UserProfileComponent implements OnInit {
     this.userService.read(id).subscribe(
       user => {
         this.user = user;
-        console.log(user);
+
+        if (this.user.reviewsReceived !== undefined) {
+          this.user.reviewsReceived.forEach(review => this.setFromUserForReview(review));
+        }
       }
     );
   }
 
+  setFromUserForReview(review) {
+    this.userService.read(review.fromUser).subscribe(
+      user => {
+        console.log('fromusersetinreview', user);
+        review.fromUser = user;
+        console.log(user);
+      }
+    );
+  }
 }

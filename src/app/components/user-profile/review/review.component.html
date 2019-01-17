@@ -2,13 +2,14 @@
   <div class="media">
     <a class="pull-left" href="#">
       <div class="avatar">
-        <img class="media-object" src="../../../../assets/images/default-user-photo.png" alt="...">
+        <img *ngIf="review.fromUser.photo.url === undefined" class="media-object" src="../../../../assets/images/default-user-photo.png" alt="...">
+        <img *ngIf="review.fromUser.photo.url !== undefined" class="media-object" src="{{serverRoute}}{{review.fromUser.photo.url}}" alt="...">
       </div>
     </a>
     <div class="media-body">
       <h4 class="media-heading">{{review.fromUser.username}}</h4>
       <h6 class="pull-right text-muted">Sep 11, 11:57 AM</h6>
-
+      <app-star-selector [fixedRating]=review.stars></app-star-selector>
       <p>{{review.description}}</p>
 
       <div class="media-footer">

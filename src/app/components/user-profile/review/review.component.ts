@@ -1,5 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Review} from '../../../models/review';
+import {AppComponent} from '../../../app.component';
+import {AuthService} from '../../../services/auth.service';
+import {UserService} from '../../../services/user.service';
+import {User} from '../../../models/user';
 
 @Component({
   selector: 'app-review',
@@ -10,9 +14,13 @@ export class ReviewComponent implements OnInit {
   @Input()
   review: Review;
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    console.log('fromuser', this.review.fromUser);
   }
 
+  get serverRoute() {
+    return AppComponent.serverRoute;
+  }
 }

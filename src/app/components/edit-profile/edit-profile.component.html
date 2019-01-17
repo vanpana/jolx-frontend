@@ -29,7 +29,7 @@
     </div>
 
     <label class="btn btn-default btn-file">
-      Upload Image <input type="file" style="display: none;" accept=".png,.jpg">
+      Upload Image <input (change)="fileChange($event)" type="file" style="display: none;" accept=".png,.jpg">
     </label>
     <button data-text="Update" (click)="update()" >
       <span>Update</span>

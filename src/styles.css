@@ -64,3 +64,5 @@ body {
   color: #FFD119;
   text-decoration: none;
 }
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";

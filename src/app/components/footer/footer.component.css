@@ -3,4 +3,9 @@ footer {
   width: 100%;
   bottom: 0;
   z-index: 2;
+
+}
+
+.copyright {
+  margin: 0px 3px !important;
 }

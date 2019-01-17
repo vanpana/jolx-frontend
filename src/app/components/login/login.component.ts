@@ -69,7 +69,6 @@ export class LoginComponent implements OnInit {
   public loginWithCredentials() {
     this.authService.login(this.email, this.password).subscribe(
       successData => {
-        console.log('Success data in login', successData);
         this.authService.authenticate(successData);
       },
       errorData => {
@@ -84,19 +83,4 @@ export class LoginComponent implements OnInit {
       this.loginWithCredentials();
     }
   }
-
-// public socialSignIn(socialPlatform: string) {
-//   let socialPlatformProvider;
-//   if (socialPlatform === 'facebook') {
-//     socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-//   }
-//
-//   this.socialAuthService.signIn(socialPlatformProvider).then(
-//     (userData) => {
-//       console.log(socialPlatform + ' sign in data : ', userData);
-//       // TODO Sign-in with userData
-//     }
-//   );
-// }
-
 }

@@ -21,11 +21,9 @@ export class EditProfileComponent implements OnInit {
               private cookieService: CookiesService,
               private messageBus: MessageBus) {
     this.user = cookieService.getUserCookie();
-    console.log('User in constructor', this.user);
   }
 
   ngOnInit() {
-    console.log('img', this.user);
   }
 
   fileChange(event) {
@@ -41,10 +39,8 @@ export class EditProfileComponent implements OnInit {
         // Pull user data from the server
         this.messageBus.publish(new UserMustUpdate());
         location.assign('/profile');
-        console.log('user updated');
       },
       error_data => {
-        console.log(error_data);
       });
   }
 

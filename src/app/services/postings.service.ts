@@ -47,7 +47,6 @@ export class PostingsService extends ResourceService<Posting> {
       // If the file was provided, POST the file and bind it to the user
       creationPromise.subscribe((success_data) => {
         this.uploaderService.upload(file, success_data._id, this.uploaderService.postingKey).subscribe((data) => {
-          console.log(data);
           posting.photo = data;
           success();
         }, error);

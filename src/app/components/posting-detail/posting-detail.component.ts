@@ -41,7 +41,6 @@ export class PostingDetailComponent implements OnInit {
     // Listen for change
     this.messageBus.observe(new PostingFetched(), (postingFetched) => {
       if (postingFetched.posting._id === this.id) {
-        console.log('posting', postingFetched.posting);
         // Disable loading and set the posting
         this.loading = false;
         this.posting = postingFetched.posting;
@@ -75,8 +74,6 @@ export class PostingDetailComponent implements OnInit {
   }
 
   checkIfUserPosting() {
-    console.log('user', this.authService.user);
-
     if (!this.authService.isAuthenticated) {
       this.isOwnPosting = false;
       return;
@@ -96,17 +93,14 @@ export class PostingDetailComponent implements OnInit {
       return;
     }
     this.postingsService.userAppliesForPosting(this.posting._id).subscribe(() => {
-      console.log('APPLY', 'has clickd apply');
       return;
     });
   }
 
   unapply() {
     this.postingsService.userUnAppliesForPosting(this.posting._id).subscribe((s) => {
-      console.log(s);
       return;
     }, (e) => {
-      console.log(e);
     });
   }
 
@@ -116,7 +110,6 @@ export class PostingDetailComponent implements OnInit {
       alert('Successfully deleted');
       return;
     }, (e) => {
-      console.log(e);
     });
   }
 

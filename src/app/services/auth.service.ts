@@ -42,9 +42,7 @@ export class AuthService {
     });
 
     this.messageBus.observe(new PostingsUpdated(), (postingsUpdated) => {
-      // console.log(postingsUpdated.postings);
       this.user.jobsPosted = postingsUpdated.postings.filter((posting) => {
-        // console.log(posting);
         return posting.creatorUser.id === this.user.id;
       });
       this.messageBus.publish(new UserPostingsUpdated(this.user.jobsPosted));

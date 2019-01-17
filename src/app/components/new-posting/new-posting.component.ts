@@ -68,7 +68,6 @@ export class NewPostingComponent implements OnInit {
       error_data => {
         this.isCreating = false;
         alert(error_data);
-        console.log(error_data);
       });
   }
 

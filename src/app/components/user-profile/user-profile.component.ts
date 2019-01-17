@@ -53,9 +53,7 @@ export class UserProfileComponent implements OnInit {
   setFromUserForReview(review) {
     this.userService.read(review.fromUser).subscribe(
       user => {
-        console.log('fromusersetinreview', user);
         review.fromUser = user;
-        console.log(user);
       }
     );
   }

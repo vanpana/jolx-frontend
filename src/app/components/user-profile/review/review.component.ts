@@ -14,10 +14,9 @@ export class ReviewComponent implements OnInit {
   @Input()
   review: Review;
 
-  constructor(private userService: UserService) { }
+  constructor() { }
 
   ngOnInit() {
-    console.log('fromuser', this.review.fromUser);
   }
 
   get serverRoute() {

@@ -39,11 +39,9 @@ export class RatingComponent implements OnInit {
     this.reviewService.addReview(this.authService.user._id, this.data.user.id, this.data.posting.id, this.stars, this.description)
       .subscribe((s) => {
         this.isSending = false;
-        console.log('review added', s);
         this.dialogRef.close();
       }, (e) => {
         this.isSending = false;
-        console.log('review not added', e);
       });
   }
 

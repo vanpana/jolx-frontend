@@ -34,7 +34,6 @@ export class ApplicantsListItemComponent implements OnInit {
     const dialogRef = this.dialog.open(RatingComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 }

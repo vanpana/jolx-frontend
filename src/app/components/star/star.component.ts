@@ -23,7 +23,6 @@ export class StarComponent implements OnInit {
 
   clickFixedRating(): boolean {
     if (this.fixedRating !== undefined) {
-      console.log('fixedrating', this.fixedRating);
 
       const star = document.getElementById(`${this.fixedRating}-stars`);
       if (star !== undefined && star != null) {

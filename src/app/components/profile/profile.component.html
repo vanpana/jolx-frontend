@@ -12,7 +12,7 @@
           <!-- else display stock image -->
           <div *ngIf="user.photo == null || user.photo == undefined">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+              src="../../../assets/images/unavailable-image.jpg"
               alt=""/>
             </div>
           <!--Button to change photo-->
@@ -51,13 +51,13 @@
       <div class="col-md-4">
         <div class="profile-work">
           <!--jobs posted by the user-->
-          <p *ngIf="jobsLoading || postings.length > 0">JOBS POSTED</p>
+          <p *ngIf="jobsLoading || user.jobsPosted.length > 0">JOBS POSTED</p>
           <div *ngIf="jobsLoading">
             <div class="loader loader-sml"></div>
           </div>
           <div *ngIf="!jobsLoading">
-            <div *ngFor="let posting of postings">
-              <a href="http://localhost:4200/postings/{{posting._id}}"><p>{{posting.name}}</p></a>
+            <div *ngFor="let posting of user.jobsPosted">
+              <a href="http://localhost:4200/postings/{{posting._id}}"><p class="text-primary">{{posting.name}}</p></a>
             </div>
           </div>
           <p>YOUR SKILLS</p>

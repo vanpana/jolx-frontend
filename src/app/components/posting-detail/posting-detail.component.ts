@@ -110,6 +110,16 @@ export class PostingDetailComponent implements OnInit {
     });
   }
 
+  deletePosting() {
+    this.postingsService.delete(this.posting._id).subscribe((s) => {
+      this.router.navigate(['/']);
+      alert('Successfully deleted');
+      return;
+    }, (e) => {
+      console.log(e);
+    });
+  }
+
   get serverRoute(): string {
     return AppComponent.serverRoute;
   }

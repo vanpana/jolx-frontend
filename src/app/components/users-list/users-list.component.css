@@ -1,0 +1,67 @@
+
+.card{
+  height: 500px;
+  border-radius: 20px !important;
+  background-color: rgba(0,0,0,0.4) !important;
+}
+.card-header{
+  border-radius: 15px 15px 0 0 !important;
+  border-bottom: 0 !important;
+  padding-bottom: 10px;
+}
+.card-footer{
+  border-radius: 0 0 15px 15px !important;
+  border-top: 0 !important;
+}
+.container{
+  align-content: center;
+}
+.form-control{
+  border-radius: 15px 0 0 15px !important;
+  border:0 !important;
+  color:gray() !important;
+}
+
+.input-group-addon{
+  border-radius: 0px 15px 15px 0px !important;
+  border:0 !important;
+}
+.contacts{
+  list-style: none;
+  padding: 0;
+}
+.contacts li{
+  width: 400px !important;
+  padding: 5px 5px;
+  margin-bottom: 5px !important;
+}
+.active{
+  background-color: rgba(0,0,0,0.3);
+}
+.user_img{
+  height: 70px;
+  width: 70px;
+  border:1.5px solid #f5f6fa;
+
+}
+.user_img_msg{
+  height: 40px;
+  width: 40px;
+  border:1.5px solid #f5f6fa;
+
+}
+.img_cont{
+  position: relative;
+  height: 70px;
+  width: 70px;
+}
+.img_cont_msg{
+  height: 40px;
+  width: 40px;
+}
+
+@media(max-width: 400px){
+  .contacts_card{
+    margin-bottom: 5px !important;
+  }
+}

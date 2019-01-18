@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from '../../../models/user';
+import {AppComponent} from '../../../app.component';
 
 @Component({
   selector: 'app-user-list-item',
@@ -14,6 +15,11 @@ export class UserListItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    console.log(this.user);
+  }
+
+  get serverRoute() {
+    return AppComponent.serverRoute;
   }
 
 }

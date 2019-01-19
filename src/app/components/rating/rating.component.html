@@ -9,7 +9,7 @@
     <span class="green"><b>{{data.posting.name}}</b></span></h5>
 
     <h3><small>Click on a star to rate his/her work</small></h3>
-    <app-star-selector></app-star-selector>
+    <app-star-selector (starsChanged)="setStars($event)"></app-star-selector>
 
     <div class="form-group">
       <textarea [(ngModel)]="description" class="form-control" placeholder="Describe why you gave this rating" rows="8"></textarea>

@@ -21,11 +21,9 @@
             <div class="bot">
 
               <!-- TODO if the ctx user posted this, show the applicants -->
-              <div *ngIf="isOwnPosting">
+              <div *ngIf="isOwnPosting && posting.applicantUsers.length > 0">
                 <h4>Applicants</h4>
-                <div *ngFor="let applicant of posting.applicantUsers">
-                  <!--TODO Link the user to his page-->
-                </div>
+                <app-applicants-list *ngIf="isOwnPosting " [posting]="posting"></app-applicants-list>
               </div>
               <div *ngIf="isPostingOpen() && !isOwnPosting">
                 <div *ngIf="!hasUserApplied">
@@ -35,12 +33,11 @@
                   <a (click)="unapply()" class="btn btn-left btn-warning">Unapply</a>
                 </div>
               </div>
-              <div *ngIf="!isPostingOpen()">
+              <div *ngIf="!isPostingOpen() && !isOwnPosting">
                 <p class="card-text">User doesn't accept any more applicants.</p>
               </div>
             </div>
-            <!--Apply button-->
-            <app-applicants-list *ngIf="isOwnPosting" [posting]="posting"></app-applicants-list>
+
           </div>
         </div>
         <div class="rightContent">

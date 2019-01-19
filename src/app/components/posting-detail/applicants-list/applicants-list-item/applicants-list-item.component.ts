@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../../../models/user';
-import {Posting} from '../../../../models/posting';
+import {Posting, PostingStatus} from '../../../../models/posting';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {RatingComponent} from '../../../rating/rating.component';
 import {AppComponent} from '../../../../app.component';
@@ -44,5 +44,9 @@ export class ApplicantsListItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+
+  get isPostingOpen(): boolean {
+    return this.posting.status === PostingStatus.Open;
   }
 }

@@ -76,7 +76,7 @@ export class AuthService {
     this.submitPromiseAndUploadFile(updatePromise, file, success, error, Action.Update);
   }
 
-  public register(firstName: string, lastName: string, email: string, username: string, password: string, file: File, success, error) {
+  public register(firstName: string, lastName: string, email: string, username: string, password: string, file: File, phoneNumber: string, success, error) {
     // First POST and register the user
     const registrationPromise = this.httpService.post(this.signupUrl, {
       firstName: firstName,
@@ -84,6 +84,7 @@ export class AuthService {
       email: email,
       username: username,
       password: password,
+      phone: phoneNumber
     });
 
     this.submitPromiseAndUploadFile(registrationPromise, file, success, error, Action.Add);

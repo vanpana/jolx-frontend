@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
   public email: string;
   public password: string;
   public file: File;
+  public phoneNumber: string;
 
   constructor(private authService: AuthService,
               private router: Router) {
@@ -28,7 +29,7 @@ export class SignupComponent implements OnInit {
   }
 
   signUp() {
-    this.authService.register(this.firstName, this.lastName, this.email, this.username, this.password, this.file,
+    this.authService.register(this.firstName, this.lastName, this.email, this.username, this.password, this.file, this.phoneNumber,
       successData => {
         this.authService.authenticate(successData);
       }, errorData => {

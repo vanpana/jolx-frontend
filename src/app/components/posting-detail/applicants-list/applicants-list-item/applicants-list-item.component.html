@@ -10,7 +10,7 @@
         </a>
         <div class="user_info">
           <span>{{user.firstName}} {{user.lastName}} {{user.phone}} </span>
-          <button class="btn btn-default" (click)="openReview()">Mark as done</button>
+          <button *ngIf="isPostingOpen" class="btn btn-default" (click)="openReview()">Mark as done</button>
         </div>
       </div>
     </div>

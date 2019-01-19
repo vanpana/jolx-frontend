@@ -10,7 +10,7 @@
     <p class="card-text">{{posting.description}}</p>
     <div class="bot">
       <a class="card-price">{{posting.price}} lei</a>
-      <div *ngIf="!isUserPosting">
+      <div *ngIf="isPostingOpen() && !isUserPosting">
         <div *ngIf="!hasUserApplied">
           <a (click)="apply()" class="btn btn-primary btn-fill">Apply</a>
         </div>

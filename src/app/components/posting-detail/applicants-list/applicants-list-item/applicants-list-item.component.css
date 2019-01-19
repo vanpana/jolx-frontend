@@ -1,3 +1,37 @@
-.content {
-  width: 400px;
+.media{
+  height: 70px;
+  background-color: #5bcaff;
+  padding-top: 0px;
 }
+.avatar{
+  margin-top: 15px;
+  margin-right: 5px;
+}
+.pull-left{
+  size: 25px;
+  padding-left: 20px;
+}
+.user_info{
+  margin-top: 15px;
+  margin-bottom: auto;
+  margin-left: 15px;
+  position: center;
+}
+.user_info span{
+  font-size: 20px;
+  color: white;
+  position: center;
+}
+.user_info p{
+  font-size: 17px;
+  color: rgba(255,255,255,0.6);
+}
+
+.btn{
+  border-color: white;
+  background-color: white;
+  float: right;
+  margin-right: 20px;
+}
+
+

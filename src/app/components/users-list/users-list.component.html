@@ -1,16 +1,17 @@
 <div class="container-fluid h-100">
   <div class="row justify-content-center h-100">
-      <div class="card-header">
-        <div class="input-group" style="width: 432px">
-        <input type="text" [(ngModel)]="query" (ngModelChange)="search()" placeholder="Search users..." class="form-control" >
+    <div class="card-header">
+      <div class="input-group" style="width: 432px">
+        <input type="text" [(ngModel)]="query" (ngModelChange)="search()" placeholder="Search users..."
+               class="form-control">
         <span class="input-group-addon"><i class="fa fa-search"></i></span>
-        </div>
-      </div>
-      <div class="card-body contacts_body" style="width: 430px">
-        <ul *ngFor="let user of users" class="contacts">
-          <app-user-list-item [user]="user"></app-user-list-item>
-        </ul>
       </div>
     </div>
+    <div class="card-body contacts_body" style="width: 430px">
+      <ul *ngFor="let user of users" class="contacts">
+        <app-user-list-item [user]="user"></app-user-list-item>
+      </ul>
     </div>
+  </div>
+</div>
 

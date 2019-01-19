@@ -1,32 +1,11 @@
-<div class="flex-container">
-  <div class="inner-flex-container">
-    <div *ngFor="let posting of postings; let i = index">
-      <app-card *ngIf="i % 5 === 0"[posting]="posting"></app-card>
+<div *ngIf="openPostings !== undefined" class="flex-container">
+  <div *ngFor="let _ of nArray(maxPostingsPerRow); let i = index">
+    <div class="inner-flex-container">
+      <div *ngFor="let posting of openPostings; let pi = index">
+        <app-card *ngIf="pi % maxPostingsPerRow === i" [posting]="posting"></app-card>
+      </div>
     </div>
   </div>
-
-  <div class="inner-flex-container">
-    <div *ngFor="let posting of postings; let i = index">
-      <app-card *ngIf="i % 5 === 1" [posting]="posting"></app-card>
-    </div>
-  </div>
-
-  <div class="inner-flex-container">
-    <div *ngFor="let posting of postings; let i = index">
-      <app-card *ngIf="i % 5 === 2"[posting]="posting"></app-card>
-    </div>
-  </div>
-
-  <div class="inner-flex-container">
-    <div *ngFor="let posting of postings; let i = index">
-      <app-card *ngIf="i % 5 === 3"[posting]="posting"></app-card>
-    </div>
-  </div>
-
-  <div class="inner-flex-container">
-    <div *ngFor="let posting of postings; let i = index">
-      <app-card *ngIf="i % 5 === 4"[posting]="posting"></app-card>
-    </div>
-  </div>
-  
 </div>
+
+<div *ngIf="openPostings === undefined" class="loader loader-center"></div>

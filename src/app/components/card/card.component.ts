@@ -1,10 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Posting} from '../../models/posting';
+import {Posting, PostingStatus} from '../../models/posting';
 import {AuthService} from '../../services/auth.service';
 import {PostingsService} from '../../services/postings.service';
 import {MessageBus} from '../../services/message-bus';
 import {UserHasUpdated} from '../../models/message-bus-events/user-has-updated';
 import {AppComponent} from '../../app.component';
+import {PostingFetched} from '../../models/message-bus-events/posting-fetched';
 
 @Component({
   selector: 'app-card',
@@ -23,9 +24,17 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.postingService.fetchPosting(this.posting._id);
     this.checkPropertiesOnObserve();
+
     this.messageBus.observe(new UserHasUpdated(), () => {
       this.checkPropertiesOnObserve();
+    });
+
+    this.messageBus.observe(new PostingFetched(), (postingFetched) => {
+      if (postingFetched.posting._id === this.posting._id) {
+        this.posting = postingFetched.posting;
+      }
     });
   }
 
@@ -87,6 +96,10 @@ export class CardComponent implements OnInit {
     }
 
     this.isUserPosting = this.authService.user.jobsPosted.map((posting) => posting._id).indexOf(this.posting._id) > -1;
+  }
+
+  isPostingOpen(): boolean {
+    return this.posting.status === PostingStatus.Open;
   }
 
   get serverRoute(): string {

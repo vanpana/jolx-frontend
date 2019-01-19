@@ -109,7 +109,7 @@
                 <p>{{user.dob}}</p>
               </div>
             </div>
-            <div *ngFor="let posting of user.postingsAppliedFor; let i = index">
+            <div *ngFor="let posting of user.postingsAppliedFor">
               <app-card [posting]="posting"></app-card>
             </div>
           </div>

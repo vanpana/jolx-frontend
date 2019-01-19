@@ -12,7 +12,7 @@ export class SearchPostingsService {
   ) { }
 
   changeQuery(query: string) {
-    this.query = query;
+    this.query = query.toLowerCase();
     this.queryChanged.emit();
   }
 
@@ -23,7 +23,7 @@ export class SearchPostingsService {
 
     return this.postingsService
       .list().pipe(map(postings => postings.filter(
-        posting => posting.name.search(this.query) !== -1
+        posting => posting.name.toLowerCase().search(this.query) !== -1
       )));
   }
 }

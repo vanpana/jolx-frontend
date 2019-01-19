@@ -1,7 +1,19 @@
-<button mat-flat-button>
-  <div class="content">
-    <a [routerLinkActive]="['active']" [routerLink]="['./' + user.id + '/profile']">
-      {{user.username}} {{user.firstName}}
-    </a>
-  </div>
-</button>
+<li>
+  <a [routerLinkActive]="['active']" [routerLink]="['./' + user.id + '/profile']">
+    <div class="d-flex bd-highlight">
+      <div class="media">
+        <a class="pull-left" href="#">
+          <div class="avatar">
+            <img *ngIf="user.photo === null || user.photo === undefined" class="media-object" src="../../../../assets/images/default-user-photo.png" alt="...">
+            <img *ngIf="user.photo !== null && user.photo !== undefined" class="media-object" src="{{serverRoute}}{{user.photo.url}}" alt="...">
+
+          </div>
+        </a>
+        <div class="user_info">
+          <span>{{user.firstName}} {{user.lastName}} </span>
+          <p>@{{user.username}}</p>
+        </div>
+      </div>
+    </div>
+  </a>
+</li>

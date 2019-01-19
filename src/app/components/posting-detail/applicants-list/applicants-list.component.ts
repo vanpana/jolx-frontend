@@ -13,7 +13,6 @@ export class ApplicantsListComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

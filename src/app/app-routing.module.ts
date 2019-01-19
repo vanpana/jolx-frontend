@@ -9,6 +9,7 @@ import {PostingDetailComponent} from './components/posting-detail/posting-detail
 import {JobSeekersComponent} from './components/job-seekers/job-seekers.component';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {RatingComponent} from './components/rating/rating.component';
+import {UsersListComponent} from './components/users-list/users-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},

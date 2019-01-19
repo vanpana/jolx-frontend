@@ -25,7 +25,6 @@
                 <h4>Applicants</h4>
                 <div *ngFor="let applicant of posting.applicantUsers">
                   <!--TODO Link the user to his page-->
-                  <a><h5>{{applicant.username}}</h5></a>
                 </div>
               </div>
               <div *ngIf="!isOwnPosting">

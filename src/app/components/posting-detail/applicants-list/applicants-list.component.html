@@ -1,12 +1,9 @@
-<mat-list>
-  <h3 mat-subheader style="width: 400px">Applicants</h3>
-
-  <mat-list-item *ngIf="posting.applicantUsers.length === 0">
-    <h4>No results found</h4>
-  </mat-list-item>
-
-  <mat-list-item *ngFor="let user of posting.applicantUsers">
-    <app-applicants-list-item [user]="user" [posting]="posting"></app-applicants-list-item>
-  </mat-list-item>
-</mat-list>
-
+<div class="container-fluid h-100">
+  <div class="row justify-content-center h-100">
+    <div class="card-body contacts_body" style="width: 900px">
+      <ul *ngFor="let user of posting.applicantUsers" class="applicants">
+        <app-applicants-list-item [user]="user" [posting]="posting"></app-applicants-list-item>
+      </ul>
+    </div>
+  </div>
+</div>

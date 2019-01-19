@@ -1,9 +1,18 @@
-<button mat-flat-button>
-  <div class="content">
-    <a [routerLink]="'../../users/' + user.id">
-      {{user.username}} {{user.firstName}}
-    </a>
-
-    <button class="btn btn-success" (click)="openReview()">Mark as done</button>
-  </div>
-</button>
+<li>
+  <a [routerLinkActive]="['active']" [routerLink]="['/users/' + user.id]">
+    <div class="d-flex bd-highlight">
+      <div class="media">
+        <a class="pull-left" href="#">
+          <div class="avatar">
+            <img *ngIf="user.photo === null || user.photo === undefined" class="media-object" src="../../../../assets/images/default-user-photo.png" alt="...">
+            <img *ngIf="user.photo !== null && user.photo !== undefined" class="media-object" src="{{serverRoute}}{{user.photo.url}}" alt="...">
+          </div>
+        </a>
+        <div class="user_info">
+          <span>{{user.firstName}} {{user.lastName}} {{user.phone}} </span>
+          <button class="btn btn-default" (click)="openReview()">Mark as done</button>
+        </div>
+      </div>
+    </div>
+  </a>
+</li>

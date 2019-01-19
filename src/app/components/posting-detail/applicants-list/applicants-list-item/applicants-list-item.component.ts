@@ -1,9 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../../../models/user';
 import {Posting} from '../../../../models/posting';
-import {ReviewComponent} from '../../../user-profile/review/review.component';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {RatingComponent} from '../../../rating/rating.component';
+import {AppComponent} from '../../../../app.component';
+import {UserService} from '../../../../services/user.service';
 
 @Component({
   selector: 'app-applicants-list-item',
@@ -18,9 +19,17 @@ export class ApplicantsListItemComponent implements OnInit {
   @Input()
   posting: Posting;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog,
+    public userService: UserService
+  ) { }
 
   ngOnInit() {
+    this.userService.read(this.user.id).subscribe(user => this.user = user);
+  }
+
+  get serverRoute() {
+    return AppComponent.serverRoute;
   }
 
   openReview() {

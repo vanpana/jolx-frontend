@@ -1,3 +1,21 @@
-.content {
-  width: 400px;
+.media{
+  height: 75px;
+  background-color: #5bcaff;
+  padding-top: 0px;
 }
+.user_info{
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 15px;
+  position: center;
+}
+.user_info span{
+  font-size: 20px;
+  color: white;
+  position: center;
+}
+.user_info p{
+  font-size: 17px;
+  color: rgba(255,255,255,0.6);
+}
+

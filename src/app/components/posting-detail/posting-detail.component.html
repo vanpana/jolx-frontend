@@ -27,13 +27,16 @@
                   <!--TODO Link the user to his page-->
                 </div>
               </div>
-              <div *ngIf="!isOwnPosting">
+              <div *ngIf="isPostingOpen() && !isOwnPosting">
                 <div *ngIf="!hasUserApplied">
                   <a (click)="apply()" class="btn btn-left btn-primary">Apply</a>
                 </div>
                 <div *ngIf="hasUserApplied">
                   <a (click)="unapply()" class="btn btn-left btn-warning">Unapply</a>
                 </div>
+              </div>
+              <div *ngIf="!isPostingOpen()">
+                <p class="card-text">User doesn't accept any more applicants.</p>
               </div>
             </div>
             <!--Apply button-->

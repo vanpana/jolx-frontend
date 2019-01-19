@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Posting} from '../../models/posting';
+import {Posting, PostingStatus} from '../../models/posting';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PostingsService} from '../../services/postings.service';
 import {MessageBus} from '../../services/message-bus';
@@ -121,6 +121,10 @@ export class PostingDetailComponent implements OnInit {
       return;
     }, (e) => {
     });
+  }
+
+  isPostingOpen(): boolean {
+    return this.posting.status === PostingStatus.Open;
   }
 
   get serverRoute(): string {

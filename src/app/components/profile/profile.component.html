@@ -1,123 +1,81 @@
-<div class="container emp-profile">
-  <form method="post">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="profile-img">
-          <!--if user has set his profile picture -->
-          <div *ngIf="user.photo != null && user.photo != undefined">
-            <img
-              src="{{serverRoute}}{{user.photo.url}}"
-              alt=""/>
+<div class="profile-page">
+  <div class="page-header header-filter" data-parallax="true"
+       style="background-image:url('http://wallpapere.org/wp-content/uploads/2012/02/black-and-white-city-night.png');"></div>
+  <div class="main main-raised">
+    <div class="profile-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile">
+              <div class="avatar" *ngIf="user.photo != null && user.photo != undefined">
+                <img src="{{serverRoute}}{{user.photo.url}}" alt="Circle Image"
+                     class="img-raised rounded-circle img-fluid"/>
+              </div>
+              <div class="avatar" *ngIf="user.photo == null || user.photo == undefined">
+                <img
+                  src="../../../assets/images/default-user-photo.png" alt="Circle Image"
+                  class="img-raised rounded-circle img-fluid">
+              </div>
+              <h2 class="name">{{user.firstName}} {{user.lastName}}</h2>
+              </div>
           </div>
-          <!-- else display stock image -->
-          <div *ngIf="user.photo == null || user.photo == undefined">
-            <img
-              src="../../../assets/images/default-user-photo.png"
-              alt=""/>
-            </div>
-          <!--Button to change photo-->
-          <!--<div class="file btn btn-lg btn-primary">-->
-            <!--Change Photo-->
-            <!--<input type="file" name="file"/>-->
-          <!--</div>-->
+          <button routerLink="/edit" class="button">Edit profile</button>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="profile-head">
-          <h5>
-            {{user.firstName}} {{user.lastName}}
-          </h5>
-          <h6>
-            Web Developer and Designer
-          </h6>
-          <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                 aria-selected="true">About</a>
-            </li>
-            <!--<li class="nav-item">-->
-              <!--<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"-->
-                 <!--aria-selected="false">Your current jobs</a>-->
-            <!--</li>-->
-          </ul>
+
+        <div class="description text-center">
         </div>
-      </div>
-      <div class="col-md-2">
-        <a routerLink="/edit" class="btn btn-round btn-default">Edit profile</a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="profile-work">
-          <!--jobs posted by the user-->
-          <p *ngIf="jobsLoading || user.jobsPosted.length > 0">JOBS POSTED</p>
-          <div *ngIf="jobsLoading">
-            <div class="loader loader-sml"></div>
+        <hr class="">
+        <div class="row">
+          <div class="col-sm-3">
+            <ul class="list-group">
+              <li class="list-group-item text-muted" contenteditable="false">Profile</li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong class="">User Name:</strong></span>@{{user.username}}
+              </li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong class="">Email:</strong></span>
+                {{user.email}}
+              </li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong
+                class="">Phone Number</strong></span>{{user.phone}}
+              </li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong
+                class="">Date of birth </strong></span>{{user.dob}}
+                <div *ngIf="user.dob===null">----</div>
+              </li>
+            </ul>
+            <div class="panel panel-default">
+              <div class="panel-heading">Jobs Posted
+
+              </div>
+              <div class="panel-body">
+                <div *ngIf="jobsLoading">
+                  <div class="loader loader-sml"></div>
+                </div>
+                <div *ngIf="!jobsLoading">
+                  <div *ngFor="let posting of user.jobsPosted">
+                    <a href="http://localhost:4200/postings/{{posting._id}}"><p class="text-primary">
+                      {{posting.name}}</p></a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div *ngIf="!jobsLoading">
-            <div *ngFor="let posting of user.jobsPosted">
-              <a href="http://localhost:4200/postings/{{posting._id}}"><p class="text-primary">{{posting.name}}</p></a>
-            </div>
-          </div>
-          <p>YOUR SKILLS</p>
-          <div *ngFor = "let skill of skills">
-            <p>{{skill.name}}</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-8">
-        <div class="tab-content profile-tab" id="myTabContent">
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="row">
-              <div class="col-md-6">
-                <label>User Id</label>
+          <div class="col-sm-9" style="" contenteditable="false">
+            <div class="panel panel-default target">
+              <div class="panel-heading" contenteditable="false">Applied Jobs</div>
+              <div class="panel-body">
+                <div class="row">
+                  <div *ngFor="let posting of user.postingsAppliedFor">
+                    <div class="col-md-5">
+                      <app-card [posting]="posting"></app-card>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-6">
-                <p>{{user.username}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Name</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{user.firstName}} {{user.lastName}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Email</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{user.email}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Phone</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{user.phone}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Date of birth</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{user.dob}}</p>
-              </div>
-            </div>
-            <div *ngFor="let posting of user.postingsAppliedFor">
-              <app-card [posting]="posting"></app-card>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </form>
+  </div>
+  <!-- else display stock image -->
 </div>
-<!------ Include the above in your HEAD tag ---------->
-
-

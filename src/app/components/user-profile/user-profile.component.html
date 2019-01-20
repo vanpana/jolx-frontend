@@ -1,161 +1,33 @@
-<div class="container emp-profile">
-
-  <h3>{{user.username}}</h3>
-
-  <form method="post">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="profile-img">
-          <div *ngIf="user.photo != null && user.photo != undefined">
-            <img
-              src="{{serverRoute}}{{user.photo.url}}"
-              alt=""/>
-          </div>
-          <!-- else display stock image -->
+<div class="container">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h5>{{user.firstName}} Profile</h5></div>
+      <div class="panel-body">
+        <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
           <div *ngIf="user.photo == null || user.photo == undefined">
-            <img
-              src="../../../assets/images/default-user-photo.png"
-              alt=""/>
+            <img alt="User Pic" src="../../../assets/images/default-user-photo.png" id="profile-image1" class="img-circle img-responsive">
           </div>
+        <div *ngIf="user.photo != null && user.photo != undefined">
+          <img  src="{{serverRoute}}{{user.photo.url}}" class="img-circle img-responsive">
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="profile-head">
-          <h5>
-            {{user.firstName}} {{user.lastName}}
-          </h5>
-          <h6>
-            Web Developer and Designer
-          </h6>
-          <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                 aria-selected="true">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-                 aria-selected="false">Timeline</a>
-            </li>
+    </div>
+        <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+          <div class="container">
+            <h2>{{user.firstName}} {{user.lastName}}</h2>
+          </div>
+          <hr>
+          <ul class="container details" >
+            <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>@{{user.username}}</p></li>
+            <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>{{user.email}}</p></li>
+            <li><p><span class="glyphicon glyphicon-phone one"  style="width:50px;"></span>{{user.phone}}</p></li>
           </ul>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <a routerLink="/edit" class="btn btn-round btn-default">Edit profile</a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="profile-work">
-          <p>JOBS POSTED</p>
-          <div *ngFor="let posting of postings">
-            <a href="http://localhost:4200/postings/{{posting._id}}"><p>{{posting.name}}</p></a>
-          </div>
-          <p>SKILLS</p>
-          <div *ngFor = "let skill of skills">
-            <p>{{skill.name}}</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-8">
-        <div class="tab-content profile-tab" id="myTabContent">
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="row">
-              <div class="col-md-6">
-                <label>User Id</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{user.username}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Name</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{user.firstName}} {{user.lastName}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Email</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{user.email}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Phone</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{user.phone}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Date of birth</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{user.dob}}</p>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <div class="row">
-              <div class="col-md-6">
-                <label>Experience</label>
-              </div>
-              <div class="col-md-6">
-                <p>Expert</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Hourly Rate</label>
-              </div>
-              <div class="col-md-6">
-                <p>10$/hr</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Total Projects</label>
-              </div>
-              <div class="col-md-6">
-                <p>230</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>English Level</label>
-              </div>
-              <div class="col-md-6">
-                <p>Expert</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Availability</label>
-              </div>
-              <div class="col-md-6">
-                <p>6 months</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <label>Your Bio</label><br/>
-                <p>Your detail description</p>
-              </div>
-            </div>
-          </div>
+          <hr>
+          <div class="col-sm-5 col-xs-6 tital " >Date Of Birth: {{user.dob}}</div>
         </div>
       </div>
     </div>
-  </form>
-
+  </div>
   <div *ngFor="let review of user.reviewsReceived">
-    <app-review [review]="review"></app-review>
+  <app-review [review]="review"></app-review>
   </div>
 </div>
-
